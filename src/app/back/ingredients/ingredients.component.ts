@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-ingredients',
+  selector: 'lsc-ingredients',
   templateUrl: './ingredients.component.html',
   styleUrls: ['./ingredients.component.css']
 })
