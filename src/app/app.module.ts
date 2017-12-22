@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
+import { AppRoutingModule }     from './app-routing.module';
 
 import { AppComponent } from './app.component';
 import { AuthenticationComponent } from './front/authentication/authentication.component';
@@ -11,27 +12,25 @@ import { ReceiptsComponent } from './back/receipts/receipts.component';
 import { BooksComponent } from './back/books/books.component';
 import { IngredientsComponent } from './back/ingredients/ingredients.component';
 import { BookComponent } from './back/book/book.component';
-import { ReceiptComponent } from './back/receipt/receipt.component';
+import { DashBoardComponent } from './back/dash-board/dash-board.component';
+import { BackMenuComponent } from './back/back-menu/back-menu.component';
 
-
-const routes = [
-  { path: 'login', component: AuthenticationComponent },
-]
 
 @NgModule({
   declarations: [
     AppComponent,
+    AppRoutingModule,
     AuthenticationComponent,
     MainMenuComponent,
     ReceiptsComponent,
     BooksComponent,
     IngredientsComponent,
     BookComponent,
-    ReceiptComponent
+    DashBoardComponent,
+    BackMenuComponent
   ],
   imports: [
-    BrowserModule,
-    RouterModule.forRoot(routes)
+    BrowserModule
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]
