@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule }   from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
@@ -42,7 +43,7 @@ import { DevMenuComponent } from './dev-tool/dev-menu/dev-menu.component';
     FrontMenuComponent
   ],
   imports: [
-    BrowserModule, AppRoutingModule
+    BrowserModule, AppRoutingModule, FormsModule
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]

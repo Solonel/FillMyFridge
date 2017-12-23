@@ -8,9 +8,24 @@ import { AuthService } from '../../services/auth.service';
 })
 export class AuthenticationComponent implements OnInit {
 
+  isAuthenticated = false;
+  alreadyTried = false;
+
   constructor() { }
 
   ngOnInit() {
-  }
+  };
 
+  login(data) {
+    if (data.email.toLowerCase() === "su@email.fr" && data.password === "test"){
+      this.isAuthenticated = true;
+      this.alreadyTried = false;
+    } else {
+      this.alreadyTried = true;
+    }
+  };
+
+  logOut() {
+    this.isAuthenticated = false;
+  }
 }

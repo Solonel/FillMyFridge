@@ -1,3 +1,19 @@
-<p>
-  authentication works!
-</p>
+<div style="margin: 20px 0 0 20px;">
+  <div *ngIf="!isAuthenticated">
+    <h3>Se connecter</h3>
+    <p>Utilisateur factice : "su@email.fr" / "test"</p>
+    <p *ngIf="alreadyTried">Raté !</p>
+    <form #loginForm="ngForm" (ngSubmit)="login(loginForm.value)">
+      <input type="text" class="login-input" ngModel name="email" placeholder="Email" required>
+      <input type="password" class="login-input" ngModel name="password" placeholder="Mot de Passe" required>
+      <button type="submit" class="btn btn-primary" [disabled]="loginForm.invalid">Se connecter</button>
+    </form>
+  </div>
+
+
+  <div *ngIf="isAuthenticated">
+    <h3>Vous êtes connecté !</h3>
+    <button (click)="this.logOut()" class="btn btn-primary">Se déconnecter</button>
+
+  </div>
+</div>
