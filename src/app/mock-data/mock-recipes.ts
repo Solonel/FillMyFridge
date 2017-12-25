@@ -31,7 +31,21 @@ export const RECIPES: Recipe[] = [
         servings: 1, 
         preparation: new Date(), 
         cook: new Date(), 
-        readyIn: new Date(), 
+        readyin: new Date(), 
+        published: true, 
+        rating: 4,
+        author: AUTHORS[0]
+    },
+    {
+        id: 2, 
+        title: "Recipe title 2", 
+        description: "Recipe description 2", 
+        directions: ["Recipe Etape 1", "Recipe Etape 2"],
+        ingredients: [INGREDIENTS[0]],
+        servings: 1, 
+        preparation: new Date(), 
+        cook: new Date(), 
+        readyin: new Date(), 
         published: true, 
         rating: 4,
         author: AUTHORS[0]

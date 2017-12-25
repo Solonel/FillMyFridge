@@ -1,3 +1,4 @@
+<lsc-back-menu></lsc-back-menu>
 
 <table class="table">
   <thead class="thead-dark">
@@ -14,12 +15,17 @@
   <tbody>
     <tr *ngFor="let book of books">
       <th scope="row">{{book.id}}</th>
-      <td>{{book.title}} <span class="badge badge-primary badge-pill"> {{book.recipes.length}}</span> </td>
+      <td>{{book.title}}
+        <span class="badge badge-primary badge-pill"> {{book.recipes.length}}</span>
+      </td>
       <td>{{book.description}}</td>
       <td>{{book.author.name}}{{book.author.firstname}}</td>
       <td>{{book.price}}</td>
       <td>{{book.rating}}</td>
-      <td>{{book.published}}</td>
+      <td>
+        <i [ngClass]="{'fas fa-check-square':book.published,
+        'far fa-square':!book.published}"></i>
+      </td>
     </tr>
   </tbody>
 </table>

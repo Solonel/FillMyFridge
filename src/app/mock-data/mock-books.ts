@@ -25,7 +25,7 @@ export const BOOKS: Book[] = [
         price: 1,
         rating: 1,
         published: true,
-        recipes : RECIPES,
+        recipes : [RECIPES[0],RECIPES[0],RECIPES[0]],
         author : AUTHORS[0]
     }, {
         id: 2,

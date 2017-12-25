@@ -1,12 +1,16 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule }   from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
- /**
- * Front Component
- */
+import {
+  MatCheckboxModule
+} from '@angular/material';
+
+/**
+* Front Component
+*/
 import { AuthenticationComponent } from './front/authentication/authentication.component';
 import { FrontMenuComponent } from './front/front-menu/front-menu.component';
 
@@ -40,10 +44,11 @@ import { DevMenuComponent } from './dev-tool/dev-menu/dev-menu.component';
     DashBoardComponent,
     BackMenuComponent,
     DevMenuComponent,
-    FrontMenuComponent
+    FrontMenuComponent,
+    
   ],
   imports: [
-    BrowserModule, AppRoutingModule, FormsModule
+    BrowserModule, AppRoutingModule, FormsModule, MatCheckboxModule
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]
