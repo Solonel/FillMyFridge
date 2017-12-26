@@ -1,15 +1,19 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule }   from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from  '@angular/common/http';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService }  from './dev-tool/dev-services/in-memory-data.service';
 
- /**
- * Front Component
- */
+import {
+  MatCheckboxModule
+} from '@angular/material';
+
+/**
+* Front Component
+*/
 import { AuthenticationComponent } from './front/authentication/authentication.component';
 import { FrontMenuComponent } from './front/front-menu/front-menu.component';
 import { HomepageComponent } from './front/homepage/homepage.component';
@@ -45,6 +49,7 @@ import { DevMenuComponent } from './dev-tool/dev-menu/dev-menu.component';
     BackMenuComponent,
     DevMenuComponent,
     FrontMenuComponent,
+<<<<<<< HEAD
     HomepageComponent
   ],
   imports: [
@@ -55,6 +60,12 @@ import { DevMenuComponent } from './dev-tool/dev-menu/dev-menu.component';
     HttpClientInMemoryWebApiModule.forRoot(
       InMemoryDataService, { dataEncapsulation: false }
     )
+=======
+    
+  ],
+  imports: [
+    BrowserModule, AppRoutingModule, FormsModule, MatCheckboxModule
+>>>>>>> 036be571ffc858277c7340c756058171881115d5
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]

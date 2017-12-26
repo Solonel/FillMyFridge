@@ -1,11 +1,31 @@
-
 <lsc-back-menu></lsc-back-menu>
 
-<div class="card" style="width: 20rem;">
-  <img class="card-img-top" src="..." alt="Card image cap">
-  <div class="card-body">
-    <h4 class="card-title">Card title</h4>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
-  </div>
-</div>
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Titre</th>
+      <th scope="col">Description</th>
+      <th scope="col">Auteur</th>
+      <th scope="col">Prix</th>
+      <th scope="col">Note</th>
+      <th scope="col">Publié</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let book of books">
+      <th scope="row">{{book.id}}</th>
+      <td>{{book.title}}
+        <span class="badge badge-primary badge-pill"> {{book.recipes.length}}</span>
+      </td>
+      <td>{{book.description}}</td>
+      <td>{{book.author.name}}{{book.author.firstname}}</td>
+      <td>{{book.price}}</td>
+      <td>{{book.rating}}</td>
+      <td>
+        <i [ngClass]="{'fas fa-check-square':book.published,
+        'far fa-square':!book.published}"></i>
+      </td>
+    </tr>
+  </tbody>
+</table>

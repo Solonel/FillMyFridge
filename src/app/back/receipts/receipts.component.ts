@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { RECIPES } from '../../mock-data/mock-recipes';
 
 @Component({
   selector: 'app-receipts',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./receipts.component.css']
 })
 export class ReceiptsComponent implements OnInit {
+
+  recipes = RECIPES
 
   constructor() { }
 
