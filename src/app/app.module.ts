@@ -3,8 +3,12 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+<<<<<<< HEAD
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+=======
+
+>>>>>>> 90bddc3a8c8ab27ee948504cc3653c57db709a26
 import {
   MatCheckboxModule, MatPaginatorModule, MatSortModule, MatTableModule,
   MatInputModule,
@@ -49,12 +53,15 @@ import { DevMenuComponent } from './dev-tool/dev-menu/dev-menu.component';
     BackMenuComponent,
     DevMenuComponent,
     FrontMenuComponent,
+<<<<<<< HEAD
     ReceiptComponent
   ],
   imports: [
     BrowserModule, AppRoutingModule, FormsModule,
     MatCheckboxModule, MatPaginatorModule, MatSortModule, MatTableModule,
     MatInputModule,BrowserAnimationsModule
+=======
+>>>>>>> 90bddc3a8c8ab27ee948504cc3653c57db709a26
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]

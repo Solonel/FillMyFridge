@@ -8,7 +8,7 @@ import { AuthService } from '../../services/auth.service';
 })
 export class FrontMenuComponent implements OnInit {
   title = 'Fill My Fridge';
-  constructor() { }
+  constructor( private auth: AuthService) { }
 
   ngOnInit() {
   }
