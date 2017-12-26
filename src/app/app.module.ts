@@ -3,15 +3,12 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-<<<<<<< HEAD
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-=======
-import { HttpClientModule } from  '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { InMemoryDataService }  from './dev-tool/dev-services/in-memory-data.service';
+import { InMemoryDataService } from './dev-tool/dev-services/in-memory-data.service';
 
->>>>>>> 90bddc3a8c8ab27ee948504cc3653c57db709a26
 import {
   MatCheckboxModule, MatPaginatorModule, MatSortModule, MatTableModule,
   MatInputModule,
@@ -57,25 +54,20 @@ import { DevMenuComponent } from './dev-tool/dev-menu/dev-menu.component';
     BackMenuComponent,
     DevMenuComponent,
     FrontMenuComponent,
-<<<<<<< HEAD
-    ReceiptComponent
-  ],
-  imports: [
-    BrowserModule, AppRoutingModule, FormsModule,
-    MatCheckboxModule, MatPaginatorModule, MatSortModule, MatTableModule,
-    MatInputModule,BrowserAnimationsModule
-=======
+    ReceiptComponent,
     HomepageComponent
   ],
   imports: [
-    HttpClientModule, BrowserModule, AppRoutingModule, FormsModule, MatCheckboxModule, 
+    HttpClientModule, BrowserModule, AppRoutingModule, FormsModule, MatCheckboxModule,
+    BrowserModule, AppRoutingModule, FormsModule,
+    MatCheckboxModule, MatPaginatorModule, MatSortModule, MatTableModule,
+    MatInputModule, BrowserAnimationsModule,
     // The HttpClientInMemoryWebApiModule module intercepts HTTP requests
     // and returns simulated server responses.
     // Remove it when a real server is ready to receive requests.
     HttpClientInMemoryWebApiModule.forRoot(
       InMemoryDataService, { dataEncapsulation: false }
     )
->>>>>>> 90bddc3a8c8ab27ee948504cc3653c57db709a26
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]
