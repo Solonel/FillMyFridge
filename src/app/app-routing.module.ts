@@ -5,6 +5,7 @@ import _ from "lodash";
 
 /** FrontOffice Module */
 import { AuthenticationComponent } from './front/authentication/authentication.component';
+import { HomepageComponent } from './front/homepage/homepage.component';
 /** BackOffice Module */
 import { DashBoardComponent } from './back/dash-board/dash-board.component';
 import { IngredientsComponent } from './back/ingredients/ingredients.component'
@@ -14,6 +15,8 @@ import { BooksComponent } from './back/books/books.component';
 const routes: Routes = [
     // Front
     { path: 'login', component: AuthenticationComponent },
+    { path: '', component: HomepageComponent },
+
     // Back
     { path: 'administration', component: DashBoardComponent },
     { path: 'ingredients', component: IngredientsComponent },

@@ -1,8 +1,7 @@
 <div style="margin: 20px 0 0 20px;">
-  <div *ngIf="!isAuthenticated">
+  <div *ngIf="!this.auth.userIsLoggedIn();">
     <h3>Se connecter</h3>
     <p>Utilisateur factice : "su@email.fr" / "test"</p>
-    <p *ngIf="alreadyTried">Raté !</p>
     <form #loginForm="ngForm" (ngSubmit)="login(loginForm.value)">
       <input type="text" class="login-input" ngModel name="email" placeholder="Email" required>
       <input type="password" class="login-input" ngModel name="password" placeholder="Mot de Passe" required>
@@ -11,7 +10,7 @@
   </div>
 
 
-  <div *ngIf="isAuthenticated">
+  <div *ngIf="this.auth.userIsLoggedIn()">
     <h3>Vous êtes connecté !</h3>
     <button (click)="this.logOut()" class="btn btn-primary">Se déconnecter</button>
 

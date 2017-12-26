@@ -3,12 +3,16 @@ import { NgModule } from '@angular/core';
 import { FormsModule }   from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { HttpClientModule } from  '@angular/common/http';
+import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { InMemoryDataService }  from './dev-tool/dev-services/in-memory-data.service';
 
  /**
  * Front Component
  */
 import { AuthenticationComponent } from './front/authentication/authentication.component';
 import { FrontMenuComponent } from './front/front-menu/front-menu.component';
+import { HomepageComponent } from './front/homepage/homepage.component';
 
 /**
  * Back Component
@@ -40,10 +44,17 @@ import { DevMenuComponent } from './dev-tool/dev-menu/dev-menu.component';
     DashBoardComponent,
     BackMenuComponent,
     DevMenuComponent,
-    FrontMenuComponent
+    FrontMenuComponent,
+    HomepageComponent
   ],
   imports: [
-    BrowserModule, AppRoutingModule, FormsModule
+    HttpClientModule, BrowserModule, AppRoutingModule, FormsModule, 
+    // The HttpClientInMemoryWebApiModule module intercepts HTTP requests
+    // and returns simulated server responses.
+    // Remove it when a real server is ready to receive requests.
+    HttpClientInMemoryWebApiModule.forRoot(
+      InMemoryDataService, { dataEncapsulation: false }
+    )
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]
