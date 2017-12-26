@@ -49,23 +49,16 @@ import { DevMenuComponent } from './dev-tool/dev-menu/dev-menu.component';
     BackMenuComponent,
     DevMenuComponent,
     FrontMenuComponent,
-<<<<<<< HEAD
     HomepageComponent
   ],
   imports: [
-    HttpClientModule, BrowserModule, AppRoutingModule, FormsModule, 
+    HttpClientModule, BrowserModule, AppRoutingModule, FormsModule, MatCheckboxModule, 
     // The HttpClientInMemoryWebApiModule module intercepts HTTP requests
     // and returns simulated server responses.
     // Remove it when a real server is ready to receive requests.
     HttpClientInMemoryWebApiModule.forRoot(
       InMemoryDataService, { dataEncapsulation: false }
     )
-=======
-    
-  ],
-  imports: [
-    BrowserModule, AppRoutingModule, FormsModule, MatCheckboxModule
->>>>>>> 036be571ffc858277c7340c756058171881115d5
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]
