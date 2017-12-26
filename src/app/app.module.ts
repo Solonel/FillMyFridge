@@ -7,6 +7,9 @@ import { AppComponent } from './app.component';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 =======
+import { HttpClientModule } from  '@angular/common/http';
+import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { InMemoryDataService }  from './dev-tool/dev-services/in-memory-data.service';
 
 >>>>>>> 90bddc3a8c8ab27ee948504cc3653c57db709a26
 import {
@@ -19,6 +22,7 @@ import {
 */
 import { AuthenticationComponent } from './front/authentication/authentication.component';
 import { FrontMenuComponent } from './front/front-menu/front-menu.component';
+import { HomepageComponent } from './front/homepage/homepage.component';
 
 /**
  * Back Component
@@ -61,6 +65,16 @@ import { DevMenuComponent } from './dev-tool/dev-menu/dev-menu.component';
     MatCheckboxModule, MatPaginatorModule, MatSortModule, MatTableModule,
     MatInputModule,BrowserAnimationsModule
 =======
+    HomepageComponent
+  ],
+  imports: [
+    HttpClientModule, BrowserModule, AppRoutingModule, FormsModule, MatCheckboxModule, 
+    // The HttpClientInMemoryWebApiModule module intercepts HTTP requests
+    // and returns simulated server responses.
+    // Remove it when a real server is ready to receive requests.
+    HttpClientInMemoryWebApiModule.forRoot(
+      InMemoryDataService, { dataEncapsulation: false }
+    )
 >>>>>>> 90bddc3a8c8ab27ee948504cc3653c57db709a26
   ],
   providers: [AuthService],
