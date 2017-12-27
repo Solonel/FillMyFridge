@@ -1,0 +1,22 @@
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+.left{
+    float: left;
+}
+
+.right {
+    float: right;
+}
+
+.clear {
+    clear: both;
+}
+
+.mat-form-field {
+    width: 25%;
+    margin: 0 24px;
+}
+
+.mat-paginator {
+    margin: 0 24px;
+}

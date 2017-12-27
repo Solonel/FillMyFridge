@@ -33,7 +33,7 @@ export const RECIPES: Recipe[] = [
         cook: new Date(), 
         readyin: new Date(), 
         published: true, 
-        rating: 4,
+        rating: 1,
         author: AUTHORS[0]
     },
     {
@@ -47,6 +47,33 @@ export const RECIPES: Recipe[] = [
         cook: new Date(), 
         readyin: new Date(), 
         published: true, 
+        rating: 2,
+        author: AUTHORS[0]
+    },
+    {
+        id: 3, 
+        title: "Recipe title 3", 
+        description: "Recipe description 3", 
+        directions: ["Recipe Etape 3", "Recipe Etape 3"],
+        ingredients: [INGREDIENTS[0]],
+        servings: 3, 
+        preparation: new Date(), 
+        cook: new Date(), 
+        readyin: new Date(), 
+        published: false, 
+        rating: 3,
+        author: AUTHORS[0]
+    }, {
+        id: 4, 
+        title: "Recipe title 4", 
+        description: "Recipe description 4", 
+        directions: ["Recipe Etape 4", "Recipe Etape 4"],
+        ingredients: [INGREDIENTS[1]],
+        servings: 4, 
+        preparation: new Date(), 
+        cook: new Date(), 
+        readyin: new Date(), 
+        published: false, 
         rating: 4,
         author: AUTHORS[0]
     }

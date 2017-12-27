@@ -2,7 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { RECIPES } from '../../mock-data/mock-recipes';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { SelectionModel } from '@angular/cdk/collections';
-
+import { Recipe } from '../../classes/Recipe';
+import {Router} from "@angular/router";
 @Component({
   selector: 'app-receipts',
   templateUrl: './receipts.component.html',
@@ -11,22 +12,19 @@ import { SelectionModel } from '@angular/cdk/collections';
 export class ReceiptsComponent implements OnInit {
 
   recipes = RECIPES
-  displayedColumns = ['select','id', 'name', 'progress', 'color'];
-  dataSource: MatTableDataSource<UserData>;
-  selection: SelectionModel<UserData>;
+
+  displayedColumns = ['select', 'id', 'title', 'description', 'published'];
+  dataSource: MatTableDataSource<Recipe>;
+  selection: SelectionModel<Recipe>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor() {
-
-    const users: UserData[] = [];
-    for (let i = 1; i <= 150; i++) { users.push(createNewUser(i)); }
-
+  constructor(private router : Router) {
     // Assign the data to the data source for the table to render
-    this.dataSource = new MatTableDataSource(users);
+    this.dataSource = new MatTableDataSource(RECIPES);
 
-    this.selection = new SelectionModel<UserData>(true, []);
+    this.selection = new SelectionModel<Recipe>(true, []);
   }
 
   ngOnInit() {
@@ -56,30 +54,9 @@ export class ReceiptsComponent implements OnInit {
       this.dataSource.data.forEach(row => this.selection.select(row));
   }
 
-}
-/** Builds and returns a new User. */
-function createNewUser(id: number): UserData {
-  const name =
-    NAMES[Math.round(Math.random() * (NAMES.length - 1))] + ' ' +
-    NAMES[Math.round(Math.random() * (NAMES.length - 1))].charAt(0) + '.';
+  toto(id) {
+    console.log('toto');
+    this.router.navigate([`receip/${id}`]);
+  }
 
-  return {
-    id: id.toString(),
-    name: name,
-    progress: Math.round(Math.random() * 100).toString(),
-    color: COLORS[Math.round(Math.random() * (COLORS.length - 1))]
-  };
-}
-/** Constants used to fill up our data base. */
-const COLORS = ['maroon', 'red', 'orange', 'yellow', 'olive', 'green', 'purple',
-  'fuchsia', 'lime', 'teal', 'aqua', 'blue', 'navy', 'black', 'gray'];
-const NAMES = ['Maia', 'Asher', 'Olivia', 'Atticus', 'Amelia', 'Jack',
-  'Charlotte', 'Theodore', 'Isla', 'Oliver', 'Isabella', 'Jasper',
-  'Cora', 'Levi', 'Violet', 'Arthur', 'Mia', 'Thomas', 'Elizabeth'];
-
-export interface UserData {
-  id: string;
-  name: string;
-  progress: string;
-  color: string;
 }

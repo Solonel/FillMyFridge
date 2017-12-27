@@ -7,9 +7,9 @@ import { HomepageComponent } from './front/homepage/homepage.component';
 /** BackOffice Module */
 import { DashBoardComponent } from './back/dash-board/dash-board.component';
 import { IngredientsComponent } from './back/ingredients/ingredients.component'
-import { ReceiptsComponent } from './back/receipts/receipts.component';
+import { RecipesComponent } from './back/recipes/recipes.component';
 import { BooksComponent } from './back/books/books.component';
-import { ReceiptComponent } from './back/receipt/receipt.component';
+import { RecipeComponent } from './back/recipe/recipe.component';
 
 const routes: Routes = [
     // Front
@@ -19,9 +19,9 @@ const routes: Routes = [
     // Back
     { path: 'administration', component: DashBoardComponent },
     { path: 'ingredients', component: IngredientsComponent },
-    { path: 'receipts', component: ReceiptsComponent },
+    { path: 'recipes', component: RecipesComponent },
     { path: 'books', component: BooksComponent },
-    { path: 'receipt/:id', component: ReceiptComponent }
+    { path: 'recipe/:id', component: RecipeComponent }
 ];
 
 @NgModule({
