@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { RECIPES } from '../../mock-data/mock-recipes';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import { SelectionModel } from '@angular/cdk/collections';
 
 @Component({
   selector: 'app-receipts',
@@ -10,8 +11,9 @@ import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 export class ReceiptsComponent implements OnInit {
 
   recipes = RECIPES
-  displayedColumns = ['id', 'name', 'progress', 'color'];
+  displayedColumns = ['select','id', 'name', 'progress', 'color'];
   dataSource: MatTableDataSource<UserData>;
+  selection: SelectionModel<UserData>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -19,15 +21,17 @@ export class ReceiptsComponent implements OnInit {
   constructor() {
 
     const users: UserData[] = [];
-    for (let i = 1; i <= 100; i++) { users.push(createNewUser(i)); }
+    for (let i = 1; i <= 150; i++) { users.push(createNewUser(i)); }
 
     // Assign the data to the data source for the table to render
     this.dataSource = new MatTableDataSource(users);
 
+    this.selection = new SelectionModel<UserData>(true, []);
   }
 
   ngOnInit() {
   }
+
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
@@ -38,7 +42,20 @@ export class ReceiptsComponent implements OnInit {
     filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
     this.dataSource.filter = filterValue;
   }
-  
+
+  isAllSelected() {
+    const numSelected = this.selection.selected.length;
+    const numRows = this.dataSource.data.length;
+    return numSelected === numRows;
+  }
+
+  /** Selects all rows if they are not all selected; otherwise clear selection. */
+  masterToggle() {
+    this.isAllSelected() ?
+      this.selection.clear() :
+      this.dataSource.data.forEach(row => this.selection.select(row));
+  }
+
 }
 /** Builds and returns a new User. */
 function createNewUser(id: number): UserData {

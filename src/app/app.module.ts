@@ -3,9 +3,11 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HttpClientModule } from  '@angular/common/http';
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { InMemoryDataService }  from './dev-tool/dev-services/in-memory-data.service';
+import { InMemoryDataService } from './dev-tool/dev-services/in-memory-data.service';
 
 import {
   MatCheckboxModule, MatPaginatorModule, MatSortModule, MatTableModule,
@@ -53,11 +55,14 @@ import { DevMenuComponent } from './dev-tool/dev-menu/dev-menu.component';
     BackMenuComponent,
     DevMenuComponent,
     FrontMenuComponent,
+    ReceiptComponent,
     HomepageComponent
   ],
   imports: [
-    HttpClientModule, BrowserModule, AppRoutingModule, FormsModule, MatCheckboxModule, MatPaginatorModule, MatSortModule, MatTableModule,
-    MatInputModule, 
+    HttpClientModule, BrowserModule, AppRoutingModule, FormsModule, MatCheckboxModule,
+    BrowserModule, AppRoutingModule, FormsModule,
+    MatCheckboxModule, MatPaginatorModule, MatSortModule, MatTableModule,
+    MatInputModule, BrowserAnimationsModule,
     // The HttpClientInMemoryWebApiModule module intercepts HTTP requests
     // and returns simulated server responses.
     // Remove it when a real server is ready to receive requests.

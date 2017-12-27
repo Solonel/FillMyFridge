@@ -38,14 +38,31 @@
 <div class="example-header">
     <mat-form-field>
       <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
-    </mat-form-field>
+      </mat-form-field>  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+  
+  
   </div>
   
-  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
   <div class="example-container mat-elevation-z8">
   
-    <mat-table [dataSource]="dataSource" matSort>
+    <mat-table #table [dataSource]="dataSource" matSort>
   
+   <!-- Checkbox Column -->
+   <ng-container matColumnDef="select">
+      <mat-header-cell *matHeaderCellDef>
+        <mat-checkbox (change)="$event ? masterToggle() : null"
+                      [checked]="selection.hasValue() && isAllSelected()"
+                      [indeterminate]="selection.hasValue() && !isAllSelected()">
+        </mat-checkbox>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <mat-checkbox (click)="$event.stopPropagation()"
+                      (change)="$event ? selection.toggle(row) : null"
+                      [checked]="selection.isSelected(row)">
+        </mat-checkbox>
+      </mat-cell>
+    </ng-container>
+
       <!-- ID Column -->
       <ng-container matColumnDef="id">
         <mat-header-cell *matHeaderCellDef mat-sort-header> ID </mat-header-cell>
@@ -71,10 +88,11 @@
       </ng-container>
   
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: displayedColumns;">
+      <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)">
       </mat-row>
+
+
     </mat-table>
-  
   </div>
   
   
