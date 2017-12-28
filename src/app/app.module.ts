@@ -24,13 +24,13 @@ import { HomepageComponent } from './front/homepage/homepage.component';
 /**
  * Back Component
  */
-import { ReceiptsComponent } from './back/receipts/receipts.component';
+import { RecipesComponent } from './back/recipes/recipes.component';
 import { BooksComponent } from './back/books/books.component';
 import { IngredientsComponent } from './back/ingredients/ingredients.component';
 import { BookComponent } from './back/book/book.component';
 import { DashBoardComponent } from './back/dash-board/dash-board.component';
 import { BackMenuComponent } from './back/back-menu/back-menu.component';
-import { ReceiptComponent } from './back/receipt/receipt.component';
+import { RecipeComponent } from './back/recipe/recipe.component';
 
 /**
  * Service
@@ -46,8 +46,7 @@ import { DevMenuComponent } from './dev-tool/dev-menu/dev-menu.component';
   declarations: [
     AppComponent,
     AuthenticationComponent,
-    ReceiptsComponent,
-    ReceiptComponent,
+    RecipesComponent,
     BooksComponent,
     IngredientsComponent,
     BookComponent,
@@ -55,7 +54,7 @@ import { DevMenuComponent } from './dev-tool/dev-menu/dev-menu.component';
     BackMenuComponent,
     DevMenuComponent,
     FrontMenuComponent,
-    ReceiptComponent,
+    RecipeComponent,
     HomepageComponent
   ],
   imports: [

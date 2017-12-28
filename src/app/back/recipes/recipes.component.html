@@ -1,40 +1,5 @@
 <lsc-back-menu></lsc-back-menu>
 
-<!-- <table class="table">
-  <thead class="thead-dark">
-    <tr>
-      <th scope="col"></th>
-      <th scope="col">#</th>
-      <th scope="col">Titre</th>
-      <th scope="col">Description</th>
-      <th scope="col">Auteur</th>
-      <th scope="col">Temps de préparation</th>
-      <th scope="col">Temps de cuisson</th>
-      <th scope="col">Temps total</th>
-      <th scope="col">Note</th>
-      <th scope="col">Publié</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let recipe of recipes">
-      <td class="checkit"><mat-checkbox></mat-checkbox></td>
-      <th scope="row">{{recipe.id}}</th>
-      <td>{{recipe.title}}
-        <span class="badge badge-primary badge-pill"> {{recipe.ingredients.length}}</span>
-      </td>
-      <td>{{recipe.description}}</td>
-      <td>{{recipe.author.name}}{{recipe.author.firstname}}</td>
-      <td>{{recipe.preparation}}</td>
-      <td>{{recipe.cook}}</td>
-      <td>{{recipe.readyin}}</td>
-      <td>{{recipe.rating}}</td>
-      <td class="published"> 
-        <i [ngClass]="{'fas fa-check-square':recipe.published,
-          'far fa-square':!recipe.published}"></i>
-      </td>
-    </tr>
-  </tbody>
-</table> -->
 <div class="clear">
     <mat-form-field class="left">
         <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
@@ -83,8 +48,7 @@
         </ng-container>
 
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-        <!-- <mat-row *matRowDef="let row; columns: displayedColumns;" (dblclick)="selection.toggle(row)" (click)="selection.toggle(row)"> -->
-      <mat-row *matRowDef="let row; columns: displayedColumns;"  (dblclick)="toto()">
+      <mat-row *matRowDef="let row; columns: displayedColumns;" (dblclick)="toto(row.id)">
         </mat-row>
 
     </mat-table>

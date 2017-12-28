@@ -4,12 +4,13 @@ import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { SelectionModel } from '@angular/cdk/collections';
 import { Recipe } from '../../classes/Recipe';
 import {Router} from "@angular/router";
+
 @Component({
-  selector: 'app-receipts',
-  templateUrl: './receipts.component.html',
-  styleUrls: ['./receipts.component.css']
+  selector: 'lsc-recipes',
+  templateUrl: './recipes.component.html',
+  styleUrls: ['./recipes.component.css']
 })
-export class ReceiptsComponent implements OnInit {
+export class RecipesComponent implements OnInit {
 
   recipes = RECIPES
 
@@ -55,8 +56,7 @@ export class ReceiptsComponent implements OnInit {
   }
 
   toto(id) {
-    console.log('toto');
-    this.router.navigate([`receip/${id}`]);
+    this.router.navigate([`recipe/${id}`]);
   }
 
 }
