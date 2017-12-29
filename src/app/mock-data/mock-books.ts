@@ -4,7 +4,7 @@ import { Recipe } from '../classes/recipe';
 import { Ingredient } from '../classes/ingredient';
 
 import { RECIPES } from './mock-recipes'; 
-import { AUTHORS } from './mock-author';
+import { AUTHORS } from './mock-authors';
 
 // export class Book {
 //     id: number;

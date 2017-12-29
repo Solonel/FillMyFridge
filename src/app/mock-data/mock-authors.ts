@@ -1,8 +1,4 @@
-import { Book } from '../classes/book';
 import { Author } from '../classes/author';
-import { Recipe } from '../classes/recipe';
-import { Ingredient } from '../classes/ingredient';
-
 // export class Author {
 //     id: number;
 //     name : string;

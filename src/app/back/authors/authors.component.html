@@ -28,16 +28,16 @@
             <mat-cell *matCellDef="let row"> {{row.id}} </mat-cell>
         </ng-container>
 
-        <!-- title Column -->
-        <ng-container matColumnDef="title">
-            <mat-header-cell *matHeaderCellDef mat-sort-header> Titre </mat-header-cell>
-            <mat-cell *matCellDef="let row"> {{row.title}} </mat-cell>
+        <!-- name Column -->
+        <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Nom </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.name}} </mat-cell>
         </ng-container>
 
-        <!-- description Column -->
-        <ng-container matColumnDef="description">
-            <mat-header-cell *matHeaderCellDef mat-sort-header> Description </mat-header-cell>
-            <mat-cell *matCellDef="let row"> {{row.description}} </mat-cell>
+        <!-- firstname Column -->
+        <ng-container matColumnDef="firstname">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Prénom </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.firstname}} </mat-cell>
         </ng-container>
 
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

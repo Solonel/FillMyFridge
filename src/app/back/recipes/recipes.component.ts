@@ -12,8 +12,6 @@ import { Router } from "@angular/router";
 })
 export class RecipesComponent implements OnInit {
 
-  recipes = RECIPES
-
   displayedColumns = ['select', 'id', 'title', 'description', 'published'];
   dataSource: MatTableDataSource<Recipe>;
   selection: SelectionModel<Recipe>;

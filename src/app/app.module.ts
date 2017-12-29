@@ -42,6 +42,10 @@ import { AuthService } from './services/auth.service';
  */
 import { DevMenuComponent } from './dev-tool/dev-menu/dev-menu.component';
 import { UnitComponent } from './back/unit/unit.component';
+import { UnitsComponent } from './back/units/units.component';
+import { AuthorComponent } from './back/author/author.component';
+import { AuthorsComponent } from './back/authors/authors.component';
+import { IngredientComponent } from './back/ingredient/ingredient.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +61,11 @@ import { UnitComponent } from './back/unit/unit.component';
     FrontMenuComponent,
     RecipeComponent,
     HomepageComponent,
-    UnitComponent
+    UnitComponent,
+    UnitsComponent,
+    AuthorComponent,
+    AuthorsComponent,
+    IngredientComponent
   ],
   imports: [
     HttpClientModule, BrowserModule, AppRoutingModule, FormsModule, MatCheckboxModule,

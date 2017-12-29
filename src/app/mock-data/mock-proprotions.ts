@@ -1,8 +1,8 @@
 import { Ingredient } from "../classes/Ingredient";
 import { Unit } from "../classes/Unit";
 import { Proportion } from "../classes/proportion";
-import { INGREDIENTS } from "./mock-ingredient"
-import { UNITS } from "./mock-unit"
+import { INGREDIENTS } from "./mock-ingredients"
+import { UNITS } from "./mock-units"
 
 // export class Proportion {
 //     quantity: number; // Titre

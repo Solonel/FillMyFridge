@@ -3,8 +3,9 @@ import { Author } from '../classes/author';
 import { Recipe } from '../classes/recipe';
 import { Ingredient } from '../classes/ingredient';
 
-import { INGREDIENTS } from './mock-ingredient';
-import { AUTHORS } from './mock-author';
+import { INGREDIENTS } from './mock-ingredients';
+import { AUTHORS } from './mock-authors';
+import { PROPORTIONS } from './mock-proprotions';
 
 // export class Recipe {
 //     id: number; // Id
@@ -27,7 +28,7 @@ export const RECIPES: Recipe[] = [
         title: "Recipe title 1", 
         description: "Recipe description 1", 
         directions: ["Recipe Etape 1", "Recipe Etape 2"],
-        ingredients: [INGREDIENTS[0]],
+        proportions: [PROPORTIONS[0]],
         servings: 1, 
         preparation: new Date(), 
         cook: new Date(), 
@@ -41,41 +42,41 @@ export const RECIPES: Recipe[] = [
         title: "Recipe title 2", 
         description: "Recipe description 2", 
         directions: ["Recipe Etape 1", "Recipe Etape 2"],
-        ingredients: [INGREDIENTS[0]],
+        proportions: [PROPORTIONS[1]],
         servings: 1, 
         preparation: new Date(), 
         cook: new Date(), 
         readyin: new Date(), 
         published: true, 
         rating: 2,
-        author: AUTHORS[0]
+        author: AUTHORS[1]
     },
     {
         id: 3, 
         title: "Recipe title 3", 
         description: "Recipe description 3", 
         directions: ["Recipe Etape 3", "Recipe Etape 3"],
-        ingredients: [INGREDIENTS[0]],
+        proportions: [PROPORTIONS[2]],
         servings: 3, 
         preparation: new Date(), 
         cook: new Date(), 
         readyin: new Date(), 
         published: false, 
         rating: 3,
-        author: AUTHORS[0]
+        author: AUTHORS[2]
     }, {
         id: 4, 
         title: "Recipe title 4", 
         description: "Recipe description 4", 
         directions: ["Recipe Etape 4", "Recipe Etape 4"],
-        ingredients: [INGREDIENTS[1]],
+        proportions: [PROPORTIONS[3]],
         servings: 4, 
         preparation: new Date(), 
         cook: new Date(), 
         readyin: new Date(), 
         published: false, 
         rating: 4,
-        author: AUTHORS[0]
+        author: AUTHORS[3]
     }
 ];
 

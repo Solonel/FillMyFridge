@@ -11,6 +11,10 @@ import { RecipesComponent } from './back/recipes/recipes.component';
 import { BooksComponent } from './back/books/books.component';
 import { RecipeComponent } from './back/recipe/recipe.component';
 import { BookComponent } from './back/book/book.component';
+import { UnitComponent } from './back/unit/unit.component';
+import { UnitsComponent } from './back/units/units.component';
+import { AuthorComponent } from './back/author/author.component';
+import { AuthorsComponent } from './back/authors/authors.component';
 
 const routes: Routes = [
     // Front
@@ -20,10 +24,16 @@ const routes: Routes = [
     // Back
     { path: 'administration', component: DashBoardComponent },
     { path: 'ingredients', component: IngredientsComponent },
+    { path: 'ingredient/:id', component: IngredientsComponent },
     { path: 'recipes', component: RecipesComponent },
-    { path: 'books', component: BooksComponent },
     { path: 'recipe/:id', component: RecipeComponent },
-    { path: 'book/:id', component: BookComponent }
+    { path: 'books', component: BooksComponent },
+    { path: 'book/:id', component: BookComponent },
+    { path: 'units', component: UnitsComponent },
+    { path: 'unit/:id', component: UnitComponent },
+    { path: 'authors', component: AuthorsComponent },
+    { path: 'author/:id', component: AuthorComponent }
+   
 ];
 
 @NgModule({
