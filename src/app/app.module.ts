@@ -41,6 +41,7 @@ import { AuthService } from './services/auth.service';
  * Dev Component
  */
 import { DevMenuComponent } from './dev-tool/dev-menu/dev-menu.component';
+import { UnitComponent } from './back/unit/unit.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { DevMenuComponent } from './dev-tool/dev-menu/dev-menu.component';
     DevMenuComponent,
     FrontMenuComponent,
     RecipeComponent,
-    HomepageComponent
+    HomepageComponent,
+    UnitComponent
   ],
   imports: [
     HttpClientModule, BrowserModule, AppRoutingModule, FormsModule, MatCheckboxModule,

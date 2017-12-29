@@ -48,7 +48,7 @@
         </ng-container>
 
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: displayedColumns;" (dblclick)="toto(row.id)">
+      <mat-row *matRowDef="let row; columns: displayedColumns;" (dblclick)="redirectOnDetail(row.id)">
         </mat-row>
 
     </mat-table>

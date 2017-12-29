@@ -1,4 +1,4 @@
-import { Ingredient } from './ingredient';
+import { Proportion } from './proportion';
 import { Author } from './author';
 
 export class Recipe {
@@ -6,7 +6,7 @@ export class Recipe {
     title: string; // Titre
     description: string; // Petite description
     directions : Array<string>; // Etapes de préparation
-    ingredients: Array<Ingredient>; // Quantité avec ingredients
+    proportions: Array<Proportion>; // Quantité avec ingredients
     servings: number; // Nombre de personnes
     preparation: Date; // Temps de préparation
     cook: Date; // Temps de cuisson

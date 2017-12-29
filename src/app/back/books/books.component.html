@@ -1,31 +1,56 @@
 <lsc-back-menu></lsc-back-menu>
 
-<table class="table">
-  <thead class="thead-dark">
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Titre</th>
-      <th scope="col">Description</th>
-      <th scope="col">Auteur</th>
-      <th scope="col">Prix</th>
-      <th scope="col">Note</th>
-      <th scope="col">Publié</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let book of books">
-      <th scope="row">{{book.id}}</th>
-      <td>{{book.title}}
-        <span class="badge badge-primary badge-pill"> {{book.recipes.length}}</span>
-      </td>
-      <td>{{book.description}}</td>
-      <td>{{book.author.name}}{{book.author.firstname}}</td>
-      <td>{{book.price}}</td>
-      <td>{{book.rating}}</td>
-      <td>
-        <i [ngClass]="{'fas fa-check-square':book.published,
-        'far fa-square':!book.published}"></i>
-      </td>
-    </tr>
-  </tbody>
-</table>
+<div class="clear">
+    <mat-form-field class="left">
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+    </mat-form-field>
+    <mat-paginator class="right" [pageSizeOptions]="[25, 50, 100]"></mat-paginator>
+</div>
+
+<div class="clear">
+
+    <mat-table #table [dataSource]="dataSource" matSort>
+        <!-- Checkbox Column -->
+        <ng-container matColumnDef="select">
+            <mat-header-cell *matHeaderCellDef>
+                <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()" [indeterminate]="selection.hasValue() && !isAllSelected()">
+                </mat-checkbox>
+            </mat-header-cell>
+            <mat-cell *matCellDef="let row">
+                <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null" [checked]="selection.isSelected(row)">
+                </mat-checkbox>
+            </mat-cell>
+        </ng-container>
+
+        <!-- id Column -->
+        <ng-container matColumnDef="id">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> # </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.id}} </mat-cell>
+        </ng-container>
+
+        <!-- title Column -->
+        <ng-container matColumnDef="title">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Titre </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.title}} </mat-cell>
+        </ng-container>
+
+        <!-- description Column -->
+        <ng-container matColumnDef="description">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Description </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.description}} </mat-cell>
+        </ng-container>
+
+        <!-- published  Column -->
+        <ng-container matColumnDef="published">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Publié </mat-header-cell>
+            <mat-cell *matCellDef="let row">  <i [ngClass]="{'fas fa-check-square':row.published,
+              'far fa-square':!row.published}"></i>  </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;" (dblclick)="redirectOnDetail(row.id)">
+        </mat-row>
+
+    </mat-table>
+</div>
+  

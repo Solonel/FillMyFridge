@@ -10,6 +10,7 @@ import { IngredientsComponent } from './back/ingredients/ingredients.component'
 import { RecipesComponent } from './back/recipes/recipes.component';
 import { BooksComponent } from './back/books/books.component';
 import { RecipeComponent } from './back/recipe/recipe.component';
+import { BookComponent } from './back/book/book.component';
 
 const routes: Routes = [
     // Front
@@ -21,7 +22,8 @@ const routes: Routes = [
     { path: 'ingredients', component: IngredientsComponent },
     { path: 'recipes', component: RecipesComponent },
     { path: 'books', component: BooksComponent },
-    { path: 'recipe/:id', component: RecipeComponent }
+    { path: 'recipe/:id', component: RecipeComponent },
+    { path: 'book/:id', component: BookComponent }
 ];
 
 @NgModule({

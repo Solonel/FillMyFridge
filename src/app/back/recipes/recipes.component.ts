@@ -3,7 +3,7 @@ import { RECIPES } from '../../mock-data/mock-recipes';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { SelectionModel } from '@angular/cdk/collections';
 import { Recipe } from '../../classes/Recipe';
-import {Router} from "@angular/router";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'lsc-recipes',
@@ -21,10 +21,8 @@ export class RecipesComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private router : Router) {
-    // Assign the data to the data source for the table to render
+  constructor(private router: Router) {
     this.dataSource = new MatTableDataSource(RECIPES);
-
     this.selection = new SelectionModel<Recipe>(true, []);
   }
 
@@ -55,7 +53,7 @@ export class RecipesComponent implements OnInit {
       this.dataSource.data.forEach(row => this.selection.select(row));
   }
 
-  toto(id) {
+  redirectOnDetail(id) {
     this.router.navigate([`recipe/${id}`]);
   }
 

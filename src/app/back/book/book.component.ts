@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Book } from '../../classes/book';
+import { SelectionModel } from '@angular/cdk/collections';
 
 @Component({
   selector: 'lsc-book',

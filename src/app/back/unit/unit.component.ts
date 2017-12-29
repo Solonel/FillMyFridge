@@ -1,29 +1,23 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { BOOKS } from '../../mock-data/mock-books'
-import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
+import { Component, OnInit } from '@angular/core';
+import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { SelectionModel } from '@angular/cdk/collections';
-import { Book } from '../../classes/book';
+import { Unit } from '../../classes/Unit';
 import { Router } from "@angular/router";
 
 @Component({
-  selector: 'lsc-books',
-  templateUrl: './books.component.html',
-  styleUrls: ['./books.component.css']
+  selector: 'lsc-unit',
+  templateUrl: './unit.component.html',
+  styleUrls: ['./unit.component.css']
 })
-export class BooksComponent implements OnInit {
-
-  books = BOOKS;
+export class UnitComponent implements OnInit {
 
   displayedColumns = ['select', 'id', 'title', 'description', 'published'];
-  dataSource: MatTableDataSource<Book>;
-  selection: SelectionModel<Book>;
+  dataSource: MatTableDataSource<Unit>;
+  selection: SelectionModel<Unit>;
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
-
-  constructor(private router: Router) {
-    this.dataSource = new MatTableDataSource(BOOKS);
-    this.selection = new SelectionModel<Book>(true, []);
+  constructor(private router: Router) { 
+    this.dataSource = new MatTableDataSource(UNIT);
+    this.selection = new SelectionModel<Unit>(true, []);
   }
 
   ngOnInit() {
@@ -54,9 +48,6 @@ export class BooksComponent implements OnInit {
   }
 
   redirectOnDetail(id) {
-    this.router.navigate([`book/${id}`]);
+    this.router.navigate([`unit/${id}`]);
   }
 }
-
-
-
