@@ -1,2 +1,32 @@
 /* You can add global styles to this file, and also import other style files */
-@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+
+
+.left{
+    float: left;
+}
+
+.right {
+    float: right;
+}
+
+.clear {
+    clear: both;
+}
+
+.grid .mat-form-field {
+    width: 25%;
+    margin: 0 24px;
+}
+
+.grid .mat-paginator {
+    margin: 0 24px;
+}
+
+.grid .mat-row:hover {
+    background-color : lightblue;
+}
+
+.form {
+    padding : 0 34px;
+}

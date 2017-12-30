@@ -6,6 +6,7 @@ import { AuthenticationComponent } from './front/authentication/authentication.c
 import { HomepageComponent } from './front/homepage/homepage.component';
 /** BackOffice Module */
 import { DashBoardComponent } from './back/dash-board/dash-board.component';
+import { IngredientComponent } from './back/ingredient/ingredient.component'
 import { IngredientsComponent } from './back/ingredients/ingredients.component'
 import { RecipesComponent } from './back/recipes/recipes.component';
 import { BooksComponent } from './back/books/books.component';
@@ -24,7 +25,7 @@ const routes: Routes = [
     // Back
     { path: 'administration', component: DashBoardComponent },
     { path: 'ingredients', component: IngredientsComponent },
-    { path: 'ingredient/:id', component: IngredientsComponent },
+    { path: 'ingredient/:id', component: IngredientComponent },
     { path: 'recipes', component: RecipesComponent },
     { path: 'recipe/:id', component: RecipeComponent },
     { path: 'books', component: BooksComponent },
