@@ -46,6 +46,7 @@ import { UnitsComponent } from './back/units/units.component';
 import { AuthorComponent } from './back/author/author.component';
 import { AuthorsComponent } from './back/authors/authors.component';
 import { IngredientComponent } from './back/ingredient/ingredient.component';
+import { AuthorService } from './services/author.service';
 
 @NgModule({
   declarations: [
@@ -79,7 +80,7 @@ import { IngredientComponent } from './back/ingredient/ingredient.component';
       InMemoryDataService, { dataEncapsulation: false }
     )
   ],
-  providers: [AuthService],
+  providers: [AuthService,AuthorService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
