@@ -3,24 +3,42 @@
 <div class="form">
 
   <h1>Auteur</h1>
+  <div *ngIf="!fetchingData">
 
-  <div>
-    <mat-form-field class="example-full-width">
-      <input matInput placeholder="Prénom">
-    </mat-form-field>
+    <div *ngIf="author ">
+      <div>
+        <mat-form-field class="example-full-width">
+          <input [(ngModel)]="author.firstname" matInput placeholder="Prénom">
+        </mat-form-field>
 
-    <mat-form-field class="example-full-width">
-      <input matInput placeholder="Nom">
-    </mat-form-field>
-  </div>
+        <mat-form-field class="example-full-width">
+          <input [(ngModel)]="author.name" matInput placeholder="Nom">
+        </mat-form-field>
+      </div>
+      <div>
+        <button type="button" (click)="save()" class="btn btn-success"> Modifier </button>
+        <button type="button" (click)="delete()" data-toggle="modal" data-target="#modal" class="btn btn-danger"> Supprimer </button>
+      </div>
+    </div>
 
-  <div>
-    <button type="button" class="btn btn-success"> Modifier </button>
-    <button type="button" class="btn btn-danger"> Archiver </button>
-  </div>
+    <div *ngIf="!author">
 
-  <div>
-    <button type="button" class="btn btn-primary"> Enregistrer </button>
+      <div>
+        <form #registerForm="ngForm" (ngSubmit)="addAuthor(registerForm.value)">
+          <mat-form-field class="example-full-width">
+            <input required ngModel name="firstname" matInput placeholder="Prénom">
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width">
+            <input required ngModel name="name" matInput placeholder="Nom">
+          </mat-form-field>
+          <button type="submit" class="btn btn-primary" [disabled]="registerForm.invalid"> Enregistrer </button>
+        </form>
+
+      </div>
+
+    </div>
+
   </div>
 
 </div>

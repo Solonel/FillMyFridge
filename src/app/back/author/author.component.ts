@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit, Input } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
+import { AuthorService } from '../../services/author.service';
+import { Author } from '../../classes/author';
 
 @Component({
   selector: 'lsc-author',
@@ -8,28 +10,43 @@ import { Location } from '@angular/common';
   styleUrls: ['./author.component.css']
 })
 export class AuthorComponent implements OnInit {
+  @Input() author: Author;
+
+  fetchingData = true;
 
   constructor(
     private route: ActivatedRoute,
-    private location: Location) { }
+    private router: Router, 
+    private authorService: AuthorService) { }
 
   ngOnInit() {
-    // this.getAuthor();
+    this.getAuthor();
   }
 
-  // getAuthor(): void {
-  //   const id = +this.route.snapshot.paramMap.get('id');
-  //   this.heroService.getHero(id)
-  //     .subscribe(hero => this.hero = hero);
-  // }
+  getAuthor(): void {
+    const id = +this.route.snapshot.paramMap.get('id');
+    this.authorService.getAuthorNo404(id)
+      .subscribe(author => { this.author = author; this.fetchingData = false; });
+  }
 
-  // goBack(): void {
-  //   this.location.back();
-  // }
+  goToList(): void {
+    this.router.navigate([`authors`]);
+  }
 
-  // save(): void {
-  //   this.heroService.updateHero(this.hero)
-  //     .subscribe(() => this.goBack());
-  // }
+  save(): void {
+    console.log("save",this.author);
+    this.authorService.updateAuthor(this.author)
+      .subscribe(() => this.goToList());
+  }
+
+  delete(): void {
+    console.log("delete",this.author);
+    this.authorService.deleteAuthor(this.author)
+      .subscribe(() => this.goToList());
+  }
+
+  addAuthor(formData) {
+    this.authorService.addAuthor(formData).subscribe(() => this.goToList());;
+  }
 
 }

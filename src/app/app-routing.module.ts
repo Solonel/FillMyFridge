@@ -33,8 +33,8 @@ const routes: Routes = [
     { path: 'units', component: UnitsComponent },
     { path: 'unit/:id', component: UnitComponent },
     { path: 'authors', component: AuthorsComponent },
+    { path: 'author/add', component: AuthorComponent },
     { path: 'author/:id', component: AuthorComponent }
-   
 ];
 
 @NgModule({

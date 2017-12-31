@@ -44,6 +44,10 @@ export class AuthorsComponent implements OnInit {
       );
   }
 
+  addAuthor() {
+    this.router.navigate([`author/add`]);
+  }
+
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
