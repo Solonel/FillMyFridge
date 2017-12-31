@@ -28,7 +28,6 @@ export class AuthorsComponent implements OnInit {
 
   ngOnInit() {
     this.getAuthors();
-    console.log(this.authors)
   }
 
   ngAfterViewInit() {
@@ -38,7 +37,11 @@ export class AuthorsComponent implements OnInit {
 
   getAuthors() {
     this.authorService.getAuthors()
-      .subscribe(authors => this.authors = authors);
+      .subscribe(authors => {
+        this.authors = authors;
+        this.dataSource.data = authors;
+      }
+      );
   }
 
   applyFilter(filterValue: string) {
