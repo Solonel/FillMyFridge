@@ -3,7 +3,7 @@ import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { SelectionModel } from '@angular/cdk/collections';
 import { Unit } from '../../classes/Unit';
 import { Router } from "@angular/router";
-import { UNITS } from '../../mock-data/mock-units';
+import { UnitService } from '../../services/unit.service';
 
 @Component({
   selector: 'lsc-units',
@@ -11,7 +11,7 @@ import { UNITS } from '../../mock-data/mock-units';
   styleUrls: ['./units.component.css']
 })
 export class UnitsComponent implements OnInit {
-
+  units: Unit[];
   displayedColumns = ['select', 'id', 'title', 'description'];
   dataSource: MatTableDataSource<Unit>;
   selection: SelectionModel<Unit>;
@@ -19,17 +19,31 @@ export class UnitsComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private router: Router) {
-    this.dataSource = new MatTableDataSource(UNITS);
+  constructor(private router: Router, private unitService: UnitService) {
+    this.dataSource = new MatTableDataSource(this.units);
     this.selection = new SelectionModel<Unit>(true, []);
   }
 
   ngOnInit() {
+    this.getUnits();
   }
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+  }
+
+  getUnits() {
+    this.unitService.getUnits()
+      .subscribe(units => {
+        this.units = units;
+        this.dataSource.data = units;
+      }
+      );
+  }
+
+  addUnit() {
+    this.router.navigate([`unit/add`]);
   }
 
   applyFilter(filterValue: string) {

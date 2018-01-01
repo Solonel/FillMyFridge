@@ -1,10 +1,11 @@
 <lsc-back-menu></lsc-back-menu>
 
-<div class="clear">
+<div class="clear gridHeader">
   <mat-form-field class="left">
     <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
   </mat-form-field>
   <mat-paginator class="right" [pageSizeOptions]="[25, 50, 100]"></mat-paginator>
+  <button type="button" (click)="addUnit()" class="btn btn-dark right">Ajouter</button>
 </div>
 
 <div class="clear">

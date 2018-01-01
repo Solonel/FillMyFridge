@@ -47,6 +47,10 @@ import { AuthorComponent } from './back/author/author.component';
 import { AuthorsComponent } from './back/authors/authors.component';
 import { IngredientComponent } from './back/ingredient/ingredient.component';
 import { AuthorService } from './services/author.service';
+import { UnitService } from './services/unit.service';
+import { IngredientService } from './services/ingredient.service';
+import { RecipeService } from './services/recipe.service';
+import { BookService } from './services/book.service';
 
 @NgModule({
   declarations: [
@@ -80,7 +84,7 @@ import { AuthorService } from './services/author.service';
       InMemoryDataService, { dataEncapsulation: false }
     )
   ],
-  providers: [AuthService,AuthorService],
+  providers: [AuthService, AuthorService, UnitService, IngredientService, RecipeService, BookService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

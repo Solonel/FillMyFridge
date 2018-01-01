@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { INGREDIENTS } from '../../mock-data/mock-ingredients';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { SelectionModel } from '@angular/cdk/collections';
 import { Ingredient } from '../../classes/Ingredient';
 import { Router } from "@angular/router";
+import { IngredientService } from '../../services/ingredient.service';
 
 @Component({
   selector: 'lsc-ingredients',
@@ -11,7 +11,7 @@ import { Router } from "@angular/router";
   styleUrls: ['./ingredients.component.css']
 })
 export class IngredientsComponent implements OnInit {
-
+  ingredients: Ingredient[];
   displayedColumns = ['select', 'id', 'title', 'description'];
   dataSource: MatTableDataSource<Ingredient>;
   selection: SelectionModel<Ingredient>;
@@ -19,17 +19,31 @@ export class IngredientsComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private router: Router) {
-    this.dataSource = new MatTableDataSource(INGREDIENTS);
+  constructor(private router: Router, private ingredientService: IngredientService) {
+    this.dataSource = new MatTableDataSource(this.ingredients);
     this.selection = new SelectionModel<Ingredient>(true, []);
   }
 
   ngOnInit() {
+    this.getIngredients();
   }
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+  }
+
+  getIngredients() {
+    this.ingredientService.getIngredients()
+      .subscribe(ingredients => {
+        this.ingredients = ingredients;
+        this.dataSource.data = ingredients;
+      }
+      );
+  }
+
+  addIngredient() {
+    this.router.navigate([`ingredient/add`]);
   }
 
   applyFilter(filterValue: string) {

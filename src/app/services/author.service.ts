@@ -50,18 +50,6 @@ export class AuthorService {
     );
   }
 
-  /* GET Authors whose name contains search term */
-  searchAuthors(term: string): Observable<Author[]> {
-    if (!term.trim()) {
-      // if not search term, return empty Author array.
-      return of([]);
-    }
-    return this.http.get<Author[]>(`api/authors/?name=${term}`).pipe(
-      tap(_ => this.log(`found authors matching "${term}"`)),
-      catchError(this.handleError<Author[]>('searchAuthors', []))
-    );
-  }
-
   //////// Save methods //////////
 
   /** POST: add a new author to the server */

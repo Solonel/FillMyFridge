@@ -27,6 +27,6 @@
     background-color : lightblue;
 }
 
-.form {
-    padding : 0 34px;
+.form, .gridHeader {
+    padding : 0 1.5rem;
 }

@@ -1,3 +1,44 @@
 <lsc-back-menu></lsc-back-menu>
 
-<p>Unit Detail</p>
+<div class="form">
+
+    <h1>Unité</h1>
+    <div *ngIf="!fetchingData">
+
+        <div *ngIf="unit ">
+            <div>
+                <mat-form-field class="example-full-width">
+                    <input [(ngModel)]="unit.title" matInput placeholder="Titre">
+                </mat-form-field>
+
+                <mat-form-field class="example-full-width">
+                    <input [(ngModel)]="unit.description" matInput placeholder="Description">
+                </mat-form-field>
+            </div>
+            <div>
+                <button type="button" (click)="save()" class="btn btn-success"> Modifier </button>
+                <button type="button" (click)="delete()" class="btn btn-danger"> Supprimer </button>
+            </div>
+        </div>
+
+        <div *ngIf="!unit">
+
+            <div>
+                <form #registerForm="ngForm" (ngSubmit)="addUnit(registerForm.value)">
+                    <mat-form-field class="example-full-width">
+                        <input required ngModel name="title" matInput placeholder="Titre">
+                    </mat-form-field>
+
+                    <mat-form-field class="example-full-width">
+                        <input required ngModel name="description" matInput placeholder="Description">
+                    </mat-form-field>
+                    <button type="submit" class="btn btn-primary" [disabled]="registerForm.invalid"> Enregistrer </button>
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

@@ -31,6 +31,7 @@ const routes: Routes = [
     { path: 'books', component: BooksComponent },
     { path: 'book/:id', component: BookComponent },
     { path: 'units', component: UnitsComponent },
+    { path: 'unit/add', component: UnitComponent },
     { path: 'unit/:id', component: UnitComponent },
     { path: 'authors', component: AuthorsComponent },
     { path: 'author/add', component: AuthorComponent },
