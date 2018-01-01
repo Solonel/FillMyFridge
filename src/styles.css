@@ -30,3 +30,8 @@
 .form, .gridHeader {
     padding : 0 1.5rem;
 }
+
+.addButtonGrid {
+   margin-top: 8px;
+margin-right: 8px; 
+}

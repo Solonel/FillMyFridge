@@ -32,7 +32,7 @@ export class UnitService {
     const url = `${this.unitsUrl}/?id=${id}`;
     return this.http.get<Unit[]>(url)
       .pipe(
-      map(Units => Units[0]), // returns a {0|1} element array
+      map(units => units[0]), // returns a {0|1} element array
       tap(h => {
         const outcome = h ? `fetched` : `did not find`;
         this.log(`${outcome} Unit id=${id}`);
@@ -53,16 +53,16 @@ export class UnitService {
   //////// Save methods //////////
 
   /** POST: add a new Unit to the server */
-  addUnit(Unit: Unit): Observable<Unit> {
-    return this.http.post<Unit>(this.unitsUrl, Unit, httpOptions).pipe(
-      tap((Unit: Unit) => this.log(`added Unit w/ id=${Unit.id}`)),
+  addUnit(unit: Unit): Observable<Unit> {
+    return this.http.post<Unit>(this.unitsUrl, unit, httpOptions).pipe(
+      tap((unit: Unit) => this.log(`added Unit w/ id=${unit.id}`)),
       catchError(this.handleError<Unit>('addUnit'))
     );
   }
 
   /** DELETE: delete the Unit from the server */
-  deleteUnit(Unit: Unit | number): Observable<Unit> {
-    const id = typeof Unit === 'number' ? Unit : Unit.id;
+  deleteUnit(unit: Unit | number): Observable<Unit> {
+    const id = typeof unit === 'number' ? unit :unit.id;
     const url = `${this.unitsUrl}/${id}`;
 
     return this.http.delete<Unit>(url, httpOptions).pipe(
@@ -72,9 +72,9 @@ export class UnitService {
   }
 
   /** PUT: update the Unit on the server */
-  updateUnit(Unit: Unit): Observable<any> {
-    return this.http.put(this.unitsUrl, Unit, httpOptions).pipe(
-      tap(_ => this.log(`updated Unit id=${Unit.id}`)),
+  updateUnit(unit: Unit): Observable<any> {
+    return this.http.put(this.unitsUrl,unit, httpOptions).pipe(
+      tap(_ => this.log(`updated Unit id=${unit.id}`)),
       catchError(this.handleError<any>('updateUnit'))
     );
   }

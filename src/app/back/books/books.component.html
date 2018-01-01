@@ -5,6 +5,7 @@
         <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
     </mat-form-field>
     <mat-paginator class="right" [pageSizeOptions]="[25, 50, 100]"></mat-paginator>
+    <button type="button" (click)="addBook()" class="btn btn-dark addButtonGrid right">Ajouter</button>
 </div>
 
 <div class="clear">
