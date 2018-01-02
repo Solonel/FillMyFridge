@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { BOOKS } from '../../mock-data/mock-books'
 import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
 import { SelectionModel } from '@angular/cdk/collections';
 import { Book } from '../../classes/book';
 import { Router } from "@angular/router";
+import { BookService } from '../../services/book.service';
 
 @Component({
   selector: 'lsc-books',
@@ -11,7 +11,7 @@ import { Router } from "@angular/router";
   styleUrls: ['./books.component.css']
 })
 export class BooksComponent implements OnInit {
-  
+  books: Book[];
   displayedColumns = ['select', 'id', 'title', 'description', 'published'];
   dataSource: MatTableDataSource<Book>;
   selection: SelectionModel<Book>;
@@ -19,17 +19,31 @@ export class BooksComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private router: Router) {
-    this.dataSource = new MatTableDataSource(BOOKS);
+  constructor(private router: Router, private bookService: BookService) {
+    this.dataSource = new MatTableDataSource(this.books);
     this.selection = new SelectionModel<Book>(true, []);
   }
 
   ngOnInit() {
+    this.getBooks();
   }
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+  }
+
+  getBooks() {
+    this.bookService.getBooks()
+      .subscribe(books => {
+        this.books = books;
+        this.dataSource.data = books;
+      }
+      );
+  }
+
+  addBook() {
+    this.router.navigate([`book/add`]);
   }
 
   applyFilter(filterValue: string) {
