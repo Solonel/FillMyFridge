@@ -1,0 +1,30 @@
+<lsc-front-menu></lsc-front-menu>
+
+<form class="register-form basic-form">
+  <mat-form-field class="">
+    <input matInput placeholder="Nom" class="register lastName" id="lastName">
+  </mat-form-field>
+
+  <mat-form-field class="">
+    <input matInput placeholder="Prénom" class="register firstName" id="firstName">
+  </mat-form-field>
+
+  <mat-form-field class="">
+    <input matInput [matDatepicker]="birthDate" placeholder="Date de naissance">
+    <mat-datepicker-toggle matSuffix [for]="birthDate"></mat-datepicker-toggle>
+    <mat-datepicker #birthDate></mat-datepicker>
+  </mat-form-field>
+
+  <mat-form-field class="">
+    <input matInput placeholder="Email" class="register email" id="email" type="email">
+  </mat-form-field>
+
+  <mat-form-field class="">
+    <input matInput placeholder="Mot de passe" class="register password" id="password" type="password">
+  </mat-form-field>
+
+  <mat-form-field class="">
+    <input matInput placeholder="Confirmation de mot de passe" class="register confirm-password" id="password-confirm" type="password">
+  </mat-form-field>
+
+</form>

@@ -16,6 +16,7 @@ import { AngularMaterialModule } from './angular-material.module'
 import { AuthenticationComponent } from './front/authentication/authentication.component';
 import { FrontMenuComponent } from './front/front-menu/front-menu.component';
 import { HomepageComponent } from './front/homepage/homepage.component';
+import { RegisterComponent } from './Front/register/register.component';
 
 /**
  * Back Component
@@ -66,7 +67,8 @@ import { BookService } from './services/book.service';
     UnitsComponent,
     AuthorComponent,
     AuthorsComponent,
-    IngredientComponent
+    IngredientComponent,
+    RegisterComponent
   ],
   imports: [
     HttpClientModule, BrowserModule, AppRoutingModule, FormsModule, 
