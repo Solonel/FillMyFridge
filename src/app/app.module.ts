@@ -12,6 +12,8 @@ import { InMemoryDataService } from './dev-tool/dev-services/in-memory-data.serv
 import {
   MatCheckboxModule, MatPaginatorModule, MatSortModule, MatTableModule,
   MatInputModule,
+  MatSlideToggleModule,
+  MatSelectModule,
 } from '@angular/material';
 
 /**
@@ -77,6 +79,8 @@ import { BookService } from './services/book.service';
     BrowserModule, AppRoutingModule, FormsModule,
     MatCheckboxModule, MatPaginatorModule, MatSortModule, MatTableModule,
     MatInputModule, BrowserAnimationsModule,
+    MatSlideToggleModule,
+    MatSelectModule,
     // The HttpClientInMemoryWebApiModule module intercepts HTTP requests
     // and returns simulated server responses.
     // Remove it when a real server is ready to receive requests.

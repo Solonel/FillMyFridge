@@ -1,3 +1,31 @@
 <lsc-back-menu></lsc-back-menu>
 
-<p>Book</p>
+<mat-form-field>
+    <input matInput placeholder="Title">
+</mat-form-field>
+
+<mat-form-field>
+    <textarea matInput placeholder="Description"></textarea>
+</mat-form-field>
+
+
+<p>il manque recette </p>
+
+<mat-form-field>
+    <mat-select placeholder="Auteur">
+        <mat-option *ngFor="let author of authors" [value]="author.id">
+            {{ author.name }} &nbsp; {{ author.firstname }}
+        </mat-option>
+    </mat-select>
+</mat-form-field>
+
+<mat-form-field>
+    <input matInput placeholder="Prix" type="number">
+    <span matSuffix>€&nbsp;</span>
+</mat-form-field>
+
+<mat-form-field>
+    <input matInput placeholder="Note" type="number">
+</mat-form-field>
+
+<mat-slide-toggle> Publié </mat-slide-toggle>
