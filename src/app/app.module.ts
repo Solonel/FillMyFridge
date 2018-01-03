@@ -13,7 +13,8 @@ import {
   MatCheckboxModule, MatPaginatorModule, MatSortModule, MatTableModule,
   MatInputModule,
   MatSlideToggleModule,
-  MatSelectModule,
+  MatSelectModule,MatDatepickerModule,
+  MatNativeDateModule,
 } from '@angular/material';
 
 /**
@@ -22,6 +23,7 @@ import {
 import { AuthenticationComponent } from './front/authentication/authentication.component';
 import { FrontMenuComponent } from './front/front-menu/front-menu.component';
 import { HomepageComponent } from './front/homepage/homepage.component';
+import { RegisterComponent } from './Front/register/register.component';
 
 /**
  * Back Component
@@ -72,7 +74,8 @@ import { BookService } from './services/book.service';
     UnitsComponent,
     AuthorComponent,
     AuthorsComponent,
-    IngredientComponent
+    IngredientComponent,
+    RegisterComponent
   ],
   imports: [
     HttpClientModule, BrowserModule, AppRoutingModule, FormsModule, MatCheckboxModule,
@@ -80,7 +83,7 @@ import { BookService } from './services/book.service';
     MatCheckboxModule, MatPaginatorModule, MatSortModule, MatTableModule,
     MatInputModule, BrowserAnimationsModule,
     MatSlideToggleModule,
-    MatSelectModule,
+    MatSelectModule, MatDatepickerModule, MatNativeDateModule,
     // The HttpClientInMemoryWebApiModule module intercepts HTTP requests
     // and returns simulated server responses.
     // Remove it when a real server is ready to receive requests.

@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 /** FrontOffice Module */
 import { AuthenticationComponent } from './front/authentication/authentication.component';
 import { HomepageComponent } from './front/homepage/homepage.component';
+import { RegisterComponent } from './Front/register/register.component';
 /** BackOffice Module */
 import { DashBoardComponent } from './back/dash-board/dash-board.component';
 import { IngredientComponent } from './back/ingredient/ingredient.component'
@@ -21,6 +22,7 @@ const routes: Routes = [
     // Front
     { path: 'login', component: AuthenticationComponent },
     { path: '', component: HomepageComponent },
+    { path: 'register', component: RegisterComponent },
 
     // Back
     { path: 'administration', component: DashBoardComponent },
