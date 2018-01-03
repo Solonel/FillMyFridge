@@ -1,31 +1,79 @@
 <lsc-back-menu></lsc-back-menu>
 
-<mat-form-field>
-    <input matInput placeholder="Title">
-</mat-form-field>
+<div class="form">
 
-<mat-form-field>
-    <textarea matInput placeholder="Description"></textarea>
-</mat-form-field>
+    <h1>Livre</h1>
+    <hr>
+    <h2>Informations</h2>
+    <div *ngIf="!fetchingData">
+        <div>
+            <mat-slide-toggle> Publié </mat-slide-toggle>
+        </div>
+
+        <div>
+            <mat-form-field>
+                <input matInput placeholder="Title">
+            </mat-form-field>
+        </div>
+
+        <div>
+            <mat-form-field>
+                <textarea matInput placeholder="Description"></textarea>
+            </mat-form-field>
+        </div>
 
 
-<p>il manque recette </p>
+        <div>
+            <mat-form-field>
+                <mat-select placeholder="Auteur">
+                    <mat-option *ngFor="let author of authors" [value]="author.id">
+                        {{ author.name }} &nbsp; {{ author.firstname }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
 
-<mat-form-field>
-    <mat-select placeholder="Auteur">
-        <mat-option *ngFor="let author of authors" [value]="author.id">
-            {{ author.name }} &nbsp; {{ author.firstname }}
-        </mat-option>
-    </mat-select>
-</mat-form-field>
+        <div>
+            <mat-form-field>
+                <input matInput placeholder="Prix" type="number">
+                <span matSuffix>€&nbsp;</span>
+            </mat-form-field>
+        </div>
 
-<mat-form-field>
-    <input matInput placeholder="Prix" type="number">
-    <span matSuffix>€&nbsp;</span>
-</mat-form-field>
+        <div>
+            <mat-form-field>
+                <input matInput placeholder="Note" type="number">
+            </mat-form-field>
+        </div>
 
-<mat-form-field>
-    <input matInput placeholder="Note" type="number">
-</mat-form-field>
+        <div class="clear">
+            <h2> Recettes </h2>
+            <div class="left">
+                <mat-selection-list #recipesList>
+                    <mat-list-option checkboxPosition="before" *ngFor="let recipe of recipes">
+                        <h3 matLine> {{recipe.title}} </h3>
+                        <p matLine>
+                            <span> {{recipe.description}} </span>
+                        </p>
+                    </mat-list-option>
+                </mat-selection-list>
+            </div>
+            <button type="button" (click)="addRecipesToBook(recipesList.selectedOptions.selected)" class="btn btn-dark"> Ajouter au livre </button>
+            <div class="right" *ngIf="choosedRecipesList">
+                <mat-selection-list #choosedRecipesList>
+                    <mat-list-option value=" {{recipe.id}}" checkboxPosition="before" *ngFor="let recipe of choosedRecipesList">
+                        <h3 matLine> {{recipe.title}} </h3>
+                        <p matLine>
+                            <span> {{recipe.description}} </span>
+                        </p>
+                    </mat-list-option>
+                </mat-selection-list>
+            </div>
 
-<mat-slide-toggle> Publié </mat-slide-toggle>
+        </div>
+    </div>
+
+</div>
+<div>
+
+</div>

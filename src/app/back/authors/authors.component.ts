@@ -16,7 +16,7 @@ export class AuthorsComponent implements OnInit {
   displayedColumns = ['select', 'id', 'name', 'firstname'];
   dataSource: MatTableDataSource<Author>;
   selection: SelectionModel<Author>;
-
+  
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
