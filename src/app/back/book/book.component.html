@@ -50,7 +50,7 @@
             <h2> Recettes </h2>
             <div class="left">
                 <mat-selection-list #recipesList>
-                    <mat-list-option checkboxPosition="before" *ngFor="let recipe of recipes">
+                    <mat-list-option checkboxPosition="before" [value]="recipe" *ngFor="let recipe of recipes">
                         <h3 matLine> {{recipe.title}} </h3>
                         <p matLine>
                             <span> {{recipe.description}} </span>
@@ -58,10 +58,10 @@
                     </mat-list-option>
                 </mat-selection-list>
             </div>
-            <button type="button" (click)="addRecipesToBook(recipesList.selectedOptions.selected)" class="btn btn-dark"> Ajouter au livre </button>
+            <button type="button" (click)="addRecipesToBook(recipesList)" class="btn btn-dark"> Ajouter au livre </button>
             <div class="right" *ngIf="choosedRecipesList">
-                <mat-selection-list #choosedRecipesList>
-                    <mat-list-option value=" {{recipe.id}}" checkboxPosition="before" *ngFor="let recipe of choosedRecipesList">
+                <mat-selection-list #recipesBook>
+                    <mat-list-option checkboxPosition="before" [value]="recipe" *ngFor="let recipe of choosedRecipesList">
                         <h3 matLine> {{recipe.title}} </h3>
                         <p matLine>
                             <span> {{recipe.description}} </span>

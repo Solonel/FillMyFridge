@@ -8,6 +8,7 @@ import { AuthorService } from '../../services/author.service';
 import { Author } from '../../classes/author';
 import { RecipeService } from '../../services/recipe.service';
 import { Recipe } from '../../classes/Recipe';
+import * as _ from "lodash";
 
 @Component({
   selector: 'lsc-book',
@@ -44,7 +45,6 @@ export class BookComponent implements OnInit {
     this.recipeService.getRecipes()
       .subscribe(recipes => {
         this.recipes = recipes;
-        console.log(this.recipes);
       });
   }
 
@@ -78,14 +78,16 @@ export class BookComponent implements OnInit {
   }
 
   addRecipesToBook(recipes) {
-    
-    console.log(recipes)
-    if (this.choosedRecipesList) {
-      this.choosedRecipesList = [this.choosedRecipesList,...recipes];
-    } else {
-      this.choosedRecipesList = recipes;
-    }
-
+    recipes.selectedOptions.selected.map(item => {
+      console.log(item.value)
+      if (!this.choosedRecipesList) {
+        this.choosedRecipesList = [item.value];
+      } else {
+        this.choosedRecipesList.push(item.value);
+      }
+      this.recipes = _.difference(this.recipes, this.choosedRecipesList);
+    });
+    recipes.deselectAll();
   }
 
 }
