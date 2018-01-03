@@ -10,13 +10,13 @@ import { DashBoardComponent } from './back/dash-board/dash-board.component';
 import { IngredientComponent } from './back/ingredient/ingredient.component'
 import { IngredientsComponent } from './back/ingredients/ingredients.component'
 import { RecipesComponent } from './back/recipes/recipes.component';
-import { BooksComponent } from './back/books/books.component';
 import { RecipeComponent } from './back/recipe/recipe.component';
-import { BookComponent } from './back/book/book.component';
 import { UnitComponent } from './back/unit/unit.component';
 import { UnitsComponent } from './back/units/units.component';
-import { AuthorComponent } from './back/author/author.component';
-import { AuthorsComponent } from './back/authors/authors.component';
+// import { BooksComponent } from './back/books/books.component';
+// import { BookComponent } from './back/book/book.component';
+// import { AuthorComponent } from './back/author/author.component';
+// import { AuthorsComponent } from './back/authors/authors.component';
 
 const routes: Routes = [
     // Front
@@ -30,14 +30,14 @@ const routes: Routes = [
     { path: 'ingredient/:id', component: IngredientComponent },
     { path: 'recipes', component: RecipesComponent },
     { path: 'recipe/:id', component: RecipeComponent },
-    { path: 'books', component: BooksComponent },
-    { path: 'book/:id', component: BookComponent },
+    // { path: 'books', component: BooksComponent },
+    // { path: 'book/:id', component: BookComponent },
     { path: 'units', component: UnitsComponent },
     { path: 'unit/add', component: UnitComponent },
     { path: 'unit/:id', component: UnitComponent },
-    { path: 'authors', component: AuthorsComponent },
-    { path: 'author/add', component: AuthorComponent },
-    { path: 'author/:id', component: AuthorComponent }
+    // { path: 'authors', component: AuthorsComponent },
+    // { path: 'author/add', component: AuthorComponent },
+    // { path: 'author/:id', component: AuthorComponent }
 ];
 
 @NgModule({

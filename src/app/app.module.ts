@@ -22,41 +22,41 @@ import { RegisterComponent } from './Front/register/register.component';
  * Back Component
  */
 import { RecipesComponent } from './back/recipes/recipes.component';
-import { BooksComponent } from './back/books/books.component';
+// import { BooksComponent } from './back/books/books.component';
+// import { BookComponent } from './back/book/book.component';
+import { IngredientComponent } from './back/ingredient/ingredient.component';
 import { IngredientsComponent } from './back/ingredients/ingredients.component';
-import { BookComponent } from './back/book/book.component';
 import { DashBoardComponent } from './back/dash-board/dash-board.component';
 import { BackMenuComponent } from './back/back-menu/back-menu.component';
 import { RecipeComponent } from './back/recipe/recipe.component';
+import { UnitComponent } from './back/unit/unit.component';
+import { UnitsComponent } from './back/units/units.component';
+//import { AuthorComponent } from './back/author/author.component';
+//import { AuthorsComponent } from './back/authors/authors.component';
 
 /**
  * Service
  */
 import { AuthService } from './services/auth.service';
+//import { AuthorService } from './services/author.service';
+import { UnitService } from './services/unit.service';
+import { IngredientService } from './services/ingredient.service';
+import { RecipeService } from './services/recipe.service';
+//import { BookService } from './services/book.service';
 
 /**
  * Dev Component
  */
 import { DevMenuComponent } from './dev-tool/dev-menu/dev-menu.component';
-import { UnitComponent } from './back/unit/unit.component';
-import { UnitsComponent } from './back/units/units.component';
-import { AuthorComponent } from './back/author/author.component';
-import { AuthorsComponent } from './back/authors/authors.component';
-import { IngredientComponent } from './back/ingredient/ingredient.component';
-import { AuthorService } from './services/author.service';
-import { UnitService } from './services/unit.service';
-import { IngredientService } from './services/ingredient.service';
-import { RecipeService } from './services/recipe.service';
-import { BookService } from './services/book.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     AuthenticationComponent,
     RecipesComponent,
-    BooksComponent,
     IngredientsComponent,
-    BookComponent,
+    //BooksComponent,
+    //BookComponent,
     DashBoardComponent,
     BackMenuComponent,
     DevMenuComponent,
@@ -65,14 +65,14 @@ import { BookService } from './services/book.service';
     HomepageComponent,
     UnitComponent,
     UnitsComponent,
-    AuthorComponent,
-    AuthorsComponent,
+    //AuthorComponent,
+    //AuthorsComponent,
     IngredientComponent,
     RegisterComponent
   ],
   imports: [
-    HttpClientModule, BrowserModule, AppRoutingModule, FormsModule, 
-    BrowserModule, AppRoutingModule, FormsModule, AngularMaterialModule,BrowserAnimationsModule,
+    HttpClientModule, BrowserModule, AppRoutingModule, FormsModule,
+    BrowserModule, AppRoutingModule, FormsModule, AngularMaterialModule, BrowserAnimationsModule,
     // The HttpClientInMemoryWebApiModule module intercepts HTTP requests
     // and returns simulated server responses.
     // Remove it when a real server is ready to receive requests.
@@ -80,7 +80,13 @@ import { BookService } from './services/book.service';
       InMemoryDataService, { dataEncapsulation: false }
     )
   ],
-  providers: [AuthService, AuthorService, UnitService, IngredientService, RecipeService, BookService],
+  providers: [
+    AuthService,
+    //AuthorService, 
+    //BookService,
+    UnitService,
+    IngredientService,
+    RecipeService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
