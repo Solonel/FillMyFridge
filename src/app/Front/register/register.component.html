@@ -1,30 +1,68 @@
 <lsc-front-menu></lsc-front-menu>
 
-<form class="register-form basic-form">
-  <mat-form-field class="">
-    <input matInput placeholder="Nom" class="register lastName" id="lastName">
-  </mat-form-field>
-
-  <mat-form-field class="">
-    <input matInput placeholder="Prénom" class="register firstName" id="firstName">
-  </mat-form-field>
-
-  <mat-form-field class="">
-    <input matInput [matDatepicker]="birthDate" placeholder="Date de naissance">
-    <mat-datepicker-toggle matSuffix [for]="birthDate"></mat-datepicker-toggle>
-    <mat-datepicker #birthDate></mat-datepicker>
-  </mat-form-field>
-
-  <mat-form-field class="">
-    <input matInput placeholder="Email" class="register email" id="email" type="email">
-  </mat-form-field>
-
-  <mat-form-field class="">
-    <input matInput placeholder="Mot de passe" class="register password" id="password" type="password">
-  </mat-form-field>
-
-  <mat-form-field class="">
-    <input matInput placeholder="Confirmation de mot de passe" class="register confirm-password" id="password-confirm" type="password">
-  </mat-form-field>
-
-</form>
+<div class="container">
+  <div class="row justify-content-around">
+    <div class="col-12">
+      <h1>
+        Création de compte
+      </h1>
+    </div>
+  </div>
+  <form [formGroup]="registerForm" class="register-form basic-form" (ngSubmit)="register(registerForm.value)">
+    <div class="row justify-content-around">
+      <div class="col-4">
+        <mat-form-field class="">
+          <mat-select [(value)]="gender" placeholder="Civilité" id="gender">
+            <mat-option></mat-option>
+            <mat-option value="option1">Monsieur</mat-option>
+            <mat-option value="option2">Madame</mat-option>
+            <mat-option value="option3">Mademoiselle</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-4">
+        <mat-form-field class="">
+          <input matInput placeholder="Nom" class="register lastName" id="lastName">
+        </mat-form-field>
+      </div>
+      <div class="col-4">
+        <mat-form-field class="">
+          <input matInput placeholder="Prénom" class="register firstName" id="firstName">
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row justify-content-around">
+      <div class="col-4">
+        <mat-form-field class="">
+          <input matInput [matDatepicker]="birthDate" placeholder="Date de naissance" id="birthDate">
+          <mat-datepicker-toggle matSuffix [for]="birthDate"></mat-datepicker-toggle>
+          <mat-datepicker #birthDate></mat-datepicker>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row justify-content-around">
+      <div class="col-4">
+        <mat-form-field class="">
+          <input matInput placeholder="Email" class="register email" id="email" type="email">
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row justify-content-around">
+      <div class="col-4">
+        <mat-form-field class="">
+          <input matInput placeholder="Mot de passe" class="register password" id="password" type="password">
+        </mat-form-field>
+      </div>
+      <div class="col-4">
+        <mat-form-field class="">
+          <input matInput placeholder="Confirmation de mot de passe" class="register confirm-password" id="passwordConfirm" type="password">
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row justify-content-around">
+      <div class="col-4">
+        <button mat-raised-button color="primary" (click)="register(form)" type="submit">S'enregistrer</button>
+      </div>
+    </div>
+  </form>
+</div>

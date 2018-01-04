@@ -75,8 +75,8 @@ import { DevMenuComponent } from './dev-tool/dev-menu/dev-menu.component';
     CategoriesComponent
   ],
   imports: [
-    HttpClientModule, BrowserModule, AppRoutingModule, FormsModule,
-    BrowserModule, AppRoutingModule, FormsModule, AngularMaterialModule, BrowserAnimationsModule,
+    HttpClientModule, BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule,
+    BrowserModule, AppRoutingModule, AngularMaterialModule, BrowserAnimationsModule,
     // The HttpClientInMemoryWebApiModule module intercepts HTTP requests
     // and returns simulated server responses.
     // Remove it when a real server is ready to receive requests.
