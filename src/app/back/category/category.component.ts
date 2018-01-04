@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { CategoryService } from '../../services/category.service'
 import { Category } from '../../classes/category';
 import * as _ from "lodash";
@@ -11,15 +12,24 @@ import * as _ from "lodash";
   styleUrls: ['./category.component.css']
 })
 export class CategoryComponent implements OnInit {
-
-  @Input() category: Category;
-
+  categoryForm: FormGroup;
   fetchingData = true;
-
+  @Input() category: Category;
   constructor(
     private route: ActivatedRoute,
-    private router: Router, 
-    private categoryService: CategoryService) { }
+    private router: Router,
+    private fb: FormBuilder,
+    private categoryService: CategoryService) {
+
+
+    this.createForm();
+  }
+
+
+  createForm() {
+    this.categoryForm = this.fb.group(new Category());
+  }
+
 
   ngOnInit() {
     this.getCategory();
@@ -36,13 +46,13 @@ export class CategoryComponent implements OnInit {
   }
 
   save(): void {
-    console.log("save",this.category);
+    console.log("save", this.category);
     this.categoryService.updateCategory(this.category)
       .subscribe(() => this.goToList());
   }
 
   delete(): void {
-    console.log("delete",this.category);
+    console.log("delete", this.category);
     this.categoryService.deleteCategory(this.category)
       .subscribe(() => this.goToList());
   }
@@ -51,7 +61,7 @@ export class CategoryComponent implements OnInit {
     this.categoryService.addCategory(formData).subscribe(() => this.goToList());;
   }
 
-  removeItems(recipes){
+  removeItems(recipes) {
     recipes.selectedOptions.selected.map(item => {
       this.category.recipes = _.difference(this.category.recipes, [item.value]);
     });

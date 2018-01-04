@@ -7,14 +7,37 @@
   recipes: Array<Recipe>;
     published: boolean;
   } -->
-              
+
+<div class="form">
+
+    <form [formGroup]="categoryForm">
+
+        <mat-slide-toggle formControlName="published"> Publié </mat-slide-toggle>
+
+        <mat-form-field class="example-full-width">
+            <input formControlName="title" matInput placeholder="Titre">
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+            <input formControlName="description" matInput placeholder="Description">
+        </mat-form-field>
+    </form>
+
+</div>
+<!-- 
 <div class="form">
 
     <h1>Catégorie</h1>
     <div *ngIf="!fetchingData">
 
         <div *ngIf="category ">
+
+
             <div>
+                <div>
+                    <mat-slide-toggle [(ngModel)]="category.published"> Publié </mat-slide-toggle>
+                </div>
+
                 <mat-form-field class="example-full-width">
                     <input [(ngModel)]="category.title" matInput placeholder="Titre">
                 </mat-form-field>
@@ -58,4 +81,4 @@
 
     </div>
 
-</div>
+</div> -->
