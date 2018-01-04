@@ -1,0 +1,66 @@
+<lsc-back-menu></lsc-back-menu>
+
+<div class="clear gridHeader">
+  <mat-form-field class="left">
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+  </mat-form-field>
+  <mat-paginator class="right" [pageSizeOptions]="[25, 50, 100]"></mat-paginator>
+  <button type="button" (click)="addCategory()" class="btn btn-dark addButtonGrid right">Ajouter</button>
+</div>
+
+<div class="clear">
+
+  <mat-table class="grid" #table [dataSource]="dataSource" matSort>
+    <!-- Checkbox Column -->
+    <ng-container matColumnDef="select">
+      <mat-header-cell *matHeaderCellDef>
+        <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()" [indeterminate]="selection.hasValue() && !isAllSelected()">
+        </mat-checkbox>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null" [checked]="selection.isSelected(row)">
+        </mat-checkbox>
+      </mat-cell>
+    </ng-container>
+
+    <!-- id Column -->
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> # </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.id}} </mat-cell>
+    </ng-container>
+
+    <!-- title Column -->
+    <ng-container matColumnDef="title">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Titre </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.title}} </mat-cell>
+    </ng-container>
+
+    <!-- description Column -->
+    <ng-container matColumnDef="description">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Description </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.description}} </mat-cell>
+    </ng-container>
+
+    <!-- published  Column -->
+    <ng-container matColumnDef="published">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Publié </mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <i [ngClass]="{'fas fa-check-square':row.published,
+    'far fa-square':!row.published}"></i>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;" (dblclick)="redirectOnDetail(row.id)">
+    </mat-row>
+
+  </mat-table>
+</div>
+
+<!-- export class Category {
+  id: number;
+  title: string;
+  description: string;
+  recipes: Array<Recipe>;
+  published: boolean;
+} -->

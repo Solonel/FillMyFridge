@@ -4,15 +4,17 @@ import { RouterModule, Routes } from '@angular/router';
 /** FrontOffice Module */
 import { AuthenticationComponent } from './front/authentication/authentication.component';
 import { HomepageComponent } from './front/homepage/homepage.component';
-import { RegisterComponent } from './Front/register/register.component';
+import { RegisterComponent } from './front/register/register.component';
 /** BackOffice Module */
 import { DashBoardComponent } from './back/dash-board/dash-board.component';
 import { IngredientComponent } from './back/ingredient/ingredient.component'
 import { IngredientsComponent } from './back/ingredients/ingredients.component'
-import { RecipesComponent } from './back/recipes/recipes.component';
 import { RecipeComponent } from './back/recipe/recipe.component';
+import { RecipesComponent } from './back/recipes/recipes.component';
 import { UnitComponent } from './back/unit/unit.component';
 import { UnitsComponent } from './back/units/units.component';
+import { CategoryComponent } from './back/category/category.component';
+import { CategoriesComponent } from './back/categories/categories.component';
 // import { BooksComponent } from './back/books/books.component';
 // import { BookComponent } from './back/book/book.component';
 // import { AuthorComponent } from './back/author/author.component';
@@ -27,14 +29,20 @@ const routes: Routes = [
     // Back
     { path: 'administration', component: DashBoardComponent },
     { path: 'ingredients', component: IngredientsComponent },
+    { path: 'ingredient/add', component: IngredientComponent },
     { path: 'ingredient/:id', component: IngredientComponent },
     { path: 'recipes', component: RecipesComponent },
+    { path: 'recipe/add', component: RecipeComponent },
     { path: 'recipe/:id', component: RecipeComponent },
     // { path: 'books', component: BooksComponent },
+    // { path: 'book/add', component: BookComponent },
     // { path: 'book/:id', component: BookComponent },
     { path: 'units', component: UnitsComponent },
     { path: 'unit/add', component: UnitComponent },
     { path: 'unit/:id', component: UnitComponent },
+    { path: 'categories', component: CategoriesComponent },
+    { path: 'category/add', component: CategoryComponent },
+    { path: 'category/:id', component: CategoryComponent },
     // { path: 'authors', component: AuthorsComponent },
     // { path: 'author/add', component: AuthorComponent },
     // { path: 'author/:id', component: AuthorComponent }

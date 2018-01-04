@@ -16,33 +16,35 @@ import { AngularMaterialModule } from './angular-material.module'
 import { AuthenticationComponent } from './front/authentication/authentication.component';
 import { FrontMenuComponent } from './front/front-menu/front-menu.component';
 import { HomepageComponent } from './front/homepage/homepage.component';
-import { RegisterComponent } from './Front/register/register.component';
+import { RegisterComponent } from './front/register/register.component';
 
 /**
  * Back Component
  */
-import { RecipesComponent } from './back/recipes/recipes.component';
 // import { BooksComponent } from './back/books/books.component';
 // import { BookComponent } from './back/book/book.component';
-import { IngredientComponent } from './back/ingredient/ingredient.component';
-import { IngredientsComponent } from './back/ingredients/ingredients.component';
-import { DashBoardComponent } from './back/dash-board/dash-board.component';
-import { BackMenuComponent } from './back/back-menu/back-menu.component';
-import { RecipeComponent } from './back/recipe/recipe.component';
-import { UnitComponent } from './back/unit/unit.component';
-import { UnitsComponent } from './back/units/units.component';
 //import { AuthorComponent } from './back/author/author.component';
 //import { AuthorsComponent } from './back/authors/authors.component';
-
+import { DashBoardComponent } from './back/dash-board/dash-board.component';
+import { BackMenuComponent } from './back/back-menu/back-menu.component';
+import { IngredientComponent } from './back/ingredient/ingredient.component';
+import { IngredientsComponent } from './back/ingredients/ingredients.component';
+import { RecipeComponent } from './back/recipe/recipe.component';
+import { RecipesComponent } from './back/recipes/recipes.component';
+import { UnitComponent } from './back/unit/unit.component';
+import { UnitsComponent } from './back/units/units.component';
+import { CategoryComponent } from './back/category/category.component';
+import { CategoriesComponent } from './back/categories/categories.component';
 /**
  * Service
  */
 import { AuthService } from './services/auth.service';
-//import { AuthorService } from './services/author.service';
 import { UnitService } from './services/unit.service';
 import { IngredientService } from './services/ingredient.service';
 import { RecipeService } from './services/recipe.service';
+import { CategoryService } from './services/category.service';
 //import { BookService } from './services/book.service';
+//import { AuthorService } from './services/author.service';
 
 /**
  * Dev Component
@@ -52,23 +54,25 @@ import { DevMenuComponent } from './dev-tool/dev-menu/dev-menu.component';
 @NgModule({
   declarations: [
     AppComponent,
+    DevMenuComponent,
     AuthenticationComponent,
-    RecipesComponent,
-    IngredientsComponent,
+    HomepageComponent,
+    RegisterComponent,
+    FrontMenuComponent,
     //BooksComponent,
     //BookComponent,
     DashBoardComponent,
     BackMenuComponent,
-    DevMenuComponent,
-    FrontMenuComponent,
     RecipeComponent,
-    HomepageComponent,
+    RecipesComponent,
     UnitComponent,
     UnitsComponent,
     //AuthorComponent,
     //AuthorsComponent,
+    IngredientsComponent,
     IngredientComponent,
-    RegisterComponent
+    CategoryComponent,
+    CategoriesComponent
   ],
   imports: [
     HttpClientModule, BrowserModule, AppRoutingModule, FormsModule,
@@ -84,6 +88,7 @@ import { DevMenuComponent } from './dev-tool/dev-menu/dev-menu.component';
     AuthService,
     //AuthorService, 
     //BookService,
+    CategoryService,
     UnitService,
     IngredientService,
     RecipeService],

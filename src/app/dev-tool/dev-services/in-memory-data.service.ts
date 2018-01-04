@@ -5,6 +5,7 @@ import { Ingredient } from '../../classes/ingredient';
 import { Recipe } from '../../classes/recipe';
 import { Proportion } from '../../classes/proportion';
 import { Unit } from '../../classes/unit';
+import { Category } from '../../classes/category';
 
 
 export class InMemoryDataService implements InMemoryDbService {
@@ -125,6 +126,22 @@ export class InMemoryDataService implements InMemoryDbService {
       }
     ];
 
-    return { users, authors, books, ingredients, proportions, recipes, units };
+    const categories: Category[] = [
+      {
+        id: 1,
+        title: "titre 1",
+        description: "description 1",
+        published: true,
+        recipes: recipes,
+      }, {
+        id: 2,
+        title: "titre 2",
+        description: "description 2",
+        published: false,
+        recipes: recipes
+      }
+    ];
+
+    return { users, authors, books, ingredients, proportions, recipes, units, categories };
   }
 }
