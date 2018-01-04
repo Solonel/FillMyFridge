@@ -1,0 +1,44 @@
+<lsc-back-menu></lsc-back-menu>
+
+<div class="form">
+
+  <h1>Utilisateurs</h1>
+  <div *ngIf="!fetchingData">
+
+    <div *ngIf="user ">
+      <div>
+        <mat-form-field class="example-full-width">
+          <input [(ngModel)]="user.firstname" matInput placeholder="Prénom">
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <input [(ngModel)]="user.name" matInput placeholder="Nom">
+        </mat-form-field>
+      </div>
+      <div>
+        <button type="button" (click)="save()" class="btn btn-success"> Modifier </button>
+        <button type="button" (click)="delete()" class="btn btn-danger"> Supprimer </button>
+      </div>
+    </div>
+
+    <div *ngIf="!user">
+
+      <div>
+        <form [formGroup]="createUser" (ngSubmit)="addUser(createUser.value)">
+          <mat-form-field class="example-full-width">
+            <input required name="firstname" formControlName="firstname" matInput placeholder="Prénom">
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width">
+            <input required name="name" formControlName="name" matInput placeholder="Nom">
+          </mat-form-field>
+          <button type="submit" class="btn btn-primary" [disabled]="createUser.invalid"> Enregistrer </button>
+        </form>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

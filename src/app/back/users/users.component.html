@@ -1,0 +1,49 @@
+<lsc-back-menu></lsc-back-menu>
+
+<div class="clear gridHeader">
+    <mat-form-field class="left">
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+    </mat-form-field>
+    <mat-paginator class="right" [pageSizeOptions]="[25, 50, 100]"></mat-paginator>
+    <button type="button" (click)="addAuthor()" class="btn btn-dark addButtonGrid right">Ajouter</button>
+</div>
+
+<div class="clear">
+
+    <mat-table class="grid" #table [dataSource]="dataSource" matSort>
+        <!-- Checkbox Column -->
+        <ng-container matColumnDef="select">
+            <mat-header-cell *matHeaderCellDef>
+                <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()" [indeterminate]="selection.hasValue() && !isAllSelected()">
+                </mat-checkbox>
+            </mat-header-cell>
+            <mat-cell *matCellDef="let row">
+                <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null" [checked]="selection.isSelected(row)">
+                </mat-checkbox>
+            </mat-cell>
+        </ng-container>
+
+        <!-- id Column -->
+        <ng-container matColumnDef="id">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> # </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.id}} </mat-cell>
+        </ng-container>
+
+        <!-- name Column -->
+        <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Nom </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.name}} </mat-cell>
+        </ng-container>
+
+        <!-- firstname Column -->
+        <ng-container matColumnDef="firstname">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Prénom </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.firstname}} </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;" (dblclick)="redirectOnDetail(row.id)">
+        </mat-row>
+
+    </mat-table>
+</div>

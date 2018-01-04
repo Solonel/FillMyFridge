@@ -14,7 +14,8 @@ export class AuthenticationComponent implements OnInit {
   };
 
   login(data) {
-    this.auth.login(data);
+    let auth = this.auth.login(data);
+    console.log(auth);
   };
 
   logOut() {

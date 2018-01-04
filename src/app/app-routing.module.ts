@@ -15,6 +15,8 @@ import { UnitComponent } from './back/unit/unit.component';
 import { UnitsComponent } from './back/units/units.component';
 import { CategoryComponent } from './back/category/category.component';
 import { CategoriesComponent } from './back/categories/categories.component';
+import { UsersComponent } from './back/users/users.component';
+import { UserComponent } from './back/user/user.component';
 // import { BooksComponent } from './back/books/books.component';
 // import { BookComponent } from './back/book/book.component';
 // import { AuthorComponent } from './back/author/author.component';
@@ -43,6 +45,9 @@ const routes: Routes = [
     { path: 'categories', component: CategoriesComponent },
     { path: 'category/add', component: CategoryComponent },
     { path: 'category/:id', component: CategoryComponent },
+    { path: 'users', component: UsersComponent },
+    { path: 'user/add', component: UserComponent },
+    { path: 'user/:id', component: UserComponent },
     // { path: 'authors', component: AuthorsComponent },
     // { path: 'author/add', component: AuthorComponent },
     // { path: 'author/:id', component: AuthorComponent }

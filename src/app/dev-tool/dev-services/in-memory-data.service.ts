@@ -1,4 +1,5 @@
 import { InMemoryDbService } from 'angular-in-memory-web-api';
+import { User } from '../../classes/user';
 import { Author } from '../../classes/author';
 import { Book } from '../../classes/book';
 import { Ingredient } from '../../classes/ingredient';
@@ -10,12 +11,13 @@ import { Category } from '../../classes/category';
 
 export class InMemoryDataService implements InMemoryDbService {
   createDb() {
-    const users = [
-      { id: 1, name: 'Mr. Nice', email: 'su@email.fr', password: 'test', role: 'superuser' },
-      { id: 2, name: 'Narco', email: 'user1@email.fr', password: 'test', role: 'users' },
-      { id: 3, name: 'Bombasto', email: 'user2@email.fr', password: 'test', role: 'users' },
-      { id: 4, name: 'Celeritas', email: 'user3@email.fr', password: 'test', role: 'users' },
-      { id: 5, name: 'Magneta', email: 'user4@email.fr', password: 'test', role: 'users' }
+
+    const users: User[] = [
+      { id: 1, gender: "1", firstName: 'Nice', lastName: 'Person', birthDate: "", email: 'su@email.fr', password: 'test' },
+      { id: 2, gender: "1", firstName: 'Narco', lastName: 'Leptic', birthDate: "", email: 'user1@email.fr', password: 'test', },
+      { id: 3, gender: "1", firstName: 'Bomba', lastName: 'Storm', birthDate: "", email: 'user2@email.fr', password: 'test' },
+      { id: 4, gender: "2", firstName: 'Celeritas', lastName: 'Stique', birthDate: "", email: 'user3@email.fr', password: 'test' },
+      { id: 5, gender: "3", firstName: 'Magneta', lastName: 'Magnet', birthDate: "", email: 'user4@email.fr', password: 'test' }
     ];
 
     const authors: Author[] = [

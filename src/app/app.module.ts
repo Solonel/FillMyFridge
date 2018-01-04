@@ -35,6 +35,8 @@ import { UnitComponent } from './back/unit/unit.component';
 import { UnitsComponent } from './back/units/units.component';
 import { CategoryComponent } from './back/category/category.component';
 import { CategoriesComponent } from './back/categories/categories.component';
+import { UsersComponent } from './back/users/users.component';
+import { UserComponent } from './back/user/user.component';
 /**
  * Service
  */
@@ -50,6 +52,7 @@ import { CategoryService } from './services/category.service';
  * Dev Component
  */
 import { DevMenuComponent } from './dev-tool/dev-menu/dev-menu.component';
+import { UserService } from './services/user.service';
 
 @NgModule({
   declarations: [
@@ -67,6 +70,8 @@ import { DevMenuComponent } from './dev-tool/dev-menu/dev-menu.component';
     RecipesComponent,
     UnitComponent,
     UnitsComponent,
+    UsersComponent,
+    UserComponent,
     //AuthorComponent,
     //AuthorsComponent,
     IngredientsComponent,
@@ -88,6 +93,7 @@ import { DevMenuComponent } from './dev-tool/dev-menu/dev-menu.component';
     AuthService,
     //AuthorService, 
     //BookService,
+    UserService,
     CategoryService,
     UnitService,
     IngredientService,

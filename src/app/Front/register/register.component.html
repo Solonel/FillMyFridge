@@ -12,29 +12,29 @@
     <div class="row justify-content-around">
       <div class="col-4">
         <mat-form-field class="">
-          <mat-select [(value)]="gender" placeholder="Civilité" id="gender">
+          <mat-select [(value)]="gender" placeholder="Civilité" formControlName="gender" id="gender" >
             <mat-option></mat-option>
-            <mat-option value="option1">Monsieur</mat-option>
-            <mat-option value="option2">Madame</mat-option>
-            <mat-option value="option3">Mademoiselle</mat-option>
+            <mat-option value="Monsieur">Monsieur</mat-option>
+            <mat-option value="Madame">Madame</mat-option>
+            <mat-option value="Mademoiselle">Mademoiselle</mat-option>
           </mat-select>
         </mat-form-field>
       </div>
       <div class="col-4">
         <mat-form-field class="">
-          <input matInput placeholder="Nom" class="register lastName" id="lastName">
+          <input matInput placeholder="Nom" class="register lastName" formControlName="lastName" id="lastName">
         </mat-form-field>
       </div>
       <div class="col-4">
         <mat-form-field class="">
-          <input matInput placeholder="Prénom" class="register firstName" id="firstName">
+          <input matInput placeholder="Prénom" class="register firstName" formControlName="firstName" id="firstName">
         </mat-form-field>
       </div>
     </div>
     <div class="row justify-content-around">
       <div class="col-4">
         <mat-form-field class="">
-          <input matInput [matDatepicker]="birthDate" placeholder="Date de naissance" id="birthDate">
+          <input matInput [matDatepicker]="birthDate" placeholder="Date de naissance" formControlName="birthDate" id="birthDate">
           <mat-datepicker-toggle matSuffix [for]="birthDate"></mat-datepicker-toggle>
           <mat-datepicker #birthDate></mat-datepicker>
         </mat-form-field>
@@ -43,25 +43,25 @@
     <div class="row justify-content-around">
       <div class="col-4">
         <mat-form-field class="">
-          <input matInput placeholder="Email" class="register email" id="email" type="email">
+          <input matInput placeholder="Email" class="register email" formControlName="email" id="email" type="email">
         </mat-form-field>
       </div>
     </div>
     <div class="row justify-content-around">
       <div class="col-4">
         <mat-form-field class="">
-          <input matInput placeholder="Mot de passe" class="register password" id="password" type="password">
+          <input matInput placeholder="Mot de passe" class="register password" formControlName="password" id="password" type="password">
         </mat-form-field>
       </div>
       <div class="col-4">
         <mat-form-field class="">
-          <input matInput placeholder="Confirmation de mot de passe" class="register confirm-password" id="passwordConfirm" type="password">
+          <input matInput placeholder="Confirmation de mot de passe" class="register confirm-password" formControlName="passwordConfirm" id="passwordConfirm" type="password">
         </mat-form-field>
       </div>
     </div>
     <div class="row justify-content-around">
       <div class="col-4">
-        <button mat-raised-button color="primary" (click)="register(form)" type="submit">S'enregistrer</button>
+        <button mat-raised-button color="primary" type="submit">S'enregistrer</button>
       </div>
     </div>
   </form>
