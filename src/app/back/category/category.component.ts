@@ -1,10 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
-import { FormBuilder, FormGroup } from '@angular/forms';
 import { CategoryService } from '../../services/category.service'
 import { Category } from '../../classes/category';
-import * as _ from "lodash";
+import { FormBuilder, FormGroup } from '@angular/forms';
+import 'rxjs/add/operator/finally';
 
 @Component({
   selector: 'lsc-category',
@@ -12,24 +12,25 @@ import * as _ from "lodash";
   styleUrls: ['./category.component.css']
 })
 export class CategoryComponent implements OnInit {
+  isLoading = true;
   categoryForm: FormGroup;
-  fetchingData = true;
-  @Input() category: Category;
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private fb: FormBuilder,
-    private categoryService: CategoryService) {
-
-
+    private categoryService: CategoryService, private fb: FormBuilder) {
     this.createForm();
   }
 
-
   createForm() {
-    this.categoryForm = this.fb.group(new Category());
+    this.categoryForm = this.fb.group({
+      id: '',
+      published: '',
+      description: '',
+      title: '',
+      recipes: []
+    });
   }
-
 
   ngOnInit() {
     this.getCategory();
@@ -38,7 +39,10 @@ export class CategoryComponent implements OnInit {
   getCategory(): void {
     const id = +this.route.snapshot.paramMap.get('id');
     this.categoryService.getCategoryNo404(id)
-      .subscribe(category => { this.category = category; this.fetchingData = false; });
+      .finally(() => this.isLoading = false)
+      .subscribe(category => {
+        this.categoryForm.reset(category);
+      })
   }
 
   goToList(): void {
@@ -46,26 +50,19 @@ export class CategoryComponent implements OnInit {
   }
 
   save(): void {
-    console.log("save", this.category);
-    this.categoryService.updateCategory(this.category)
+    console.log("save", this.categoryForm.value);
+    this.categoryService.updateCategory(this.categoryForm.value)
       .subscribe(() => this.goToList());
   }
 
   delete(): void {
-    console.log("delete", this.category);
-    this.categoryService.deleteCategory(this.category)
+    console.log("delete", this.categoryForm.value);
+    this.categoryService.deleteCategory(this.categoryForm.value)
       .subscribe(() => this.goToList());
   }
 
-  addCategory(formData) {
-    this.categoryService.addCategory(formData).subscribe(() => this.goToList());;
-  }
-
-  removeItems(recipes) {
-    recipes.selectedOptions.selected.map(item => {
-      this.category.recipes = _.difference(this.category.recipes, [item.value]);
-    });
-    recipes.deselectAll();
+  addCategory() {
+    this.categoryService.addCategory(this.categoryForm.value).subscribe(() => this.goToList());;
   }
 
 }

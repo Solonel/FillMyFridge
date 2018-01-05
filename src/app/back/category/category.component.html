@@ -1,84 +1,26 @@
 <lsc-back-menu></lsc-back-menu>
 
-<!-- export class Category {
-  id: number;
-  title: string;
-  description: string;
-  recipes: Array<Recipe>;
-    published: boolean;
-  } -->
+<div *ngIf="!isLoading">
+    <div class="form">
+        <form [formGroup]="categoryForm" >
 
-<div class="form">
+            <mat-slide-toggle formControlName="published"> Publié </mat-slide-toggle>
 
-    <form [formGroup]="categoryForm">
+            <mat-form-field class="example-full-width">
+                <input formControlName="title" matInput placeholder="Titre">
+            </mat-form-field>
 
-        <mat-slide-toggle formControlName="published"> Publié </mat-slide-toggle>
-
-        <mat-form-field class="example-full-width">
-            <input formControlName="title" matInput placeholder="Titre">
-        </mat-form-field>
-
-        <mat-form-field class="example-full-width">
-            <input formControlName="description" matInput placeholder="Description">
-        </mat-form-field>
-    </form>
-
-</div>
-<!-- 
-<div class="form">
-
-    <h1>Catégorie</h1>
-    <div *ngIf="!fetchingData">
-
-        <div *ngIf="category ">
-
-
-            <div>
-                <div>
-                    <mat-slide-toggle [(ngModel)]="category.published"> Publié </mat-slide-toggle>
-                </div>
-
-                <mat-form-field class="example-full-width">
-                    <input [(ngModel)]="category.title" matInput placeholder="Titre">
-                </mat-form-field>
-
-                <mat-form-field class="example-full-width">
-                    <input [(ngModel)]="category.description" matInput placeholder="Description">
-                </mat-form-field>
-
-                <mat-selection-list #recipesList>
-                    <mat-list-option checkboxPosition="before" [value]="recipe" *ngFor="let recipe of category.recipes">
-                        <h3 matLine> {{recipe.title}} </h3>
-                        <p matLine>
-                            <span> {{recipe.description}} </span>
-                        </p>
-                    </mat-list-option>
-                </mat-selection-list>
-            </div>
-            <div>
-                <button type="button" (click)="removeItems(recipesList)" class="btn btn-dark"> Retirer recettes </button>
-                <button type="button" (click)="save()" class="btn btn-success"> Modifier </button>
-                <button type="button" (click)="delete()" class="btn btn-danger"> Supprimer </button>
-            </div>
+            <mat-form-field class="example-full-width">
+                <input formControlName="description" matInput placeholder="Description">
+            </mat-form-field>
+        </form>
+        
+        <div *ngIf="categoryForm.value.id" >
+            <button type="button" (click)="save()" class="btn btn-success"> Modifier </button>
+            <button type="button" (click)="delete()" class="btn btn-danger"> Supprimer </button>
         </div>
-
-        <div *ngIf="!category">
-
-            <div>
-                <form #registerForm="ngForm" (ngSubmit)="addCategory(registerForm.value)">
-                    <mat-form-field class="example-full-width">
-                        <input required ngModel name="title" matInput placeholder="Titre">
-                    </mat-form-field>
-                    <mat-form-field class="example-full-width">
-                        <input required ngModel name="description" matInput placeholder="Description">
-                    </mat-form-field>
-                    <button type="submit" class="btn btn-primary" [disabled]="registerForm.invalid"> Enregistrer </button>
-                </form>
-
-            </div>
-
+        <div *ngIf="!categoryForm.value.id">
+            <button   (click)="addCategory()" type="button" class="btn btn-primary"> Enregistrer </button>
         </div>
-
     </div>
-
-</div> -->
+</div>
