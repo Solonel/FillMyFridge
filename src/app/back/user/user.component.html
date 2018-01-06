@@ -8,11 +8,11 @@
     <div *ngIf="user ">
       <div>
         <mat-form-field class="example-full-width">
-          <input [(ngModel)]="user.firstname" matInput placeholder="Prénom">
+          <input [(ngModel)]="user.firstName" matInput placeholder="Prénom">
         </mat-form-field>
 
         <mat-form-field class="example-full-width">
-          <input [(ngModel)]="user.name" matInput placeholder="Nom">
+          <input [(ngModel)]="user.lastName" matInput placeholder="Nom">
         </mat-form-field>
       </div>
       <div>
@@ -24,21 +24,52 @@
     <div *ngIf="!user">
 
       <div>
-        <form [formGroup]="createUser" (ngSubmit)="addUser(createUser.value)">
-          <mat-form-field class="example-full-width">
-            <input required name="firstname" formControlName="firstname" matInput placeholder="Prénom">
-          </mat-form-field>
+        <form [formGroup]="createUserForm" (ngSubmit)="addUser(createUserForm.value)">
 
-          <mat-form-field class="example-full-width">
-            <input required name="name" formControlName="name" matInput placeholder="Nom">
-          </mat-form-field>
-          <button type="submit" class="btn btn-primary" [disabled]="createUser.invalid"> Enregistrer </button>
+          <!-- <div class="row justify-content-around">-->
+          <div class="col-4">
+            <mat-form-field class="example-full-width">
+              <mat-select [(value)]="gender" placeholder="Civilité" formControlName="gender" id="gender">
+                <mat-option></mat-option>
+                <mat-option value="Monsieur">Monsieur</mat-option>
+                <mat-option value="Madame">Madame</mat-option>
+                <mat-option value="Mademoiselle">Mademoiselle</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-4">
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Nom" class="user lastName" formControlName="lastName" id="lastName">
+            </mat-form-field>
+          </div>
+          <div class="col-4">
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Prénom" class="user firstName" formControlName="firstName" id="firstName">
+            </mat-form-field>
+          </div>
+          <!-- <div class="row justify-content-around">-->
+          <div class="col-4">
+            <mat-form-field class="example-full-width">
+              <input matInput [matDatepicker]="birthDate" placeholder="Date de naissance" formControlName="birthDate" id="birthDate">
+              <mat-datepicker-toggle matSuffix [for]="birthDate"></mat-datepicker-toggle>
+              <mat-datepicker #birthDate></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <!--<div class="row justify-content-around">-->
+          <div class="col-4">
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Email" class="user email" formControlName="email" id="email" type="email">
+            </mat-form-field>
+          </div>
+          <!--   <div class="row justify-content-around">-->
+          <div class="col-4">
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Mot de passe" class="user password" formControlName="password" id="password" type="password">
+            </mat-form-field>
+          </div>
+          <button type="submit" class="btn btn-primary" > Enregistrer </button> <!-- [disabled]="createUser.invalid" -->
         </form>
-
       </div>
-
     </div>
-
   </div>
-
 </div>

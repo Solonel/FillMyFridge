@@ -5,7 +5,7 @@
         <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
     </mat-form-field>
     <mat-paginator class="right" [pageSizeOptions]="[25, 50, 100]"></mat-paginator>
-    <button type="button" (click)="addAuthor()" class="btn btn-dark addButtonGrid right">Ajouter</button>
+    <button type="button" (click)="addUser()" class="btn btn-dark addButtonGrid right">Ajouter</button>
 </div>
 
 <div class="clear">
@@ -29,16 +29,40 @@
             <mat-cell *matCellDef="let row"> {{row.id}} </mat-cell>
         </ng-container>
 
-        <!-- name Column -->
-        <ng-container matColumnDef="name">
-            <mat-header-cell *matHeaderCellDef mat-sort-header> Nom </mat-header-cell>
-            <mat-cell *matCellDef="let row"> {{row.name}} </mat-cell>
+        <!-- gender Column -->
+        <ng-container matColumnDef="gender">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Civilité </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.gender}} </mat-cell>
         </ng-container>
 
-        <!-- firstname Column -->
-        <ng-container matColumnDef="firstname">
+        <!-- lastName Column -->
+        <ng-container matColumnDef="lastName">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Nom </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.lastName}} </mat-cell>
+        </ng-container>
+
+        <!-- firstName Column -->
+        <ng-container matColumnDef="firstName">
             <mat-header-cell *matHeaderCellDef mat-sort-header> Prénom </mat-header-cell>
-            <mat-cell *matCellDef="let row"> {{row.firstname}} </mat-cell>
+            <mat-cell *matCellDef="let row"> {{row.firstName}} </mat-cell>
+        </ng-container>
+
+        <!-- birthDate Column -->
+        <ng-container matColumnDef="birthDate">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Date de naissance </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.birthDate}} </mat-cell>
+        </ng-container>
+
+        <!-- email Column -->
+        <ng-container matColumnDef="email">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Nom </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.email }} </mat-cell>
+        </ng-container>
+
+        <!-- password Column -->
+        <ng-container matColumnDef="password">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Mot de passe </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.password}} </mat-cell>
         </ng-container>
 
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

@@ -51,16 +51,16 @@ export class UserService {
   //////// Save methods //////////
 
   /** POST: add a new author to the server */
-  addUser(author: User): Observable<User> {
-    return this.http.post<User>(this.userUrl, author, httpOptions).pipe(
-      tap((author: User) => this.log(`added User w/ id=${author.id}`)),
+  addUser(user: User): Observable<User> {
+    return this.http.post<User>(this.userUrl, user, httpOptions).pipe(
+      tap((user: User) => this.log(`added User w/ id=${user.id}`)),
       catchError(this.handleError<User>('addUser'))
     );
   }
 
   /** DELETE: delete the author from the server */
-  deleteUser(author: User | number): Observable<User> {
-    const id = typeof author === 'number' ? author : author.id;
+  deleteUser(user: User | number): Observable<User> {
+    const id = typeof user === 'number' ? user : user.id;
     const url = `${this.userUrl}/${id}`;
 
     return this.http.delete<User>(url, httpOptions).pipe(
@@ -70,9 +70,9 @@ export class UserService {
   }
 
   /** PUT: update the Author on the server */
-  updateUser(author: User): Observable<any> {
-    return this.http.put(this.userUrl, author, httpOptions).pipe(
-      tap(_ => this.log(`updated author id=${author.id}`)),
+  updateUser(user: User): Observable<any> {
+    return this.http.put(this.userUrl, user, httpOptions).pipe(
+      tap(_ => this.log(`updated author id=${user.id}`)),
       catchError(this.handleError<any>('updateAuthor'))
     );
   }

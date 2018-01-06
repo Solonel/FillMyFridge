@@ -13,11 +13,11 @@ export class InMemoryDataService implements InMemoryDbService {
   createDb() {
 
     const users: User[] = [
-      { id: 1, gender: "1", firstName: 'Nice', lastName: 'Person', birthDate: "", email: 'su@email.fr', password: 'test' },
-      { id: 2, gender: "1", firstName: 'Narco', lastName: 'Leptic', birthDate: "", email: 'user1@email.fr', password: 'test', },
-      { id: 3, gender: "1", firstName: 'Bomba', lastName: 'Storm', birthDate: "", email: 'user2@email.fr', password: 'test' },
-      { id: 4, gender: "2", firstName: 'Celeritas', lastName: 'Stique', birthDate: "", email: 'user3@email.fr', password: 'test' },
-      { id: 5, gender: "3", firstName: 'Magneta', lastName: 'Magnet', birthDate: "", email: 'user4@email.fr', password: 'test' }
+      { id: 1, gender: "Mr", firstName: 'Nice', lastName: 'Person', birthDate: "", email: 'su@email.fr', password: 'test' },
+      { id: 2, gender: "Mr", firstName: 'Narco', lastName: 'Leptic', birthDate: "", email: 'user1@email.fr', password: 'test', },
+      { id: 3, gender: "Mr", firstName: 'Bomba', lastName: 'Storm', birthDate: "", email: 'user2@email.fr', password: 'test' },
+      { id: 4, gender: "Mme", firstName: 'Celeritas', lastName: 'Stique', birthDate: "", email: 'user3@email.fr', password: 'test' },
+      { id: 5, gender: "Mlle", firstName: 'Magneta', lastName: 'Magnet', birthDate: "", email: 'user4@email.fr', password: 'test' }
     ];
 
     const authors: Author[] = [
