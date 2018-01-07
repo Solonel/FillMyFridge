@@ -3,8 +3,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { CategoryService } from '../../services/category.service'
 import { Category } from '../../classes/category';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
 import 'rxjs/add/operator/finally';
+import { Recipe } from '../../classes/Recipe';
 
 @Component({
   selector: 'lsc-category',
@@ -28,12 +29,12 @@ export class CategoryComponent implements OnInit {
       published: '',
       description: '',
       title: '',
-      recipes: []
-    });
+      recipes: this.fb.array([new Recipe])
+    }); 
   }
 
   ngOnInit() {
-    this.getCategory();
+   this.getCategory();
   }
 
   getCategory(): void {
@@ -42,8 +43,21 @@ export class CategoryComponent implements OnInit {
       .finally(() => this.isLoading = false)
       .subscribe(category => {
         this.categoryForm.reset(category);
+        this.setCategories(category.recipes);
+        console.log(this.categoryForm)
       })
   }
+
+  setCategories(categories: Recipe[]) {
+    const categoryFGs = categories.map(recipe => this.fb.group(recipe));
+    const categoryFormArray = this.fb.array(categoryFGs);
+    this.categoryForm.setControl('recipes', categoryFormArray);
+  
+  }
+
+  get recipes(): FormArray {
+    return this.categoryForm.get('recipes') as FormArray;
+  };
 
   goToList(): void {
     this.router.navigate([`categories`]);

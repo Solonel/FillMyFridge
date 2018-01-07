@@ -2,7 +2,7 @@
 
 <div *ngIf="!isLoading">
     <div class="form">
-        <form [formGroup]="categoryForm" >
+        <form [formGroup]="categoryForm">
 
             <mat-slide-toggle formControlName="published"> Publié </mat-slide-toggle>
 
@@ -13,14 +13,45 @@
             <mat-form-field class="example-full-width">
                 <input formControlName="description" matInput placeholder="Description">
             </mat-form-field>
+
+            <div formArrayName="recipes" class="well well-lg">
+                    <div *ngFor="let recipe of recipes.controls; let i=index" [formGroupName]="i" >
+                      <!-- The repeated address template -->
+                      <h4>Address #{{i + 1}}</h4>
+                      <div style="margin-left: 1em;">
+                        <div class="form-group">
+                          <label class="center-block">id :
+                            <input class="form-control" formControlName="id">
+                          </label>
+                        </div>
+                        <div class="form-group">
+                          <label class="center-block">title :
+                            <input class="form-control" formControlName="title">
+                          </label>
+                        </div>
+                        <div class="form-group">
+                          <label class="center-block">description :  
+                              <input class="form-control" formControlName="description">
+                          </label>
+                        </div>
+                        <div class="form-group">
+                          <label class="center-block">published :
+                            <input class="form-control" formControlName="published">
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
         </form>
-        
-        <div *ngIf="categoryForm.value.id" >
+
+
+        <div *ngIf="categoryForm.value.id">
             <button type="button" (click)="save()" class="btn btn-success"> Modifier </button>
             <button type="button" (click)="delete()" class="btn btn-danger"> Supprimer </button>
         </div>
         <div *ngIf="!categoryForm.value.id">
-            <button   (click)="addCategory()" type="button" class="btn btn-primary"> Enregistrer </button>
+            <button (click)="addCategory()" type="button" class="btn btn-primary"> Enregistrer </button>
         </div>
     </div>
 </div>
