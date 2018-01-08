@@ -1,57 +1,49 @@
 <lsc-back-menu></lsc-back-menu>
 
-<div *ngIf="!isLoading">
-    <div class="form">
+
+<div class="form justify-content-around">
+    <div *ngIf="!isLoading">
         <form [formGroup]="categoryForm">
+            <div class="container">
+                <div class="row justify-content-around">
 
-            <mat-slide-toggle formControlName="published"> Publié </mat-slide-toggle>
+                    <div class="col-6">
 
-            <mat-form-field class="example-full-width">
-                <input formControlName="title" matInput placeholder="Titre">
-            </mat-form-field>
+                        <mat-slide-toggle formControlName="published"> Publié </mat-slide-toggle>
 
-            <mat-form-field class="example-full-width">
-                <input formControlName="description" matInput placeholder="Description">
-            </mat-form-field>
+                        <mat-form-field class="example-full-width">
+                            <input formControlName="title" matInput placeholder="Titre">
+                        </mat-form-field>
 
-            <div formArrayName="recipes" class="well well-lg">
-                    <div *ngFor="let recipe of recipes.controls; let i=index" [formGroupName]="i" >
-                      <!-- The repeated address template -->
-                      <h4>Address #{{i + 1}}</h4>
-                      <div style="margin-left: 1em;">
-                        <div class="form-group">
-                          <label class="center-block">id :
-                            <input class="form-control" formControlName="id">
-                          </label>
-                        </div>
-                        <div class="form-group">
-                          <label class="center-block">title :
-                            <input class="form-control" formControlName="title">
-                          </label>
-                        </div>
-                        <div class="form-group">
-                          <label class="center-block">description :  
-                              <input class="form-control" formControlName="description">
-                          </label>
-                        </div>
-                        <div class="form-group">
-                          <label class="center-block">published :
-                            <input class="form-control" formControlName="published">
-                          </label>
-                        </div>
-                      </div>
+                        <mat-form-field class="example-full-width">
+                            <input formControlName="description" matInput placeholder="Description">
+                        </mat-form-field>
+
                     </div>
-                  </div>
+                    <div class="col-6">
+                        <div formArrayName="recipes" *ngIf="categoryFormArray">
+                            <mat-selection-list #recipesList>
+                                <mat-list-option checkboxPosition="before" [value]="recipe" *ngFor="let recipe of categoryFormArray.controls; let idx = index"
+                                    [formGroupName]="idx">
+                                    <h3 matLine> {{recipe.value.title}} </h3>
+                                    <p matLine>
+                                        <span> {{recipe.value.description}} </span>
+                                    </p>
 
+                                </mat-list-option>
+                            </mat-selection-list>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div *ngIf="categoryForm.value.id">
+                            <button type="button" (click)="save()" class="btn btn-success"> Modifier </button>
+                            <button type="button" (click)="delete()" class="btn btn-danger"> Supprimer </button>
+                        </div>
+                        <div *ngIf="!categoryForm.value.id">
+                            <button (click)="addCategory()" type="button" class="btn btn-primary"> Enregistrer </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </form>
-
-
-        <div *ngIf="categoryForm.value.id">
-            <button type="button" (click)="save()" class="btn btn-success"> Modifier </button>
-            <button type="button" (click)="delete()" class="btn btn-danger"> Supprimer </button>
-        </div>
-        <div *ngIf="!categoryForm.value.id">
-            <button (click)="addCategory()" type="button" class="btn btn-primary"> Enregistrer </button>
-        </div>
     </div>
-</div>

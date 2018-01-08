@@ -5,7 +5,7 @@ export class Book {
     id: number;
     title: string;
     description: string;
-    recipes: Array<Recipe>;
+    recipes: Recipe[];
     author: Author;
     price: number;
     rating: number;

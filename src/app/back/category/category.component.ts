@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { CategoryService } from '../../services/category.service'
 import { Category } from '../../classes/category';
-import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
+import { FormControl, FormGroup, FormArray, Validators, FormBuilder } from '@angular/forms';
 import 'rxjs/add/operator/finally';
 import { Recipe } from '../../classes/Recipe';
 
@@ -25,16 +25,20 @@ export class CategoryComponent implements OnInit {
 
   createForm() {
     this.categoryForm = this.fb.group({
-      id: '',
-      published: '',
-      description: '',
-      title: '',
-      recipes: this.fb.array([new Recipe])
-    }); 
+      id: null,
+      published: null,
+      description: null,
+      title: null,
+      recipes: this.fb.array([])
+    });
   }
 
   ngOnInit() {
-   this.getCategory();
+    this.getCategory();
+  }
+
+  get categoryFormArray(): FormArray {
+    return this.categoryForm.get('recipes') as FormArray;
   }
 
   getCategory(): void {
@@ -42,22 +46,37 @@ export class CategoryComponent implements OnInit {
     this.categoryService.getCategoryNo404(id)
       .finally(() => this.isLoading = false)
       .subscribe(category => {
-        this.categoryForm.reset(category);
-        this.setCategories(category.recipes);
-        console.log(this.categoryForm)
+        if (category) {
+          this.categoryForm.patchValue({
+            id: category.id,
+            description: category.description,
+            title: category.title,
+            published: category.published
+          });
+
+          this.setRecipeArray(category.recipes)
+        }
       })
   }
 
-  setCategories(categories: Recipe[]) {
-    const categoryFGs = categories.map(recipe => this.fb.group(recipe));
-    const categoryFormArray = this.fb.array(categoryFGs);
-    this.categoryForm.setControl('recipes', categoryFormArray);
-  
-  }
+  setRecipeArray(recipes: Recipe[]) {
+    let recipeFormGroups = recipes.map(recipe => (
+      this.fb.group({
+        id: recipe.id,// Id
+        title: recipe.title,// Titre
+        description: recipe.description, // Petite description
+        servings: recipe.servings, // Nombre de personnes
+        preparation: recipe.preparation, // Temps de préparation
+        cook: recipe.cook,// Temps de cuisson
+        readyin: recipe.readyin, // Prêt en combien de temps
+        published: recipe.published, // Publié sur le site
+        rating: recipe.rating,// Notation
+      })
+    ));
 
-  get recipes(): FormArray {
-    return this.categoryForm.get('recipes') as FormArray;
-  };
+    let recipeFormArray = this.fb.array(recipeFormGroups);
+    this.categoryForm.setControl('recipes', recipeFormArray);
+  }
 
   goToList(): void {
     this.router.navigate([`categories`]);
@@ -76,6 +95,7 @@ export class CategoryComponent implements OnInit {
   }
 
   addCategory() {
+    console.log("add", this.categoryForm.value);
     this.categoryService.addCategory(this.categoryForm.value).subscribe(() => this.goToList());;
   }
 

@@ -4,6 +4,6 @@ export class Category {
     id: number;
     title: string;
     description: string;
-    recipes: Array<Recipe>;
+    recipes: Recipe[];
     published: boolean;
 }
