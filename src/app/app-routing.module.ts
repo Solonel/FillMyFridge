@@ -6,6 +6,7 @@ import { AuthenticationComponent } from './front/authentication/authentication.c
 import { HomepageComponent } from './front/homepage/homepage.component';
 import { RegisterComponent } from './front/register/register.component';
 import { ProfileComponent } from './front/profile/profile.component';
+import { FrontRecipesComponent } from './front/front-recipes/front-recipes.component';
 /** BackOffice Module */
 import { DashBoardComponent } from './back/dash-board/dash-board.component';
 import { IngredientComponent } from './back/ingredient/ingredient.component'
@@ -29,6 +30,7 @@ const routes: Routes = [
     { path: '', component: HomepageComponent },
     { path: 'register', component: RegisterComponent },
     { path: 'profile', component: ProfileComponent },
+    { path: 'ft-recipes', component: FrontRecipesComponent },
 
     // Back
     { path: 'administration', component: DashBoardComponent },

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service'
 import { User } from '../../classes/user';
 
@@ -10,10 +11,18 @@ import { User } from '../../classes/user';
 export class ProfileComponent implements OnInit {
 
   user: User;
-  constructor(private authService:AuthService) { }
+  constructor(private authService:AuthService,
+    private router: Router,) { }
 
   ngOnInit() {
     this.user = this.authService.getConnectedUser();
+    this.checkIfLoggedIn();
+  }
+
+  checkIfLoggedIn(){
+    if (!this.authService.userIsLoggedIn()){
+      this.router.navigate([`login`]);
+    }
   }
 
 }
