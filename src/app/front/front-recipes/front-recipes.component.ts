@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { RecipeService } from '../../services/recipe.service';
+import { CategoryService } from '../../services/category.service';
+import { Category } from '../../classes/category';
+
 
 @Component({
   selector: 'lsc-front-recipes',
@@ -7,9 +11,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FrontRecipesComponent implements OnInit {
 
-  constructor() { }
+  categories: Category[];
+  
+
+  constructor(private recipeService: RecipeService, private categoryService: CategoryService) { }
 
   ngOnInit() {
+    this.categoryService.getCategories().subscribe(categories => {
+      this.categories = categories;
+    })
   }
 
 }
