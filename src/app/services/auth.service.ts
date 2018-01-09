@@ -52,7 +52,7 @@ export class AuthService {
         this.log(`added user w/ id=${user.id}`)
         console.log(user);
       }),
-      catchError(this.handleError<User>('addAuthor'))
+      catchError(this.handleError<User>('addUser'))
     );
   }
 
