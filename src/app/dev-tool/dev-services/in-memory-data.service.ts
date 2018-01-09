@@ -34,7 +34,7 @@ export class InMemoryDataService implements InMemoryDbService {
       { id: 6, title: "petit bol de mayonnaise", description: "", icon: "" },
       { id: 7, title: "tomates", description: "", icon: "" },
       { id: 8, title: "boules de mozzarella", description: "", icon: "" },
-      { id: 9, title: "branche de thym", description: "", icon: "" },
+      { id: 9, title: "thym", description: "", icon: "" },
       { id: 10, title: "brins de ciboulette", description: "", icon: "" },
       { id: 11, title: "branche d'estragon", description: "", icon: "" },
       { id: 12, title: "branche de persil", description: "", icon: "" },
@@ -46,7 +46,8 @@ export class InMemoryDataService implements InMemoryDbService {
     const units: Unit[] = [
       { id: 1, title: "g", description: "Gramme" },
       { id: 2, title: "l", description: "Litre" },
-      { id: 3, title: "cuillère à café", description: "" }
+      { id: 3, title: "cuillère à café", description: "" },
+      { id: 4, title: "branche", description: "" }
     ]
 
     const proportions: Proportion[] = [
@@ -57,8 +58,9 @@ export class InMemoryDataService implements InMemoryDbService {
       { quantity: 100, unit: units[4], ingredient: ingredients[4] }, // 5
       { quantity: 4, unit: null, ingredient: ingredients[2], }, // 6
       { quantity: 1, unit: null, ingredient: ingredients[5], }, // 7
-      { quantity: 8, unit: null, ingredient: ingredients[7], }, // 8 - salade tomate mozza
-      { quantity: 2, unit: null, ingredient: ingredients[8], }, // 9 - salade tomate mozza
+      { quantity: 8, unit: null, ingredient: ingredients[6], }, // 8 - salade tomate mozza
+      { quantity: 2, unit: null, ingredient: ingredients[7], }, // 9 - salade tomate mozza
+      { quantity: 1, unit: units[3], ingredient: ingredients[8], }, // 10 - salade tomate mozza
     ]
 
     const recipes: Recipe[] = [
