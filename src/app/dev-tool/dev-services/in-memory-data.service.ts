@@ -21,88 +21,103 @@ export class InMemoryDataService implements InMemoryDbService {
     ];
 
     const authors: Author[] = [
-      { id: 1, name: "Author Name 1", firstname: "Author Firstname 1" },
-      { id: 2, name: "Author Name 2", firstname: "Author Firstname 2" },
-      { id: 3, name: "Author Name 3", firstname: "Author Firstname 3" },
-      { id: 4, name: "Author Name 4", firstname: "Author Firstname 4" }
+      { id: 1, name: "", firstname: "", username: "clairette600" },
+      { id: 2, name: "", firstname: "", username: "mapo9" }
     ]
 
     const ingredients: Ingredient[] = [
-      { id: 1, title: "Ingredient title 1", description: "Ingredient description 1", icon: "Ingredient icon 1" },
-      { id: 2, title: "Ingredient title 2", description: "Ingredient description 2", icon: "Ingredient icon 2" },
-      { id: 3, title: "Ingredient title 3", description: "Ingredient description 3", icon: "Ingredient icon 3" },
-      { id: 4, title: "Ingredient title 4", description: "Ingredient description 4", icon: "Ingredient icon 4" }
+      { id: 1, title: "chocolat à pâtisser noir", description: "", icon: "" },
+      { id: 2, title: "beurre", description: "", icon: "" },
+      { id: 3, title: "oeufs", description: "", icon: "" },
+      { id: 4, title: "farine", description: "", icon: "" },
+      { id: 5, title: "sucre en poudre", description: "", icon: "" },
+      { id: 6, title: "petit bol de mayonnaise", description: "", icon: "" },
     ]
 
     const units: Unit[] = [
-      { id: 1, title: "Unit Title 1", description: "unit description 1" },
-      { id: 2, title: "Unit Title 2", description: "unit description 2" },
-      { id: 3, title: "Unit Title 3", description: "unit description 3" },
-      { id: 4, title: "Unit Title 4", description: "unit description 4" }
+      { id: 1, title: "g", description: "Gramme" },
+      { id: 2, title: "l", description: "Litre" },
+      { id: 3, title: "cuillère à café", description: "" }
     ]
 
     const proportions: Proportion[] = [
-      { quantity: 1, ingredient: ingredients[0], unit: units[0] },
-      { quantity: 2, ingredient: ingredients[1], unit: units[1] },
-      { quantity: 3, ingredient: ingredients[2], unit: units[2] },
-      { quantity: 4, ingredient: ingredients[3], unit: units[3] }
+      { quantity: 200, unit: units[0], ingredient: ingredients[0] },
+      { quantity: 100, unit: units[0], ingredient: ingredients[1] },
+      { quantity: 3, unit: null, ingredient: ingredients[2] },
+      { quantity: 50, unit: units[0], ingredient: ingredients[3] },
+      { quantity: 100, unit: units[4], ingredient: ingredients[4] },
+      { quantity: 4, unit: null, ingredient: ingredients[2], },
+      { quantity: 1, unit: null, ingredient: ingredients[5], },
     ]
 
     const recipes: Recipe[] = [
       {
         id: 1,
-        title: "Recipe title 1",
-        description: "Recipe description 1",
-        directions: ["Recipe Etape 1", "Recipe Etape 2"],
-        proportions: [proportions[0]],
-        servings: 1,
+        title: "Gâteau au chocolat fondant rapide",
+        description: "",
+        directions: [
+          "Préchauffez votre four à 180°C (thermostat 6).",
+          "Dans une casserole, faites fondre le chocolat et le beurre coupé en morceaux à feu très doux.",
+          "Dans un saladier, ajoutez le sucre, les oeufs, la farine. Mélangez.",
+          "Ajoutez le mélange chocolat/beurre. Mélangez bien.",
+          "Beurrez et farinez votre moule puis y versez la pâte à gâteau.",
+          "Faites cuire au four environ 20 minutes.",
+          "A la sortie du four le gâteau ne paraît pas assez cuit. C'est normal, laissez-le refroidir puis démoulez- le."],
+        proportions: [
+          proportions[0],
+          proportions[1],
+          proportions[2],
+          proportions[3],
+          proportions[4]
+        ],
+        servings: 6,
         preparation: new Date(),
         cook: new Date(),
         readyin: new Date(),
         published: true,
-        rating: 1,
+        rating: 4.5,
         author: authors[0]
       },
       {
         id: 2,
-        title: "Recipe title 2",
-        description: "Recipe description 2",
-        directions: ["Recipe Etape 1", "Recipe Etape 2"],
-        proportions: [proportions[1]],
-        servings: 1,
-        preparation: new Date(),
-        cook: new Date(),
-        readyin: new Date(),
-        published: true,
-        rating: 2,
-        author: authors[1]
-      },
-      {
-        id: 3,
-        title: "Recipe title 3",
-        description: "Recipe description 3",
-        directions: ["Recipe Etape 3", "Recipe Etape 3"],
-        proportions: [proportions[2]],
-        servings: 3,
-        preparation: new Date(),
-        cook: new Date(),
-        readyin: new Date(),
-        published: false,
-        rating: 3,
-        author: authors[2]
-      }, {
-        id: 4,
-        title: "Recipe title 4",
-        description: "Recipe description 4",
-        directions: ["Recipe Etape 4", "Recipe Etape 4"],
-        proportions: [proportions[3]],
+        title: "Oeufs mimosa",
+        description: "",
+        directions: [
+          "Faire durcir les oeufs 10 mn, puis les mettre dans l'eau froide.",
+          "utiliser une mayonnaise prête vendue dans le commerce.",
+          "Les oeufs écalés, les couper dans le sens de la longueur, séparer les blancs des jaunes.",
+          "Dans une assiette creuse, émietter les jaunes à la fourchette, mélanger la moitié de ces jaunes émiettés avec la mayonnaise et réserver le reste.",
+          "Remplir les demi-blancs de cette préparation, puis saupoudrer chaque demi-oeuf du reste de jaunes émiettés (ce qui fait le mimosa !!).",
+          "Disposer les oeufs dans une assiette",
+          "Servir frais."
+        ],
+        proportions: [
+          proportions[5],
+          proportions[6]
+        ],
         servings: 4,
         preparation: new Date(),
         cook: new Date(),
         readyin: new Date(),
+        published: true,
+        rating: 5,
+        author: authors[1]
+      }
+    ];
+
+    const categories: Category[] = [
+      {
+        id: 1,
+        title: "Dessert",
+        description: "Les desserts de l'application",
+        published: true,
+        recipes: [recipes[0]],
+      }, {
+        id: 2,
+        title: "Entrées",
+        description: "Les entrées de l'application",
         published: false,
-        rating: 4,
-        author: authors[3]
+        recipes: [recipes[1]]
       }
     ];
 
@@ -128,21 +143,6 @@ export class InMemoryDataService implements InMemoryDbService {
       }
     ];
 
-    const categories: Category[] = [
-      {
-        id: 1,
-        title: "titre 1",
-        description: "description 1",
-        published: true,
-        recipes: recipes,
-      }, {
-        id: 2,
-        title: "titre 2",
-        description: "description 2",
-        published: false,
-        recipes: recipes
-      }
-    ];
 
     return { users, authors, books, ingredients, proportions, recipes, units, categories };
   }

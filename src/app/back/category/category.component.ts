@@ -37,7 +37,7 @@ export class CategoryComponent implements OnInit {
     this.getCategory();
   }
 
-  get categoryFormArray(): FormArray {
+  get recipeFormArray(): FormArray {
     return this.categoryForm.get('recipes') as FormArray;
   }
 
@@ -97,6 +97,13 @@ export class CategoryComponent implements OnInit {
   addCategory() {
     console.log("add", this.categoryForm.value);
     this.categoryService.addCategory(this.categoryForm.value).subscribe(() => this.goToList());;
+  }
+
+  removeRecipes(recipes) {
+    recipes.selectedOptions.selected.map(item => {
+      this.recipeFormArray.removeAt(this.recipeFormArray.value.findIndex(recipe => recipe.id === item.id))
+    });
+    recipes.deselectAll();
   }
 
 }
