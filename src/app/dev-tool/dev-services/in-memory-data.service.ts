@@ -31,20 +31,76 @@ export class InMemoryDataService implements InMemoryDbService {
           "fr-fr": { title: { singular: "chocolat pâtisser noir", plural: "" }, description: "", available: true }
         }, icon: ""
       },
-      // { id: 2, title: "beurre", description: "", icon: "" },
-      // { id: 3, title: "oeufs", description: "", icon: "" },
-      // { id: 4, title: "farine", description: "", icon: "" },
-      // { id: 5, title: "sucre en poudre", description: "", icon: "" },
-      // { id: 6, title: "petit bol de mayonnaise", description: "", icon: "" },
-      // { id: 7, title: "tomates", description: "", icon: "" },
-      // { id: 8, title: "boules de mozzarella", description: "", icon: "" },
-      // { id: 9, title: "thym", description: "", icon: "" },
-      // { id: 10, title: "brins de ciboulette", description: "", icon: "" },
-      // { id: 11, title: "branche d'estragon", description: "", icon: "" },
-      // { id: 12, title: "branche de persil", description: "", icon: "" },
-      // { id: 13, title: "salade composée (en sachet)", description: "", icon: "" },
-      // { id: 14, title: "vinaigre balsamique", description: "", icon: "" },
-      // { id: 15, title: "branche de basilic", description: "", icon: "" },
+      {
+        id: 2, locale: {
+          "fr-fr": { title: { singular: "beurre", plural: "beurres" }, description: "", available: true }
+        }, icon: ""
+      },
+      {
+        id: 3, locale: {
+          "fr-fr": { title: { singular: "oeuf", plural: "oeufs" }, description: "", available: true }
+        }, icon: ""
+      },
+      {
+        id: 4, locale: {
+          "fr-fr": { title: { singular: "farine", plural: "farines" }, description: "", available: true }
+        }, icon: ""
+      },
+      {
+        id: 5, locale: {
+          "fr-fr": { title: { singular: "sucre en poudre", plural: "sucres en poudre" }, description: "", available: true }
+        }, icon: ""
+      },
+      {
+        id: 6, locale: {
+          "fr-fr": { title: { singular: "mayonnaise", plural: "mayonnaises" }, description: "", available: true }
+        }, icon: ""
+      },
+      {
+        id: 7, locale: {
+          "fr-fr": { title: { singular: "tomate", plural: "tomates" }, description: "", available: true }
+        }, icon: ""
+      },
+      {
+        id: 8, locale: {
+          "fr-fr": { title: { singular: "boule de mozzarella", plural: "boules de mozzarella" }, description: "", available: true }
+        }, icon: ""
+      },
+      {
+        id: 9, locale: {
+          "fr-fr": { title: { singular: "thym", plural: "" }, description: "", available: true }
+        }, icon: ""
+      },
+      {
+        id: 10, locale: {
+          "fr-fr": { title: { singular: "ciboulette", plural: "ciboulettes" }, description: "", available: true }
+        }, icon: ""
+      },
+      {
+        id: 11, locale: {
+          "fr-fr": { title: { singular: "estragon", plural: "estragons" }, description: "", available: true }
+        }, icon: ""
+      },
+      {
+        id: 12, locale: {
+          "fr-fr": { title: { singular: "persil", plural: "persils" }, description: "", available: true }
+        }, icon: ""
+      },
+      {
+        id: 13, locale: {
+          "fr-fr": { title: { singular: "salade composée (en sachet)", plural: "salades composées" }, description: "", available: true }
+        }, icon: ""
+      },
+      {
+        id: 14, locale: {
+          "fr-fr": { title: { singular: "vinaigre balsamique", plural: "vinaigres balsamique" }, description: "", available: true }
+        }, icon: ""
+      },
+      {
+        id: 15, locale: {
+          "fr-fr": { title: { singular: "basilic", plural: "basilics" }, description: "", available: true }
+        }, icon: ""
+      },
     ]
 
     const units: Unit[] = [
