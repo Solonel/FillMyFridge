@@ -1,18 +1,32 @@
 <lsc-back-menu></lsc-back-menu>
 
-<p>recipe</p>
-<pre>
-    id: number; // Id
-    title: string; // Titre
-    description: string; // Petite description
-    directions : Array&lt;string&gt;; // Etapes de préparation
-    proportions: Array&lt;Proportion&gt;; // Quantité avec ingredients
-    servings: number; // Nombre de personnes
-    preparation: Date; // Temps de préparation
-    cook: Date; // Temps de cuisson
-    readyin: Date; // Prêt en combien de temps
-    published : boolean; // Publié sur le site
-    rating : number; // Notation
-    author : Author;
-</pre>
- 
+<!-- <div *ngIf="!isLoading">
+    <form [formGroup]="categoryForm"> -->
+
+        <p>id</p>
+        <mat-form-field>
+            <input matInput placeholder="Title">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Description">
+        </mat-form-field>
+        <p>Directions</p>
+        <p>Proportions</p>
+        <mat-form-field>
+            <input matInput placeholder="Nombre de personne" type="number">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Temps de préparation" type="time">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Temps de cuisson" type="time">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Temps de total" type="time">
+        </mat-form-field>
+        <mat-slide-toggle> Publié </mat-slide-toggle>
+        <mat-form-field>
+            <input matInput placeholder="Note" type="number">
+        </mat-form-field>
+<!--     </form>
+</div> -->
