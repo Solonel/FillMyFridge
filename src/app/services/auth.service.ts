@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from '../classes/user';
+import { UserService } from '../services/user.service'
 
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
@@ -13,33 +14,35 @@ const httpOptions = {
 @Injectable()
 export class AuthService {
 
-
+  currentlyLoggedInUser: User = null;
   isAuthenticated = false;
   private authUrl = 'api/users';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private userService: UserService) { }
 
   login(data): Boolean {
-    let users = this.http.get<User[]>(this.authUrl)
-      .pipe(
-      tap(users => {
-        users.forEach(user => {
-          console.log("a");
-          if (user.email === data.email && user.password === data.password) {
-            this.isAuthenticated = true;
-            console.log("isAuthenticated !!");
-          }
-        });
-      }),
-      catchError(this.handleError('user', []))
-      );
+    let users = this.userService.getUsers().subscribe(users => {
+      users.forEach(user => {
+        if (user.email === data.email && user.password === data.password) {
+          this.isAuthenticated = true;
+          this.currentlyLoggedInUser = user;
+          console.log( this.currentlyLoggedInUser);
+          console.log("isAuthenticated !!");
+        }
+      })
+    });
     return this.isAuthenticated;
   }
 
   logOut() {
     if (this.isAuthenticated === true) {
+      this.currentlyLoggedInUser = null;
       this.isAuthenticated = false;
     }
+  }
+
+  getConnectedUser(): User {
+    return this.currentlyLoggedInUser;
   }
 
   userIsLoggedIn() {
@@ -52,7 +55,7 @@ export class AuthService {
         this.log(`added user w/ id=${user.id}`)
         console.log(user);
       }),
-      catchError(this.handleError<User>('addAuthor'))
+      catchError(this.handleError<User>('addUser'))
     );
   }
 

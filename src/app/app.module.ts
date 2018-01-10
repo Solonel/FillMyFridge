@@ -17,6 +17,8 @@ import { AuthenticationComponent } from './front/authentication/authentication.c
 import { FrontMenuComponent } from './front/front-menu/front-menu.component';
 import { HomepageComponent } from './front/homepage/homepage.component';
 import { RegisterComponent } from './front/register/register.component';
+import { ProfileComponent } from './front/profile/profile.component';
+import { FrontRecipesComponent } from './front/front-recipes/front-recipes.component';
 
 /**
  * Back Component
@@ -61,7 +63,9 @@ import { UserService } from './services/user.service';
     AuthenticationComponent,
     HomepageComponent,
     RegisterComponent,
+    ProfileComponent,
     FrontMenuComponent,
+    FrontRecipesComponent,
     //BooksComponent,
     //BookComponent,
     DashBoardComponent,

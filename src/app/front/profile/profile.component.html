@@ -1,0 +1,5 @@
+<lsc-front-menu></lsc-front-menu>
+
+<div *ngIf="authService.userIsLoggedIn()">
+  {{ user | json }}
+</div>

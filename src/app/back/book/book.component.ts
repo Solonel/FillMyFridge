@@ -80,6 +80,7 @@ export class BookComponent implements OnInit {
   addRecipesToBook(recipes) {
     recipes.selectedOptions.selected.map(item => {
       console.log(item.value)
+
       if (!this.choosedRecipesList) {
         this.choosedRecipesList = [item.value];
       } else {

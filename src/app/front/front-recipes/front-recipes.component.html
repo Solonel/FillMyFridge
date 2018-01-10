@@ -1,0 +1,19 @@
+<lsc-front-menu></lsc-front-menu>
+<p>Recipes !</p>
+
+
+<mat-accordion>
+  <mat-expansion-panel *ngFor="let category of categories">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        {{category.title}}
+      </mat-panel-title>
+      <mat-panel-description>
+        {{category.description}}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <div *ngFor="let recipe of category.recipes">
+      <mat-card>{{recipe.title}}</mat-card>
+    </div>
+  </mat-expansion-panel>
+</mat-accordion>
