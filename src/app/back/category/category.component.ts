@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { CategoryService } from '../../services/category.service'
 import { Category } from '../../classes/category';
-import { FormControl, FormGroup, FormArray, Validators, FormBuilder } from '@angular/forms';
+import { FormControl, FormGroup, FormArray, FormBuilder } from '@angular/forms';
 import 'rxjs/add/operator/finally';
 import { Recipe } from '../../classes/Recipe';
 

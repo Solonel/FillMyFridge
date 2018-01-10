@@ -1,33 +1,40 @@
 <lsc-back-menu></lsc-back-menu>
 
+<!-- export class Ingredient {
+    id: number;
+    locale: IngredientLocale;
+    icon: string;
+}
+export class IngredientLocale {
+    [key: string]: IngredientLocaleDetail;
+}
+export class IngredientLocaleDetail {
+    title: Pluralization;
+    description: string;
+    available: boolean;
+}
+export class Pluralization {
+    singular: string;
+    plural: string;
+} -->
+
 <div class="form">
 
     <h1>Ingrédient</h1>
-    <div *ngIf="!fetchingData">
+    <div *ngIf="!isLoading">
 
         <div *ngIf="ingredient ">
-            <div>
-                <mat-form-field class="example-full-width">
-                    <input [(ngModel)]="ingredient.locale['fr-fr'].title.singular" matInput placeholder="Titre">
-                </mat-form-field>
+            <mat-form-field class="example-full-width">
+                <input formControlName="title" matInput placeholder="Titre">
+            </mat-form-field>
 
-                <mat-form-field class="example-full-width">
-                    <input [(ngModel)]="ingredient" matInput placeholder="Description">
-                </mat-form-field>
 
-                <mat-form-field class="example-full-width">
-                    <input required [(ngModel)]="ingredient.icon" matInput placeholder="Icône">
-                </mat-form-field>
-            </div>
-            <div>
-                <button type="button" (click)="save()" class="btn btn-success"> Modifier </button>
-                <button type="button" (click)="delete()" class="btn btn-danger"> Supprimer </button>
-            </div>
-            <pre>
-            </pre>
+
+
+
             <pre>
                     {{ingredient | json}}
-                </pre>
+            </pre>
 
         </div>
 
