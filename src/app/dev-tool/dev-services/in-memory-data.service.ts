@@ -26,21 +26,25 @@ export class InMemoryDataService implements InMemoryDbService {
     ]
 
     const ingredients: Ingredient[] = [
-      { id: 1, title: "chocolat à pâtisser noir", description: "", icon: "" },
-      { id: 2, title: "beurre", description: "", icon: "" },
-      { id: 3, title: "oeufs", description: "", icon: "" },
-      { id: 4, title: "farine", description: "", icon: "" },
-      { id: 5, title: "sucre en poudre", description: "", icon: "" },
-      { id: 6, title: "petit bol de mayonnaise", description: "", icon: "" },
-      { id: 7, title: "tomates", description: "", icon: "" },
-      { id: 8, title: "boules de mozzarella", description: "", icon: "" },
-      { id: 9, title: "thym", description: "", icon: "" },
-      { id: 10, title: "brins de ciboulette", description: "", icon: "" },
-      { id: 11, title: "branche d'estragon", description: "", icon: "" },
-      { id: 12, title: "branche de persil", description: "", icon: "" },
-      { id: 13, title: "salade composée (en sachet)", description: "", icon: "" },
-      { id: 14, title: "vinaigre balsamique", description: "", icon: "" },
-      { id: 15, title: "branche de basilic", description: "", icon: "" },
+      {
+        id: 1, locale: {
+          "fr-fr": { title: { singular: "chocolat pâtisser noir", plural: "" }, description: "", available: true }
+        }, icon: ""
+      },
+      // { id: 2, title: "beurre", description: "", icon: "" },
+      // { id: 3, title: "oeufs", description: "", icon: "" },
+      // { id: 4, title: "farine", description: "", icon: "" },
+      // { id: 5, title: "sucre en poudre", description: "", icon: "" },
+      // { id: 6, title: "petit bol de mayonnaise", description: "", icon: "" },
+      // { id: 7, title: "tomates", description: "", icon: "" },
+      // { id: 8, title: "boules de mozzarella", description: "", icon: "" },
+      // { id: 9, title: "thym", description: "", icon: "" },
+      // { id: 10, title: "brins de ciboulette", description: "", icon: "" },
+      // { id: 11, title: "branche d'estragon", description: "", icon: "" },
+      // { id: 12, title: "branche de persil", description: "", icon: "" },
+      // { id: 13, title: "salade composée (en sachet)", description: "", icon: "" },
+      // { id: 14, title: "vinaigre balsamique", description: "", icon: "" },
+      // { id: 15, title: "branche de basilic", description: "", icon: "" },
     ]
 
     const units: Unit[] = [
@@ -51,16 +55,16 @@ export class InMemoryDataService implements InMemoryDbService {
     ]
 
     const proportions: Proportion[] = [
-      { quantity: 200, unit: units[0], ingredient: ingredients[0] }, // 1
-      { quantity: 100, unit: units[0], ingredient: ingredients[1] }, // 2 
-      { quantity: 3, unit: null, ingredient: ingredients[2] }, // 3
-      { quantity: 50, unit: units[0], ingredient: ingredients[3] }, // 4
-      { quantity: 100, unit: units[4], ingredient: ingredients[4] }, // 5
-      { quantity: 4, unit: null, ingredient: ingredients[2], }, // 6
-      { quantity: 1, unit: null, ingredient: ingredients[5], }, // 7
-      { quantity: 8, unit: null, ingredient: ingredients[6], }, // 8 - salade tomate mozza
-      { quantity: 2, unit: null, ingredient: ingredients[7], }, // 9 - salade tomate mozza
-      { quantity: 1, unit: units[3], ingredient: ingredients[8], }, // 10 - salade tomate mozza
+      { quantity: 200, unit: units[0], ingredient: ingredients[0] }, // 0
+      { quantity: 100, unit: units[0], ingredient: ingredients[1] }, // 1 
+      { quantity: 3, unit: null, ingredient: ingredients[2] }, // 2
+      { quantity: 50, unit: units[0], ingredient: ingredients[3] }, // 3
+      { quantity: 100, unit: units[4], ingredient: ingredients[4] }, // 4
+      { quantity: 4, unit: null, ingredient: ingredients[2], }, // 5
+      { quantity: 1, unit: null, ingredient: ingredients[5], }, // 6
+      { quantity: 8, unit: null, ingredient: ingredients[6], }, // 7 - salade tomate mozza
+      { quantity: 2, unit: null, ingredient: ingredients[7], }, // 8 - salade tomate mozza
+      { quantity: 1, unit: units[3], ingredient: ingredients[8], }, // 9 - salade tomate mozza
     ]
 
     const recipes: Recipe[] = [
@@ -77,7 +81,7 @@ export class InMemoryDataService implements InMemoryDbService {
           "Faites cuire au four environ 20 minutes.",
           "A la sortie du four le gâteau ne paraît pas assez cuit. C'est normal, laissez-le refroidir puis démoulez- le."],
         proportions: [
-          proportions[0],
+          { quantity: 200, unit: units[0], ingredient: ingredients[0] }, // 1
           proportions[1],
           proportions[2],
           proportions[3],

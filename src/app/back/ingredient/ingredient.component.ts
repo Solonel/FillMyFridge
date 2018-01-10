@@ -30,6 +30,7 @@ export class IngredientComponent implements OnInit {
         this.ingredient = Ingredient; 
         this.fetchingData = false; 
         console.log(this.ingredient)
+        console.log(this.ingredient.locale["fr-fr"]);
       });
   }
 
