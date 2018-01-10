@@ -104,10 +104,32 @@ export class InMemoryDataService implements InMemoryDbService {
     ]
 
     const units: Unit[] = [
-      { id: 1, title: "g", description: "Gramme" },
-      { id: 2, title: "l", description: "Litre" },
-      { id: 3, title: "cuillère à café", description: "" },
-      { id: 4, title: "branche", description: "" }
+      {
+        id: 1, locale: {
+          "fr-fr": { name: "gramme", shorted: "gr", available: true }
+        }
+      },
+      {
+        id: 2, locale: {
+          "fr-fr": {
+            name: "litre", shorted: "l", available: true
+          }
+        }
+      },
+      {
+        id: 3, locale: {
+          "fr-fr": {
+            name: "cuillère à café", shorted: "cc", available: true
+          }
+        }
+      },
+      {
+        id: 4, locale: {
+          "fr-fr": {
+            name: "branche", shorted: "br", available: true
+          }
+        }
+      }
     ]
 
     const proportions: Proportion[] = [
