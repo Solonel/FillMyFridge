@@ -55,6 +55,7 @@ import { CategoryService } from './services/category.service';
  */
 import { DevMenuComponent } from './dev-tool/dev-menu/dev-menu.component';
 import { UserService } from './services/user.service';
+import { LocaleService } from './services/locale.service';
 
 @NgModule({
   declarations: [
@@ -101,6 +102,7 @@ import { UserService } from './services/user.service';
     CategoryService,
     UnitService,
     IngredientService,
+    LocaleService,
     RecipeService],
   bootstrap: [AppComponent]
 })

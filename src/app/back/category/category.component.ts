@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { CategoryService } from '../../services/category.service'
-import { Category } from '../../classes/category';
+import { LocaleService } from '../../services/locale.service'
+import { Category, CategoryLocale } from '../../classes/category';
 import { FormControl, FormGroup, FormArray, FormBuilder } from '@angular/forms';
 import 'rxjs/add/operator/finally';
 import { Recipe } from '../../classes/Recipe';
@@ -15,11 +16,15 @@ import { Recipe } from '../../classes/Recipe';
 export class CategoryComponent implements OnInit {
   isLoading = true;
   categoryForm: FormGroup;
+  langForm: FormGroup;
+  categoryAvailableLanguages = [];
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private categoryService: CategoryService, private fb: FormBuilder) {
+    private categoryService: CategoryService,
+    private fb: FormBuilder,
+    private localeService: LocaleService) {
     this.createForm();
   }
 
@@ -31,10 +36,22 @@ export class CategoryComponent implements OnInit {
       title: null,
       recipes: this.fb.array([])
     });
+    //this.langForm = this.fb.group({
+    //  title: null,
+    //  description: null,
+    //})
   }
 
   ngOnInit() {
     this.getCategory();
+  }
+
+  getAvailableLanguages(category) {
+    console.log(category.locale);
+    for (var lang in category.locale) {
+      this.categoryAvailableLanguages.push(lang);
+    }
+
   }
 
   get recipeFormArray(): FormArray {
@@ -49,14 +66,16 @@ export class CategoryComponent implements OnInit {
         if (category) {
           this.categoryForm.patchValue({
             id: category.id,
-            description: category.description,
-            title: category.title,
+            description: category.locale[this.localeService.getDefaultLanguage()].description,
+            title: category.locale[this.localeService.getDefaultLanguage()].title,
             published: category.published
           });
 
+          this.getAvailableLanguages(category);
           this.setRecipeArray(category.recipes)
         }
       })
+
   }
 
   setRecipeArray(recipes: Recipe[]) {

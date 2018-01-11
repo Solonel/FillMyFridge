@@ -225,14 +225,26 @@ export class InMemoryDataService implements InMemoryDbService {
     const categories: Category[] = [
       {
         id: 1,
-        title: "Dessert",
-        description: "Les desserts de l'application",
+        locale: {
+          "fr-fr": {
+            title: "Desserts", description: "Les desserts de l'application", available: true
+          },
+          "en-us": {
+            title: "Desserts", description: "Application's desserts", available: true
+          },
+        },
         published: true,
         recipes: [recipes[0]],
       }, {
         id: 2,
-        title: "Entrées",
-        description: "Les entrées de l'application",
+        locale: {
+          "fr-fr": {
+            title: "Entrées", description: "Les entrées de l'application", available: true
+          },
+          "en-us": {
+            title: "Appetizers", description: "Application's appetizers.", available: true
+          },
+        },
         published: false,
         recipes: [
           recipes[1],

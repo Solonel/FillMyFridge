@@ -37,7 +37,7 @@
                                 </mat-list-option>
                             </mat-selection-list>
                             <button type="button" *ngIf="recipeFormArray.controls.length > 0" (click)="removeRecipes(recipesList)" class="btn btn-dark">
-                            Retirer recettes</button>
+                                Retirer recettes</button>
                             <!-- <button type="button" *ngIf="recipeFormArray.controls.length === 0" (click)="addRecipe()" class="btn btn-dark"> Ajouter recettes </button> -->
                         </div>
                     </div>
@@ -53,4 +53,25 @@
                 </div>
             </div>
         </form>
+        <mat-tab-group>
+            <mat-tab *ngFor="let lang of categoryAvailableLanguages" label="{{lang}}">
+                <!-- <form [formGroup]="langForm"> -->
+                    <!-- <div>
+                        <mat-form-field class="example-full-width">
+                            <input formControlName="title" matInput placeholder="Titre">
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <mat-form-field class="example-full-width">
+                            <input formControlName="description" matInput placeholder="Description">
+                        </mat-form-field>
+                    </div> -->
+                    <p>TOTO</p>
+                <!-- </form> -->
+            </mat-tab>
+            <mat-tab label="AJOUTER LANGUE">
+
+            </mat-tab>
+        </mat-tab-group>
     </div>
+</div>
