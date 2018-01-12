@@ -26,7 +26,7 @@ export class IngredientComponent implements OnInit {
   createForm() {
     this.ingredientForm = this.fb.group({
       id: null,
-      locale: this.fb.array([]),
+      locale: null,
       icon: null
     });
   }
@@ -39,47 +39,12 @@ export class IngredientComponent implements OnInit {
     const id = +this.route.snapshot.paramMap.get('id');
     this.ingredientService.getIngredientNo404(id).finally(() => {
       this.isLoading = false;
-      console.log("formgroup : ", this.ingredientForm)
+      console.log(this.ingredientForm)
     }).subscribe(ingredient => {
       if (ingredient) {
-        this.ingredientForm.patchValue({
-          id: ingredient.id,
-          icon: ingredient.icon
-        });
-        this.setLocaleArray(ingredient.locale)
+        this.ingredientForm.patchValue(ingredient);
       }
     });
-  }
-
-  setLocaleArray(locale) {
-    let localeFormGroups = [];
-
-    for (let i in locale) {
-      console.log("i", i ,"locale[i]" , locale[i]);
-      localeFormGroups.push(this.fb.group({
-        title: locale[i].id,// Id
-        description: locale[i].description, // Petite description
-        available: locale[i].servings
-      }))
-    }
-
-    let localeFormArray = this.fb.array(localeFormGroups);
-    this.ingredientForm.setControl('locale', localeFormArray);
-    //   let recipeFormGroups = locale.map(locale => (
-    //     // this.fb.group({
-    //     //   id: recipe.id,// Id
-    //     //   title: recipe.title,// Titre
-    //     //   description: recipe.description, // Petite description
-    //     //   servings: recipe.servings, // Nombre de personnes
-    //     //   preparation: recipe.preparation, // Temps de préparation
-    //     //   cook: recipe.cook,// Temps de cuisson
-    //     //   readyin: recipe.readyin, // Prêt en combien de temps
-    //     //   published: recipe.published, // Publié sur le site
-    //     //   rating: recipe.rating,// Notation
-    //     // })
-    //   //)
-    //   console.log(locale)
-    // ));
   }
 
   goToList(): void {

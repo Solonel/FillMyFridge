@@ -23,21 +23,15 @@ export class Pluralization {
     <h1>Ingrédient</h1>
     <div *ngIf="!isLoading">
 
-        <div *ngIf="ingredient ">
+        <div>
             <mat-form-field class="example-full-width">
                 <input formControlName="title" matInput placeholder="Titre">
             </mat-form-field>
 
-
-
-
-
-            <pre>
-                    {{ingredient | json}}
-            </pre>
+{{ingredient | json}}
 
         </div>
-
+        
         <!-- <div *ngIf="!ingredient">
 
             <div>
