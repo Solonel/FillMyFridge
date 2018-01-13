@@ -77,7 +77,7 @@ export class CategoryComponent implements OnInit {
       })
 
   }
-
+  
   setRecipeArray(recipes: Recipe[]) {
     let recipeFormGroups = recipes.map(recipe => (
       this.fb.group({

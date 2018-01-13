@@ -1,16 +1,17 @@
 export class Ingredient {
     id: number;
-    locale: IngredientLocale;
+    locale: {
+        [key: string]: IngredientLocale
+    };
     icon: string;
 }
+
 export class IngredientLocale {
-    [key: string]: IngredientLocaleDetail;
-}
-export class IngredientLocaleDetail {
     title: Pluralization;
     description: string;
     available: boolean;
 }
+
 export class Pluralization {
     singular: string;
     plural: string;

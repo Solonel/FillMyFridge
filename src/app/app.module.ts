@@ -57,6 +57,11 @@ import { DevMenuComponent } from './dev-tool/dev-menu/dev-menu.component';
 import { UserService } from './services/user.service';
 import { LocaleService } from './services/locale.service';
 
+/**
+ * Pipe
+ */
+import { KeysPipe } from './pipes/keys.pipe';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -82,7 +87,7 @@ import { LocaleService } from './services/locale.service';
     IngredientsComponent,
     IngredientComponent,
     CategoryComponent,
-    CategoriesComponent
+    CategoriesComponent, KeysPipe
   ],
   imports: [
     HttpClientModule, BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule,

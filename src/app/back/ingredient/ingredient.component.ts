@@ -11,10 +11,9 @@ import { FormControl, FormGroup, FormArray, FormBuilder } from '@angular/forms';
   styleUrls: ['./ingredient.component.css']
 })
 export class IngredientComponent implements OnInit {
-
-  @Input() ingredient: Ingredient;
   isLoading = true;
   ingredientForm: FormGroup;
+  availableLanguages = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -26,7 +25,7 @@ export class IngredientComponent implements OnInit {
   createForm() {
     this.ingredientForm = this.fb.group({
       id: null,
-      locale: null,
+      locale: this.fb.array([]),
       icon: null
     });
   }
@@ -39,12 +38,44 @@ export class IngredientComponent implements OnInit {
     const id = +this.route.snapshot.paramMap.get('id');
     this.ingredientService.getIngredientNo404(id).finally(() => {
       this.isLoading = false;
-      console.log(this.ingredientForm)
+      console.log(this.ingredientForm);
     }).subscribe(ingredient => {
       if (ingredient) {
-        this.ingredientForm.patchValue(ingredient);
+        this.getAvailableLanguages(ingredient.locale);
+        this.ingredientForm.patchValue({
+          id: ingredient.id,
+          icon: ingredient.icon
+        });
+        this.setLocaleGroup(ingredient.locale);
       }
     });
+  }
+
+  getAvailableLanguages(language) {
+    console.log(language.locale);
+    for (var lang in language.locale) {
+      this.availableLanguages.push(lang);
+    }
+    console.log('availableLanguages', this.availableLanguages)
+  }
+
+  get localeFormArray(): FormArray {
+    return this.ingredientForm.get('locale') as FormArray;
+  }
+
+
+  setLocaleGroup(locale) {
+    let localeFormGroups = [];
+    for (let i in locale) {
+      localeFormGroups.push(this.fb.group({
+        language: i,
+        title: locale[i].title,
+        description: locale[i].description,
+        available: locale[i].available
+      }))
+    }
+    let localeFormArray = this.fb.array(localeFormGroups);
+    this.ingredientForm.setControl('locale', localeFormArray);
   }
 
   goToList(): void {
@@ -52,16 +83,16 @@ export class IngredientComponent implements OnInit {
   }
 
   save(): void {
-    this.ingredientService.updateIngredient(this.ingredient)
-      .subscribe(() => this.goToList());
+    // this.ingredientService.updateIngredient(this.ingredient)
+    //   .subscribe(() => this.goToList());
   }
 
   delete(): void {
-    this.ingredientService.deleteIngredient(this.ingredient)
-      .subscribe(() => this.goToList());
+    // this.ingredientService.deleteIngredient(this.ingredient)
+    //   .subscribe(() => this.goToList());
   }
 
   addIngredient(formData) {
-    this.ingredientService.addIngredient(formData).subscribe(() => this.goToList());;
+    // this.ingredientService.addIngredient(formData).subscribe(() => this.goToList());;
   }
 }
