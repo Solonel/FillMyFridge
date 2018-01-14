@@ -7,6 +7,7 @@ import { Recipe } from '../../classes/recipe';
 import { Proportion } from '../../classes/proportion';
 import { Unit } from '../../classes/unit';
 import { Category } from '../../classes/category';
+import { Language } from '../../classes/language';
 
 
 export class InMemoryDataService implements InMemoryDbService {
@@ -25,6 +26,54 @@ export class InMemoryDataService implements InMemoryDbService {
       { id: 2, name: "", firstname: "", username: "mapo9" }
     ]
 
+    const languages: Language[] = [
+      {
+        id: 'fr-fr',
+        flag: "FR",
+        locale: {
+          "fr-fr": {
+            label: 'Français'
+          },
+          "en-en" : {
+            label : 'Anglais'
+          }, 
+          "es-es" : {
+            label : 'Espagnol'
+          }
+        }
+      },
+      {
+        id: 'en-en',
+        flag: "EN",
+        locale: {
+          "fr-fr": {
+            label: 'French'
+          },
+          "en-en": {
+            label: 'English'
+          }, 
+          "es-es" : {
+            label : 'Spanish'
+          }
+        }
+      },
+      {
+        id: 'es-es',
+        flag: "ES",
+        locale: {
+          "fr-fr": {
+            label: 'Francès'
+          },
+          "en-en": {
+            label: 'Inglès'
+          }, 
+          "es-es" : {
+            label : 'Español'
+          }
+        }
+      }
+    ]
+
     const ingredients: Ingredient[] = [
       {
         id: 1, locale: {
@@ -33,7 +82,8 @@ export class InMemoryDataService implements InMemoryDbService {
       },
       {
         id: 2, locale: {
-          "fr-fr": { title: { singular: "beurre", plural: "beurres" }, description: "", available: true }
+          "fr-fr": { title: { singular: "beurre", plural: "beurres" }, description: "1", available: true },
+          "en-en": { title: { singular: "butter", plural: "butters" }, description: "2", available: false }
         }, icon: ""
       },
       {
@@ -276,6 +326,6 @@ export class InMemoryDataService implements InMemoryDbService {
     ];
 
 
-    return { users, authors, books, ingredients, proportions, recipes, units, categories };
+    return { users, authors, books, ingredients, proportions, recipes, units, categories, languages };
   }
 }

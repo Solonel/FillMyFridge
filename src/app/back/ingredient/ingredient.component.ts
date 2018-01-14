@@ -4,6 +4,8 @@ import { Location, LOCATION_INITIALIZED } from '@angular/common';
 import { IngredientService } from '../../services/ingredient.service';
 import { Ingredient, IngredientLocale } from '../../classes/ingredient';
 import { FormControl, FormGroup, FormArray, FormBuilder } from '@angular/forms';
+import { LanguageService } from '../../services/language.service';
+import * as _ from "lodash";
 
 @Component({
   selector: 'lsc-ingredient',
@@ -11,37 +13,61 @@ import { FormControl, FormGroup, FormArray, FormBuilder } from '@angular/forms';
   styleUrls: ['./ingredient.component.css']
 })
 export class IngredientComponent implements OnInit {
+
+  /**
+  * Permet de temporiser le html tant que le chargement de l ingredient n'est pas terminé
+  */
   isLoading = true;
+
+  /**
+   * Le formulaire Group, il est de la form du ce qu'on souhaite avoir en sortie vers la base de données
+   */
   ingredientForm: FormGroup;
-  availableLanguages = [];
+  /**
+   * Contient toutes les langues,
+   * Il faut tout les languages pour pouvoir ajouter une traduction
+   */
+
+  allLanguages = [];
+
+  /**
+   * Les langues de l'ingredient filtré par celle qui sont présentes
+   */
+  ingredientLanguage = [];
+
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private ingredientService: IngredientService, private fb: FormBuilder) {
+    private ingredientService: IngredientService, private fb: FormBuilder, private languageService: LanguageService) {
     this.createForm();
   }
 
   createForm() {
     this.ingredientForm = this.fb.group({
       id: null,
-      locale: this.fb.array([]),
+      locale: null,
       icon: null
     });
   }
 
   ngOnInit() {
+    this.allLanguages = this.getLanguages();
     this.getIngredient();
+  }
+
+  getLanguages(): Object[] {
+    // TODO  Il faut récupérer tous les langages 
+    return this.languageService.getDefaultLanguages();
   }
 
   getIngredient(): void {
     const id = +this.route.snapshot.paramMap.get('id');
     this.ingredientService.getIngredientNo404(id).finally(() => {
       this.isLoading = false;
-      console.log(this.ingredientForm);
+      console.log("this.ingredientForm", this.ingredientForm);
     }).subscribe(ingredient => {
       if (ingredient) {
-        this.getAvailableLanguages(ingredient.locale);
         this.ingredientForm.patchValue({
           id: ingredient.id,
           icon: ingredient.icon
@@ -51,48 +77,32 @@ export class IngredientComponent implements OnInit {
     });
   }
 
-  getAvailableLanguages(language) {
-    console.log(language.locale);
-    for (var lang in language.locale) {
-      this.availableLanguages.push(lang);
-    }
-    console.log('availableLanguages', this.availableLanguages)
-  }
-
-  get localeFormArray(): FormArray {
-    return this.ingredientForm.get('locale') as FormArray;
-  }
-
-
   setLocaleGroup(locale) {
-    let localeFormGroups = [];
+    let map: { [key: string]: FormGroup } = {};
+
     for (let i in locale) {
-      localeFormGroups.push(this.fb.group({
-        language: i,
-        title: locale[i].title,
+
+      let obj = {
         description: locale[i].description,
-        available: locale[i].available
-      }))
+        available: locale[i].available,
+        title: this.fb.group({
+          singular: locale[i].title.singular,
+          plural: locale[i].title.plural
+        })
+      }
+      
+      map[i] = this.fb.group(obj);
+
+      // TODO, on filtre le tableau des langues
+      // On enleve celle existante dans le tableau de toutes les langues
+      // Et on créé le tableau des langues de l ingredient pour pouvoir afficher correctement coté formulaire
     }
-    let localeFormArray = this.fb.array(localeFormGroups);
+
+    let localeFormArray = this.fb.group(map);
     this.ingredientForm.setControl('locale', localeFormArray);
   }
 
-  goToList(): void {
-    this.router.navigate([`ingredients`]);
-  }
-
-  save(): void {
-    // this.ingredientService.updateIngredient(this.ingredient)
-    //   .subscribe(() => this.goToList());
-  }
-
-  delete(): void {
-    // this.ingredientService.deleteIngredient(this.ingredient)
-    //   .subscribe(() => this.goToList());
-  }
-
-  addIngredient(formData) {
-    // this.ingredientService.addIngredient(formData).subscribe(() => this.goToList());;
+  onSubmit() {
+    console.log(this.ingredientForm.value);
   }
 }

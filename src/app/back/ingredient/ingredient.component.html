@@ -23,86 +23,48 @@ export class Pluralization {
     <h1>Ingrédient</h1>
     <div *ngIf="!isLoading">
 
-        <form [formGroup]="ingredientForm">
+        <form [formGroup]="ingredientForm" (ngSubmit)="onSubmit()" novalidate>
+
             <mat-form-field class="example-full-width">
-                <input formControlName="id" matInput type="number" placeholder="Id" disabled>
+                <input formControlName="id" matInput type="number" placeholder="Id">
             </mat-form-field>
+
             <mat-form-field class="example-full-width">
                 <input formControlName="icon" matInput placeholder="Icon">
             </mat-form-field>
 
-            <div formArrayName="locale">
-                <div *ngFor="let localeGroup of localeFormArray.controls; let idx = index">
-                    {{localeGroup.value | json}}
-                </div>
+            <div formGroupName="locale">
 
-            </div>
+                <mat-tab-group>
+                    <!-- TODO - On boucle sur la liste des langues de l'ingredient -->
+                    <mat-tab *ngFor="let language of ingredientLanguages" formGroupName="{{language.id}}" label={{language.label}}>
 
-            <mat-tab-group>
-                <mat-tab *ngFor="let lang of categoryAvailableLanguages" label="{{lang}}">
-                    <form [formGroup]="langForm">
-                        <!-- <div>
-                                <mat-form-field class="example-full-width">
-                                    <input formControlName="title" matInput placeholder="Titre">
-                                </mat-form-field>
-                            </div>
-                            <div>
-                                <mat-form-field class="example-full-width">
-                                    <input formControlName="description" matInput placeholder="Description">
-                                </mat-form-field>
-                            </div> -->
-                        <p>TOTO</p>
-                    </form>
-                </mat-tab>
-                <mat-tab label="AJOUTER LANGUE">
-
-                </mat-tab>
-            </mat-tab-group>
-
-            <!-- <mat-list-option checkboxPosition="before" [value]="recipe.value" *ngFor="let recipe of recipeFormArray.controls; let idx = index"
-            [formGroupName]="idx">
-            <h3 matLine> {{recipe.value.title}} </h3>
-            <p matLine>
-                <span> {{recipe.value.description}} </span>
-            </p>
-            <p matLine>
-                <span> Publié : </span>
-                <i [ngClass]="{'fas fa-check-square':recipe.value.published,
-                    'far fa-square':!recipe.value.published}"></i>
-            </p>
-        </mat-list-option> -->
+                        <mat-form-field class="example-full-width">
+                            <input type="text" class="text" matInput placeholder="description" formControlName='description'>
+                        </mat-form-field>
+                        <mat-form-field class="example-full-width">
+                            <input type="text" class="text" matInput placeholder="available" formControlName='available'>
+                        </mat-form-field>
 
 
-            <!-- <mat-tab-group>
-                    <mat-tab *ngFor="let locale of ingredientForm" >
+                        <div formGroupName="title">
+                            <mat-form-field class="example-full-width">
+                                <input type="text" class="text" matInput placeholder="plural" formControlName='plural'>
+                            </mat-form-field>
+                            <mat-form-field class="example-full-width">
+                                <input type="text" class="text" matInput placeholder="singular" formControlName='singular'>
+                            </mat-form-field>
+                        </div>
+
                     </mat-tab>
                     <mat-tab label="AJOUTER LANGUE">
-        
+
                     </mat-tab>
-                </mat-tab-group> -->
-
-
-        </form>
-
-        <!-- <div *ngIf="!ingredient">
-
-            <div>
-                <form #registerForm="ngForm" (ngSubmit)="addIngredient(registerForm.value)">
-                    <mat-form-field class="example-full-width">
-                        <input required ngModel name="title" matInput placeholder="Titre">
-                    </mat-form-field>
-                    <mat-form-field class="example-full-width">
-                        <input required ngModel name="description" matInput placeholder="Description">
-                    </mat-form-field>
-                    <mat-form-field class="example-full-width">
-                        <input required ngModel name="icon" matInput placeholder="Icône">
-                    </mat-form-field>
-                    <button type="submit" class="btn btn-primary" [disabled]="registerForm.invalid"> Enregistrer </button>
-                </form>
-
+                </mat-tab-group>
             </div>
 
-        </div> -->
+            <button type="submit" class="btn btn-success">Save</button>
+        </form>
 
     </div>
 

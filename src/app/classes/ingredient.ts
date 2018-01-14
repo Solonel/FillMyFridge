@@ -1,9 +1,11 @@
+import { Pluralization } from './pluralization';
+
 export class Ingredient {
     id: number;
+    icon: string;
     locale: {
         [key: string]: IngredientLocale
     };
-    icon: string;
 }
 
 export class IngredientLocale {
@@ -11,11 +13,3 @@ export class IngredientLocale {
     description: string;
     available: boolean;
 }
-
-export class Pluralization {
-    singular: string;
-    plural: string;
-}
-
-
-//{ id: 1, locale: { "fr-fr": { title: { singulier: "chocolat pâtisser noir", pluriel: "" }, description: "", }, "en-us" }, icon: "" },

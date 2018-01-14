@@ -55,7 +55,7 @@ import { CategoryService } from './services/category.service';
  */
 import { DevMenuComponent } from './dev-tool/dev-menu/dev-menu.component';
 import { UserService } from './services/user.service';
-import { LocaleService } from './services/locale.service';
+import { LanguageService } from './services/language.service';
 
 /**
  * Pipe
@@ -107,7 +107,7 @@ import { KeysPipe } from './pipes/keys.pipe';
     CategoryService,
     UnitService,
     IngredientService,
-    LocaleService,
+    LanguageService,
     RecipeService],
   bootstrap: [AppComponent]
 })

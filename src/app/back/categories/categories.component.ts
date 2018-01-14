@@ -4,7 +4,7 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { Category } from '../../classes/category';
 import { Router } from "@angular/router";
 import { CategoryService } from '../../services/category.service';
-import { LocaleService } from '../../services/locale.service';
+import { LanguageService } from '../../services/language.service';
 
 @Component({
   selector: 'lsc-categories',
@@ -22,7 +22,7 @@ export class CategoriesComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private router: Router, private categoryService: CategoryService, private localeService:LocaleService) {
+  constructor(private router: Router, private categoryService: CategoryService, private languageService:LanguageService) {
     this.dataSource = new MatTableDataSource(this.categories);
     this.selection = new SelectionModel<Category>(true, []);
   }

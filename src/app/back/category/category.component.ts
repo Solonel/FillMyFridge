@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { CategoryService } from '../../services/category.service'
-import { LocaleService } from '../../services/locale.service'
+import { LanguageService } from '../../services/language.service';
 import { Category, CategoryLocale } from '../../classes/category';
 import { FormControl, FormGroup, FormArray, FormBuilder } from '@angular/forms';
 import 'rxjs/add/operator/finally';
@@ -24,7 +24,7 @@ export class CategoryComponent implements OnInit {
     private router: Router,
     private categoryService: CategoryService,
     private fb: FormBuilder,
-    private localeService: LocaleService) {
+    private languageService: LanguageService) {
     this.createForm();
   }
 
@@ -66,8 +66,8 @@ export class CategoryComponent implements OnInit {
         if (category) {
           this.categoryForm.patchValue({
             id: category.id,
-            description: category.locale[this.localeService.getDefaultLanguage()].description,
-            title: category.locale[this.localeService.getDefaultLanguage()].title,
+            description: category.locale[this.languageService.getDefaultLanguage()].description,
+            title: category.locale[this.languageService.getDefaultLanguage()].title,
             published: category.published
           });
 
