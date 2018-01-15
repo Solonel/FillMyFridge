@@ -1,29 +1,11 @@
 <lsc-back-menu></lsc-back-menu>
 
-<!-- export class Ingredient {
-    id: number;
-    locale: IngredientLocale;
-    icon: string;
-}
-export class IngredientLocale {
-    [key: string]: IngredientLocaleDetail;
-}
-export class IngredientLocaleDetail {
-    title: Pluralization;
-    description: string;
-    available: boolean;
-}
-export class Pluralization {
-    singular: string;
-    plural: string;
-} -->
-
 <div class="form">
 
     <h1>Ingrédient</h1>
     <div *ngIf="!isLoading">
 
-        <form [formGroup]="ingredientForm" (ngSubmit)="onSubmit()" novalidate>
+        <form [formGroup]="ingredientForm" novalidate>
 
             <mat-form-field class="example-full-width">
                 <input formControlName="id" matInput type="number" placeholder="Id">
@@ -33,11 +15,13 @@ export class Pluralization {
                 <input formControlName="icon" matInput placeholder="Icon">
             </mat-form-field>
 
+            <hr>
+
             <div formGroupName="locale">
 
                 <mat-tab-group>
-                    <!-- TODO - On boucle sur la liste des langues de l'ingredient -->
-                    <mat-tab *ngFor="let language of ingredientLanguages" formGroupName="{{language.id}}" label={{language.label}}>
+
+                    <mat-tab *ngFor="let language of ingredientLanguage" formGroupName="{{language.id}}" label={{language.label}}>
 
                         <mat-form-field class="example-full-width">
                             <input type="text" class="text" matInput placeholder="description" formControlName='description'>
@@ -57,13 +41,23 @@ export class Pluralization {
                         </div>
 
                     </mat-tab>
-                    <mat-tab label="AJOUTER LANGUE">
+                    <mat-tab label="Ajouter langue">
 
                     </mat-tab>
                 </mat-tab-group>
             </div>
 
-            <button type="submit" class="btn btn-success">Save</button>
+            <hr>
+
+            <div *ngIf="!ingredientForm.value.id">
+                <button (click)="add()" type="button" class="btn btn-primary"> Enregistrer </button>
+            </div>
+
+            <div *ngIf="ingredientForm.value.id">
+                <button type="button" (click)="save()" class="btn btn-success"> Modifier </button>
+                <button type="button" (click)="delete()" class="btn btn-danger"> Supprimer </button>
+            </div>
+
         </form>
 
     </div>

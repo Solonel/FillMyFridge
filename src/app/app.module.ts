@@ -60,7 +60,7 @@ import { LanguageService } from './services/language.service';
 /**
  * Pipe
  */
-import { KeysPipe } from './pipes/keys.pipe';
+
 
 @NgModule({
   declarations: [
@@ -87,7 +87,7 @@ import { KeysPipe } from './pipes/keys.pipe';
     IngredientsComponent,
     IngredientComponent,
     CategoryComponent,
-    CategoriesComponent, KeysPipe
+    CategoriesComponent
   ],
   imports: [
     HttpClientModule, BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule,

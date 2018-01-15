@@ -6,6 +6,8 @@ import { Ingredient, IngredientLocale } from '../../classes/ingredient';
 import { FormControl, FormGroup, FormArray, FormBuilder } from '@angular/forms';
 import { LanguageService } from '../../services/language.service';
 import * as _ from "lodash";
+import { Observable } from 'rxjs/Observable';
+import { of } from 'rxjs/observable/of';
 
 @Component({
   selector: 'lsc-ingredient',
@@ -57,15 +59,13 @@ export class IngredientComponent implements OnInit {
   }
 
   getLanguages(): Object[] {
-    // TODO  Il faut récupérer tous les langages 
-    return this.languageService.getDefaultLanguages();
+    return this.languageService.getDefaultLanguages()
   }
 
   getIngredient(): void {
     const id = +this.route.snapshot.paramMap.get('id');
-    this.ingredientService.getIngredientNo404(id).finally(() => {
+    this.ingredientService.getIngredient(id).finally(() => {
       this.isLoading = false;
-      console.log("this.ingredientForm", this.ingredientForm);
     }).subscribe(ingredient => {
       if (ingredient) {
         this.ingredientForm.patchValue({
@@ -78,7 +78,10 @@ export class IngredientComponent implements OnInit {
   }
 
   setLocaleGroup(locale) {
+    // Key/Value de la collection de traduction
     let map: { [key: string]: FormGroup } = {};
+    // On créé un tableau temporaire pour avoir les id des langues de l ingredient
+    let locales = [];
 
     for (let i in locale) {
 
@@ -90,19 +93,51 @@ export class IngredientComponent implements OnInit {
           plural: locale[i].title.plural
         })
       }
-      
-      map[i] = this.fb.group(obj);
 
-      // TODO, on filtre le tableau des langues
-      // On enleve celle existante dans le tableau de toutes les langues
-      // Et on créé le tableau des langues de l ingredient pour pouvoir afficher correctement coté formulaire
+      map[i] = this.fb.group(obj);
+      locales.push(i);
     }
 
     let localeFormArray = this.fb.group(map);
     this.ingredientForm.setControl('locale', localeFormArray);
+
+    this.filterLanguage(locales)
   }
 
-  onSubmit() {
-    console.log(this.ingredientForm.value);
+  filterLanguage(locales) {
+    this.allLanguages.map(l => {
+      let exist = locales.find(function (element) {
+        return element === l.id;
+      });
+      if (exist) {
+        this.ingredientLanguage.push(l)
+      }
+    })
+
+    // On filtre les langues existantes pour ne pouvoir ajouter que elle
+    this.allLanguages = _.difference(this.allLanguages, this.ingredientLanguage)
+  }
+
+  goToList(): void {
+    this.router.navigate([`ingredients`]);
+  }
+
+  save() {
+    this.ingredientService.updateIngredient(this.ingredientForm.value)
+      .subscribe(() => this.goToList());
+  }
+
+  delete() {
+    this.ingredientService.deleteIngredient(this.ingredientForm.value)
+      .subscribe(() => this.goToList());
+  }
+
+  add() {
+    this.ingredientService.addIngredient(this.ingredientForm.value)
+      .subscribe(ingredient => {
+        this.ingredientForm.patchValue({
+          id: ingredient.id
+        });
+      });
   }
 }
