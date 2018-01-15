@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Language } from '../classes/language';
+import { Language, LanguageLight } from '../classes/language';
 import { Observable } from 'rxjs/Observable';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { of } from 'rxjs/observable/of';
@@ -11,40 +11,72 @@ export class LanguageService {
 
   private languagesUrl = 'api/languages';  // URL to web api
 
-  constructor(private http: HttpClient) { }
+  private languages;
 
 
-  getDefaultLanguage(): string {
-    let defaultLanguage = 'fr-fr';
-    return defaultLanguage;
-  }
+  constructor(private http: HttpClient) { this.languages = this.getLanguages(); }
 
-  getDefaultLanguages(): Array<Object> {
-    let languages = [];
-    languages = [
-      { id: 'en-en', label: 'Anglais', flag: 'icon du drapeau EN' },
-      { id: 'fr-fr', label: 'Français', flag: 'icon du drapeau FR' }
-    ]
 
-    return languages
-    // TODO - On filtre les traductions par la langue par défault
-    // On créé un tableau simple 
-    // Exemple avec la langue fr-fr en default : { id : 'en-en' , label : 'Anglais', flag : 'icon du drapeau'}
-  }
-
-  getIngredients(): Observable<Language[]> {
+  // Retourne un observable tableau de languages complexes (objet tel que sur la DB)
+  getLanguages(): Observable<Language[]> {
     return this.http.get<Language[]>(this.languagesUrl)
       .pipe(
-      tap(language => {
-        this.log(`fetched Languages`)
-        this.getDefaultLanguages();
-        // TODO - Comment faire pour filter par la langue par default
-      }
-      ),
+      tap(language => this.log(`fetched languages`)),
       catchError(this.handleError('getLanguages', []))
       );
   }
 
+  // Retourne un tableau de languages simples (objet sans la notion de locale)
+  getLanguagesLight(): LanguageLight[] {
+    let languagesLight = [];
+    let languageLight;
+    this.getLanguages().subscribe(language => {
+      language.forEach(element => {
+        languageLight.id = element.id;
+        languageLight.label = element.locale[this.getDefaultLanguageId()].label;
+        languageLight.flag = element.flag;
+        languagesLight.push(languageLight);
+      });
+    })
+    return languagesLight;
+  }
+
+  // Retourne l'ID de la langue par défaut (fr-fr dans un premier temps)
+  getDefaultLanguageId(): string {
+    let defaultLanguage = 'fr-fr';
+    return defaultLanguage;
+  }
+
+  // DOIT retourner un objet langue complexe de la langue par défaut (fr-fr dans un premier temps)
+  getDefaultLanguage(): string {
+    let defaultLanguage = 'fr-fr';
+    return defaultLanguage;
+  }
+  //
+  getImplementedLanguages(locales): LanguageLight[] {
+    let implementedLanguages;
+    this.getLanguagesLight().forEach(language => {
+      if (locales.find(function (element) {
+        return element === language.id;
+      })) {
+        implementedLanguages.push(language);
+      }
+    });
+    return implementedLanguages;
+  }
+
+  getNotYetImplementedLanguages(locales): LanguageLight[] {
+    let implementedLanguages;
+    this.getLanguagesLight().forEach(language => {
+      if (!locales.find(function (element) {
+        return element === language.id;
+      })) {
+        implementedLanguages.push(language);
+      }
+    });
+    return null;
+  }
+  
   /**
    * Handle Http operation that failed.
    * Let the app continue.

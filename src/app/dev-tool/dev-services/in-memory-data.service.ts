@@ -34,11 +34,11 @@ export class InMemoryDataService implements InMemoryDbService {
           "fr-fr": {
             label: 'Français'
           },
-          "en-en" : {
-            label : 'Anglais'
-          }, 
-          "es-es" : {
-            label : 'Espagnol'
+          "en-en": {
+            label: 'Anglais'
+          },
+          "es-es": {
+            label: 'Espagnol'
           }
         }
       },
@@ -51,9 +51,9 @@ export class InMemoryDataService implements InMemoryDbService {
           },
           "en-en": {
             label: 'English'
-          }, 
-          "es-es" : {
-            label : 'Spanish'
+          },
+          "es-es": {
+            label: 'Spanish'
           }
         }
       },
@@ -66,9 +66,9 @@ export class InMemoryDataService implements InMemoryDbService {
           },
           "en-en": {
             label: 'Inglès'
-          }, 
-          "es-es" : {
-            label : 'Español'
+          },
+          "es-es": {
+            label: 'Español'
           }
         }
       }
@@ -279,7 +279,7 @@ export class InMemoryDataService implements InMemoryDbService {
           "fr-fr": {
             title: "Desserts", description: "Les desserts de l'application", available: true
           },
-          "en-us": {
+          "en-en": {
             title: "Desserts", description: "Application's desserts", available: true
           },
         },
@@ -291,7 +291,7 @@ export class InMemoryDataService implements InMemoryDbService {
           "fr-fr": {
             title: "Entrées", description: "Les entrées de l'application", available: true
           },
-          "en-us": {
+          "en-en": {
             title: "Appetizers", description: "Application's appetizers.", available: true
           },
         },
@@ -324,7 +324,6 @@ export class InMemoryDataService implements InMemoryDbService {
         author: authors[1]
       }
     ];
-
 
     return { users, authors, books, ingredients, proportions, recipes, units, categories, languages };
   }

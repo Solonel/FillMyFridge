@@ -25,12 +25,6 @@ export class IngredientComponent implements OnInit {
    * Le formulaire Group, il est de la form du ce qu'on souhaite avoir en sortie vers la base de données
    */
   ingredientForm: FormGroup;
-  /**
-   * Contient toutes les langues,
-   * Il faut tout les languages pour pouvoir ajouter une traduction
-   */
-
-  allLanguages = [];
 
   /**
    * Les langues de l'ingredient filtré par celle qui sont présentes
@@ -54,13 +48,9 @@ export class IngredientComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.allLanguages = this.getLanguages();
     this.getIngredient();
   }
 
-  getLanguages(): Object[] {
-    return this.languageService.getDefaultLanguages()
-  }
 
   getIngredient(): void {
     const id = +this.route.snapshot.paramMap.get('id');
@@ -100,22 +90,6 @@ export class IngredientComponent implements OnInit {
 
     let localeFormArray = this.fb.group(map);
     this.ingredientForm.setControl('locale', localeFormArray);
-
-    this.filterLanguage(locales)
-  }
-
-  filterLanguage(locales) {
-    this.allLanguages.map(l => {
-      let exist = locales.find(function (element) {
-        return element === l.id;
-      });
-      if (exist) {
-        this.ingredientLanguage.push(l)
-      }
-    })
-
-    // On filtre les langues existantes pour ne pouvoir ajouter que elle
-    this.allLanguages = _.difference(this.allLanguages, this.ingredientLanguage)
   }
 
   goToList(): void {
