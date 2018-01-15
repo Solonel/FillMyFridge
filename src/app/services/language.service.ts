@@ -25,13 +25,15 @@ export class LanguageService {
 
   // Retourne un tableau de languages simples (objet sans la notion de locale)
   getLanguagesLight(): LanguageLight[] {
-    let languagesLight = [];
-    let languageLight;
-    this.getLanguages().subscribe(language => {
-      language.forEach(element => {
-        languageLight.id = element.id;
-        languageLight.label = element.locale[this.getDefaultLanguageId()].label;
-        languageLight.flag = element.flag;
+    let languagesLight: LanguageLight[] = new Array<LanguageLight>();
+    let languageLight: LanguageLight;
+    this.getLanguages().subscribe(languages => {
+      languages.forEach(element => {
+        languageLight = {
+          id: element.id,
+          label: element.locale[this.getDefaultLanguageId()].label,
+          flag: element.flag
+        };
         languagesLight.push(languageLight);
       });
     })
@@ -52,26 +54,26 @@ export class LanguageService {
   //
   getImplementedLanguages(locales): LanguageLight[] {
     let implementedLanguages;
-    this.getLanguagesLight().forEach(language => {
+    this.getLanguagesLight().forEach(languages => {
       if (locales.find(function (element) {
-        return element === language.id;
+        return element === languages.id;
       })) {
-        implementedLanguages.push(language);
+        implementedLanguages.push(languages);
       }
     });
     return implementedLanguages;
   }
 
-  getNotYetImplementedLanguages(locales): LanguageLight[] {
-    let implementedLanguages;
-    this.getLanguagesLight().forEach(language => {
+  getNotImplementedLanguages(locales): LanguageLight[] {
+    let notImplementedLanguages;
+    this.getLanguagesLight().forEach(languages => {
       if (!locales.find(function (element) {
-        return element === language.id;
+        return element === languages.id;
       })) {
-        implementedLanguages.push(language);
+        notImplementedLanguages.push(languages);
       }
     });
-    return null;
+    return notImplementedLanguages;
   }
 
   /**

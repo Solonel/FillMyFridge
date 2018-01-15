@@ -21,7 +21,7 @@ export class CategoryComponent implements OnInit {
 
   categoryAvailableLanguages = [];
   // Catégories déjà ajoutées
-  categroyLanguages = [];
+  categoryLanguages = [];
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -49,13 +49,6 @@ export class CategoryComponent implements OnInit {
     this.getCategory();
   }
 
-  getAvailableLanguages(category) {
-    console.log(category.locale);
-    for (var lang in category.locale) {
-      this.categoryAvailableLanguages.push(lang);
-    }
-  }
-
   setLocaleGroup(locale) {
     // Key/Value de la collection de traduction
     let map: { [key: string]: FormGroup } = {};
@@ -74,11 +67,11 @@ export class CategoryComponent implements OnInit {
       locales.push(i);
     }
     
-    // Retourne une collection de languages pas encore implémentés
-    this.languageService.getImplementedLanguages(locales);
+    // Retourne une collection de languages implémentées
+    this.categoryLanguages = this.languageService.getImplementedLanguages(locales);
+    this.categoryAvailableLanguages = this.languageService.getNotImplementedLanguages(locales);
     let localeFormArray = this.fb.group(map);
     this.categoryForm.setControl('locale', localeFormArray);
-
   }
 
 
@@ -98,8 +91,7 @@ export class CategoryComponent implements OnInit {
           });
           this.setLocaleGroup(category.locale);
 
-          this.getAvailableLanguages(category);
-          this.setRecipeArray(category.recipes)
+//          this.setRecipeArray(category.recipes)
         }
       })
 
