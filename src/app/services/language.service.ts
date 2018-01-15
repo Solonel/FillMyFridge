@@ -11,10 +11,7 @@ export class LanguageService {
 
   private languagesUrl = 'api/languages';  // URL to web api
 
-  private languages;
-
-
-  constructor(private http: HttpClient) { this.languages = this.getLanguages(); }
+  constructor(private http: HttpClient) { }
 
 
   // Retourne un observable tableau de languages complexes (objet tel que sur la DB)
@@ -76,7 +73,7 @@ export class LanguageService {
     });
     return null;
   }
-  
+
   /**
    * Handle Http operation that failed.
    * Let the app continue.
