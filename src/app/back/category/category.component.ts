@@ -17,8 +17,11 @@ export class CategoryComponent implements OnInit {
   isLoading = true;
   categoryForm: FormGroup;
   langForm: FormGroup;
-  categoryAvailableLanguages = [];
 
+
+  categoryAvailableLanguages = [];
+  // Catégories déjà ajoutées
+  categroyLanguages = [];
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -51,8 +54,34 @@ export class CategoryComponent implements OnInit {
     for (var lang in category.locale) {
       this.categoryAvailableLanguages.push(lang);
     }
+  }
+
+  setLocaleGroup(locale) {
+    // Key/Value de la collection de traduction
+    let map: { [key: string]: FormGroup } = {};
+    // On créé un tableau temporaire pour avoir les id des langues de l ingredient
+    let locales = [];
+
+    for (let i in locale) {
+
+      let obj = {
+        description: locale[i].description,
+        available: locale[i].available,
+        title: locale[i].title
+      }
+
+      map[i] = this.fb.group(obj);
+      locales.push(i);
+    }
+    
+    // Retourne une collection de languages pas encore implémentés
+    this.languageService.getImplementedLanguages(locales);
+    let localeFormArray = this.fb.group(map);
+    this.categoryForm.setControl('locale', localeFormArray);
 
   }
+
+
 
   get recipeFormArray(): FormArray {
     return this.categoryForm.get('recipes') as FormArray;
@@ -65,11 +94,9 @@ export class CategoryComponent implements OnInit {
       .subscribe(category => {
         if (category) {
           this.categoryForm.patchValue({
-            id: category.id,
-            description: category.locale[this.languageService.getDefaultLanguage()].description,
-            title: category.locale[this.languageService.getDefaultLanguage()].title,
-            published: category.published
+            id: category.id
           });
+          this.setLocaleGroup(category.locale);
 
           this.getAvailableLanguages(category);
           this.setRecipeArray(category.recipes)
@@ -77,7 +104,7 @@ export class CategoryComponent implements OnInit {
       })
 
   }
-  
+
   setRecipeArray(recipes: Recipe[]) {
     let recipeFormGroups = recipes.map(recipe => (
       this.fb.group({
