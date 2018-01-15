@@ -70,6 +70,9 @@ export class CategoryComponent implements OnInit {
     // Retourne une collection de languages implémentées
     this.categoryLanguages = this.languageService.getImplementedLanguages(locales);
     this.categoryAvailableLanguages = this.languageService.getNotImplementedLanguages(locales);
+
+    console.log(this.categoryLanguages);
+    console.log(this.categoryAvailableLanguages);
     let localeFormArray = this.fb.group(map);
     this.categoryForm.setControl('locale', localeFormArray);
   }

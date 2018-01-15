@@ -24,7 +24,7 @@ export class LanguageService {
   }
 
   // Retourne un tableau de languages simples (objet sans la notion de locale)
-  getLanguagesLight(): LanguageLight[] {
+  getLanguagesLight(): Observable<LanguageLight[]> {
     let languagesLight: LanguageLight[] = new Array<LanguageLight>();
     let languageLight: LanguageLight;
     this.getLanguages().subscribe(languages => {
@@ -36,8 +36,8 @@ export class LanguageService {
         };
         languagesLight.push(languageLight);
       });
-    })
-    return languagesLight;
+    });
+    return of(languagesLight);
   }
 
   // Retourne l'ID de la langue par défaut (fr-fr dans un premier temps)
@@ -54,25 +54,40 @@ export class LanguageService {
   //
   getImplementedLanguages(locales): LanguageLight[] {
     let implementedLanguages;
-    this.getLanguagesLight().forEach(languages => {
-      if (locales.find(function (element) {
-        return element === languages.id;
-      })) {
-        implementedLanguages.push(languages);
-      }
+    this.getLanguagesLight().subscribe(languages => {
+      languages.forEach(language => {
+        if (locales.find(function (element) {
+          return element === language.id;
+        })) {
+          implementedLanguages.push(language);
+        }
+      });
     });
+
+    console.log("implementedLanguages");
+    console.log(implementedLanguages);
     return implementedLanguages;
   }
 
   getNotImplementedLanguages(locales): LanguageLight[] {
-    let notImplementedLanguages;
-    this.getLanguagesLight().forEach(languages => {
-      if (!locales.find(function (element) {
-        return element === languages.id;
-      })) {
-        notImplementedLanguages.push(languages);
-      }
+    let notImplementedLanguages: LanguageLight[] = new Array<LanguageLight>();
+    this.getLanguagesLight().subscribe(languages => {
+      console.log("languages");
+      console.log(languages);
+      languages.forEach(function (element) {
+        console.log("element");
+        console.log(element);
+
+      })
+      //notImplementedLanguages.push(language);
+      //    if (!locales.find(function (element) {
+      //      return element === language.id;
+      //    })) {
+      //      notImplementedLanguages.push(language);
+      //    }
     });
+    console.log("notImplementedLanguages");
+    console.log(notImplementedLanguages);
     return notImplementedLanguages;
   }
 

@@ -35,10 +35,10 @@ export class InMemoryDataService implements InMemoryDbService {
             label: 'Français'
           },
           "en-en": {
-            label: 'Anglais'
+            label: 'French'
           },
           "es-es": {
-            label: 'Espagnol'
+            label: 'Francès'
           }
         }
       },
@@ -47,13 +47,13 @@ export class InMemoryDataService implements InMemoryDbService {
         flag: "EN",
         locale: {
           "fr-fr": {
-            label: 'French'
+            label: 'Anglais'
           },
           "en-en": {
             label: 'English'
           },
           "es-es": {
-            label: 'Spanish'
+            label: 'Inglès'
           }
         }
       },
@@ -62,10 +62,10 @@ export class InMemoryDataService implements InMemoryDbService {
         flag: "ES",
         locale: {
           "fr-fr": {
-            label: 'Francès'
+            label: 'Espagnol'
           },
           "en-en": {
-            label: 'Inglès'
+            label: 'Spanish'
           },
           "es-es": {
             label: 'Español'
