@@ -15,13 +15,14 @@ import { Recipe } from '../../classes/Recipe';
 })
 export class CategoryComponent implements OnInit {
   isLoading = true;
+  isFormReady = false;
   categoryForm: FormGroup;
   langForm: FormGroup;
 
 
-  categoryAvailableLanguages = [];
+  categoryNotImplementedLanguages = [];
   // Catégories déjà ajoutées
-  categoryLanguages = [];
+  categoryImplementedLanguages = [];
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -66,18 +67,28 @@ export class CategoryComponent implements OnInit {
       map[i] = this.fb.group(obj);
       locales.push(i);
     }
-    
-    // Retourne une collection de languages implémentées
-    this.categoryLanguages = this.languageService.getImplementedLanguages(locales);
-    this.categoryAvailableLanguages = this.languageService.getNotImplementedLanguages(locales);
 
-    console.log(this.categoryLanguages);
-    console.log(this.categoryAvailableLanguages);
+    // Retourne une collection de languages implémentées
+    this.categoryImplementedLanguages = this.languageService.getImplementedLanguages(locales);
+    this.categoryNotImplementedLanguages = this.languageService.getNotImplementedLanguages(locales);
     let localeFormArray = this.fb.group(map);
     this.categoryForm.setControl('locale', localeFormArray);
   }
 
+  newLanguageSelected(newLanguageId) {
+    let map: { [key: string]: FormGroup } = {};
+    let obj = {
+      description: null,
+      available: null,
+      title: null,
+    }
 
+    let localeFormArray = this.fb.group(map);
+    this.categoryForm.addControl('locale', localeFormArray);
+    this.categoryForm.get("locale")
+    console.log(this.categoryForm, this.categoryForm.get("locale"));
+    this.isFormReady = true;
+  }
 
   get recipeFormArray(): FormArray {
     return this.categoryForm.get('recipes') as FormArray;
@@ -94,7 +105,7 @@ export class CategoryComponent implements OnInit {
           });
           this.setLocaleGroup(category.locale);
 
-//          this.setRecipeArray(category.recipes)
+          //          this.setRecipeArray(category.recipes)
         }
       })
 

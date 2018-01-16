@@ -24,7 +24,7 @@ export class LanguageService {
   }
 
   // Retourne un tableau de languages simples (objet sans la notion de locale)
-  getLanguagesLight(): Observable<LanguageLight[]> {
+  getLanguagesLight(callback): LanguageLight[] {
     let languagesLight: LanguageLight[] = new Array<LanguageLight>();
     let languageLight: LanguageLight;
     this.getLanguages().subscribe(languages => {
@@ -36,8 +36,9 @@ export class LanguageService {
         };
         languagesLight.push(languageLight);
       });
+      callback(languagesLight);
     });
-    return of(languagesLight);
+    return languagesLight;
   }
 
   // Retourne l'ID de la langue par défaut (fr-fr dans un premier temps)
@@ -53,41 +54,34 @@ export class LanguageService {
   }
   //
   getImplementedLanguages(locales): LanguageLight[] {
-    let implementedLanguages;
-    this.getLanguagesLight().subscribe(languages => {
-      languages.forEach(language => {
-        if (locales.find(function (element) {
-          return element === language.id;
-        })) {
-          implementedLanguages.push(language);
-        }
-      });
-    });
-
-    console.log("implementedLanguages");
-    console.log(implementedLanguages);
+    let implementedLanguages = [];
+    this.getLanguagesLight(function (locales) {
+      return function (languages) {
+        languages.forEach(language => {
+          if (locales.find(function (element) {
+            return element === language.id;
+          })) {
+            implementedLanguages.push(language);
+          }
+        });
+      }
+    }(locales));
     return implementedLanguages;
   }
 
   getNotImplementedLanguages(locales): LanguageLight[] {
-    let notImplementedLanguages: LanguageLight[] = new Array<LanguageLight>();
-    this.getLanguagesLight().subscribe(languages => {
-      console.log("languages");
-      console.log(languages);
-      languages.forEach(function (element) {
-        console.log("element");
-        console.log(element);
-
-      })
-      //notImplementedLanguages.push(language);
-      //    if (!locales.find(function (element) {
-      //      return element === language.id;
-      //    })) {
-      //      notImplementedLanguages.push(language);
-      //    }
-    });
-    console.log("notImplementedLanguages");
-    console.log(notImplementedLanguages);
+    let notImplementedLanguages = [];
+    this.getLanguagesLight(function (locales) {
+      return function (languages) {
+        languages.forEach(language => {
+          if (!locales.find(function (element) {
+            return element === language.id;
+          })) {
+            notImplementedLanguages.push(language);
+          }
+        });
+      }
+    }(locales));
     return notImplementedLanguages;
   }
 
