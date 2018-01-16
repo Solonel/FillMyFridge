@@ -1,24 +1,14 @@
 <lsc-back-menu></lsc-back-menu>
 
-
 <div class="form justify-content-around">
     <div *ngIf="!isLoading">
+
         <form [formGroup]="categoryForm">
             <div class="container">
                 <div class="row justify-content-around">
 
                     <div class="col-6">
-
                         <mat-slide-toggle formControlName="published"> Publié </mat-slide-toggle>
-
-                        <mat-form-field class="example-full-width">
-                            <input formControlName="title" matInput placeholder="Titre">
-                        </mat-form-field>
-
-                        <mat-form-field class="example-full-width">
-                            <input formControlName="description" matInput placeholder="Description">
-                        </mat-form-field>
-
                     </div>
                     <div class="col-6">
                         <div formArrayName="recipes">

@@ -18,7 +18,7 @@ export class CategoryComponent implements OnInit {
   isFormReady = false;
   categoryForm: FormGroup;
   langForm: FormGroup;
-
+  locales: { [key: string]: FormGroup };
 
   categoryNotImplementedLanguages = [];
   // Catégories déjà ajoutées
@@ -36,14 +36,10 @@ export class CategoryComponent implements OnInit {
     this.categoryForm = this.fb.group({
       id: null,
       published: null,
-      description: null,
-      title: null,
+      locale: null,
       recipes: this.fb.array([])
     });
-    //this.langForm = this.fb.group({
-    //  title: null,
-    //  description: null,
-    //})
+    this.locales = {}
   }
 
   ngOnInit() {
@@ -52,9 +48,8 @@ export class CategoryComponent implements OnInit {
 
   setLocaleGroup(locale) {
     // Key/Value de la collection de traduction
-    let map: { [key: string]: FormGroup } = {};
     // On créé un tableau temporaire pour avoir les id des langues de l ingredient
-    let locales = [];
+    let localeIds = [];
 
     for (let i in locale) {
 
@@ -64,29 +59,25 @@ export class CategoryComponent implements OnInit {
         title: locale[i].title
       }
 
-      map[i] = this.fb.group(obj);
-      locales.push(i);
+      this.locales[i] = this.fb.group(obj);
+      localeIds.push(i);
     }
 
     // Retourne une collection de languages implémentées
-    this.categoryImplementedLanguages = this.languageService.getImplementedLanguages(locales);
-    this.categoryNotImplementedLanguages = this.languageService.getNotImplementedLanguages(locales);
-    let localeFormArray = this.fb.group(map);
+    this.categoryImplementedLanguages = this.languageService.getImplementedLanguages(localeIds);
+    this.categoryNotImplementedLanguages = this.languageService.getNotImplementedLanguages(localeIds);
+    let localeFormArray = this.fb.group(this.locales);
     this.categoryForm.setControl('locale', localeFormArray);
   }
 
   newLanguageSelected(newLanguageId) {
-    let map: { [key: string]: FormGroup } = {};
     let obj = {
       description: null,
       available: null,
       title: null,
     }
-
-    let localeFormArray = this.fb.group(map);
-    this.categoryForm.addControl('locale', localeFormArray);
-    this.categoryForm.get("locale")
-    console.log(this.categoryForm, this.categoryForm.get("locale"));
+    this.locales[newLanguageId] = this.fb.group(obj);
+    this.categoryForm.setControl('locale', this.fb.group(this.locales));
     this.isFormReady = true;
   }
 
@@ -101,11 +92,14 @@ export class CategoryComponent implements OnInit {
       .subscribe(category => {
         if (category) {
           this.categoryForm.patchValue({
-            id: category.id
+            id: category.id,
+            published: category.published,
           });
           this.setLocaleGroup(category.locale);
 
-          //          this.setRecipeArray(category.recipes)
+          // this.setRecipeArray(category.recipes)
+        } else {
+          this.categoryNotImplementedLanguages = this.languageService.getNotImplementedLanguages([]);
         }
       })
 
