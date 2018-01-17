@@ -53,7 +53,7 @@ export class LanguageService {
     return defaultLanguage;
   }
   //
-  getImplementedLanguages(locales): LanguageLight[] {
+  getImplementedLanguages(locales): Observable<LanguageLight[]> {
     let implementedLanguages = [];
     this.getLanguagesLight(function (locales) {
       return function (languages) {
@@ -66,10 +66,10 @@ export class LanguageService {
         });
       }
     }(locales));
-    return implementedLanguages;
+    return of(implementedLanguages);
   }
 
-  getNotImplementedLanguages(locales): LanguageLight[] {
+  getNotImplementedLanguages(locales): Observable<LanguageLight[]> {
     let notImplementedLanguages = [];
     this.getLanguagesLight(function (locales) {
       return function (languages) {
@@ -82,7 +82,7 @@ export class LanguageService {
         });
       }
     }(locales));
-    return notImplementedLanguages;
+    return of(notImplementedLanguages);
   }
 
   /**

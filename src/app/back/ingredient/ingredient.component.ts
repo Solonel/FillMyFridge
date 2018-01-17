@@ -31,12 +31,12 @@ export class IngredientComponent implements OnInit {
   /**
    * Les langues de l'ingredient implémenté
    */
-  implementedLanguage = [];
+  implementedLanguages = [];
 
   /**
  * Les langues de l'ingredient non implémenté
  */
-  notImplementedLanguage = [];
+  notImplementedLanguages = [];
 
   /**
    *  Dictionnaire de langue de l'ingredient
@@ -69,7 +69,7 @@ export class IngredientComponent implements OnInit {
     this.ingredientForm = this.fb.group({
       id: null,
       locale: null,
-      icon: null
+      image: null
     });
   }
 
@@ -92,15 +92,20 @@ export class IngredientComponent implements OnInit {
         // On n'est plus en loading
         this.isLoading = false;
       }).subscribe(ingredient => {
-          this.ingredientForm.patchValue({
-            id: ingredient.id,
-            icon: ingredient.icon
-          });
-          this.setLocaleGroup(ingredient.locale);
+        this.ingredientForm.patchValue({
+          id: ingredient.id,
+          image: ingredient.image
+        });
+        this.setLocaleGroup(ingredient.locale);
       });
     } else {
-      this.notImplementedLanguage = this.languageService.getNotImplementedLanguages([])
-      this.isLoading = false;
+      this.languageService.getNotImplementedLanguages([]).finally(() => {
+        this.isLoading = false;
+      }).subscribe(notImplementedLanguages => {
+        this.notImplementedLanguages = notImplementedLanguages
+      }, err => {
+        console.log(err)
+      });
     }
   }
 
@@ -128,12 +133,30 @@ export class IngredientComponent implements OnInit {
       localeIds.push(i);
     }
 
-    // On récupère les langues implémentées et non implémentées
-    this.implementedLanguage = this.languageService.getImplementedLanguages(localeIds);
-    this.notImplementedLanguage = this.languageService.getNotImplementedLanguages(localeIds);
+    // Récupère les langues nécessaires
+    this.getLanguages(localeIds);
 
     // On set le formgroup créé sur le formulaire pour disposer des controles coté html
     this.ingredientForm.setControl('locale', this.fb.group(this.locales));
+  }
+
+  /**
+   * Récupère les langues implémentées et non implémentées de l'ingredient
+   * @param localeIds Le tableau d'id de langue
+   */
+  getLanguages(localeIds) {
+    // On récupère les langues implémentées et non implémentées
+    this.languageService.getImplementedLanguages(localeIds).subscribe(implementedLanguages => {
+      this.implementedLanguages = implementedLanguages
+    }, err => {
+      console.log(err);
+    });
+
+    this.languageService.getNotImplementedLanguages(localeIds).subscribe(notImplementedLanguages => {
+      this.notImplementedLanguages = notImplementedLanguages
+    }, err => {
+      console.log(err);
+    });
   }
 
   /**
@@ -155,11 +178,26 @@ export class IngredientComponent implements OnInit {
   }
 
   /**
-   * Sauvegarde l'ingredient
+   * Redirige vers la liste des ingredients
    */
-  save() {
+  goToList(): void {
+    this.router.navigate([`ingredients`]);
+  }
+
+  /**
+   * Redirige vers l'ingredient avec l'identifiant cible
+   * @param id id de l'ingredient
+   */
+  goToIngredient(id): void {
+    this.router.navigate([`ingredient/${id}`])
+  }
+
+  /**
+   * Met à jour l'ingredient
+   */
+  update() {
     this.ingredientService.updateIngredient(this.ingredientForm.value)
-      .subscribe(() => {});
+      .subscribe(() => { });
   }
 
   /**
@@ -167,16 +205,16 @@ export class IngredientComponent implements OnInit {
    */
   delete() {
     this.ingredientService.deleteIngredient(this.ingredientForm.value)
-      .subscribe(() => {});
+      .subscribe(() => { this.goToList() });
   }
 
   /**
-   * Ajoute un nouvelle ingredient
+   * Ajoute un nouvel ingredient
    */
   add() {
     this.ingredientService.addIngredient(this.ingredientForm.value)
       .subscribe(ingredient => {
-        this.router.navigate([`ingredient/${ingredient.id}`])
+        this.goToIngredient(ingredient.id);
       });
   }
 }

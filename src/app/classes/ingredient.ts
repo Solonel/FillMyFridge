@@ -2,7 +2,7 @@ import { Pluralization } from './pluralization';
 
 export class Ingredient {
     id: number;
-    icon: string;
+    image: string;
     locale: {
         [key: string]: IngredientLocale
     };

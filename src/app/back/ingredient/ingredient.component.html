@@ -7,13 +7,13 @@
 
         <form [formGroup]="ingredientForm" novalidate>
 
-            <mat-form-field *ngIf="ingredientForm.value.id">
-                <input readonly formControlName="id" matInput type="number" placeholder="Id">
+            <mat-form-field >
+                <input disabled  value="{{ingredientForm.value.id}}" matInput type="number" placeholder="Id">
             </mat-form-field>
 
             <mat-form-field>
-                <mat-label>Icône</mat-label>
-                <input formControlName="icon" matInput placeholder="Icône">
+                <mat-label>Image</mat-label>
+                <input formControlName="image" matInput placeholder="Image">
             </mat-form-field>
 
             <hr>
@@ -22,7 +22,7 @@
 
                 <mat-tab-group>
 
-                    <mat-tab *ngFor="let language of implementedLanguage" formGroupName="{{language.id}}" label={{language.label}}>
+                    <mat-tab *ngFor="let language of implementedLanguages" formGroupName="{{language.id}}" label={{language.label}}>
 
                         <mat-card>
                             <mat-form-field>
@@ -52,11 +52,11 @@
                         </div>
 
                     </mat-tab>
-                    <mat-tab label="Ajouter langue">
+                    <mat-tab label="Ajouter une langue">
                         <mat-card>
                             <mat-form-field>
                                 <mat-select placeholder="Langue" [(value)]="newLanguageId" (change)="addNewLanguage(newLanguageId)">
-                                    <mat-option *ngFor="let language of notImplementedLanguage" [value]="language.id">
+                                    <mat-option *ngFor="let language of notImplementedLanguages" [value]="language.id">
                                         {{ language.label }}
                                     </mat-option>
                                 </mat-select>
@@ -102,12 +102,35 @@
             </div>
 
             <div *ngIf="ingredientForm.value.id">
-                <button type="button" (click)="save()" class="btn btn-success"> Modifier </button>
+                <button type="button" (click)="update()" class="btn btn-success"> Modifier </button>
                 <button type="button" (click)="delete()" class="btn btn-danger"> Supprimer </button>
             </div>
 
+            <hr>
         </form>
 
     </div>
+
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                Amélioration continue
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        <ul>
+            <li>Améliorer la mise en page (drapeau des langues) et l'affichage saccader des onglets</li>
+            <li>Gestion de l'image avec apercu</li>
+            <li>Gestion 404 sur l'ingredient</li>
+            <li>Gestion de champ obligatoire</li>
+            <li>Feedback de modification/enregistrement</li>
+            <li>Meilleur gestion de l'ajout d'une langue (A la selection, la langue est créé, il faudrait pouvoir enregistrer
+                uniquement celle de la combo) ou pouvoir créé plusieurs langue à la fois</li>
+            <li>Suppression d'une langue (via petite croix sur l'onglet avec confirmation)</li>
+            <li>Bouton supprimer avec confirmation</li>
+            <li>Changement sur la disponibilité d'une langue existante avec confirmation</li>
+            <li>Rafraichir le formulaire à la mise à jour (ajout d'une langue)</li>
+            <li>Gestion multilangue des libellés en dur</li>
+        </ul>
+    </mat-expansion-panel>
 
 </div>
