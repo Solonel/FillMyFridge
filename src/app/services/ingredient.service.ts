@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { catchError, map, tap } from 'rxjs/operators';
 
-import { Ingredient } from '../classes/ingredient'
+import { Ingredient, IngredientLight } from '../classes/ingredient'
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -35,8 +35,8 @@ export class IngredientService {
       map(ingredients => ingredients[0]), // returns a {0|1} element array
       tap(h => {
         const outcome = h ? `fetched` : `did not find`;
-      //  this.log(`${outcome} Ingredient id=${id}`);
-        this.log( outcome);
+        //  this.log(`${outcome} Ingredient id=${id}`);
+        this.log(outcome);
       }),
       catchError(this.handleError<Ingredient>(`getIngredient id=${id}`))
       );

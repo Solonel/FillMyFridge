@@ -39,6 +39,8 @@ import { CategoryComponent } from './back/category/category.component';
 import { CategoriesComponent } from './back/categories/categories.component';
 import { UsersComponent } from './back/users/users.component';
 import { UserComponent } from './back/user/user.component';
+import { LanguageComponent } from './back/language/language.component';
+import { LanguagesComponent } from './back/languages/languages.component';
 /**
  * Service
  */
@@ -87,7 +89,9 @@ import { LanguageService } from './services/language.service';
     IngredientsComponent,
     IngredientComponent,
     CategoryComponent,
-    CategoriesComponent
+    CategoriesComponent,
+    LanguageComponent,
+    LanguagesComponent
   ],
   imports: [
     HttpClientModule, BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule,

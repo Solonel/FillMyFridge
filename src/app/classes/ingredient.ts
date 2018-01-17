@@ -13,3 +13,11 @@ export class IngredientLocale {
     description: string;
     available: boolean;
 }
+
+export class IngredientLight {
+    id: number;
+    image: string;
+    title: Pluralization;
+    description: string;
+    available: boolean;    
+}

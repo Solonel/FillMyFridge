@@ -29,7 +29,7 @@ export class InMemoryDataService implements InMemoryDbService {
     const languages: Language[] = [
       {
         id: 'fr-fr',
-        flag: "FR",
+        flag: "flag-icon-fr",
         locale: {
           "fr-fr": {
             label: 'Français'
@@ -44,7 +44,7 @@ export class InMemoryDataService implements InMemoryDbService {
       },
       {
         id: 'en-en',
-        flag: "EN",
+        flag: "flag-icon-gb",
         locale: {
           "fr-fr": {
             label: 'Anglais'
@@ -59,7 +59,7 @@ export class InMemoryDataService implements InMemoryDbService {
       },
       {
         id: 'es-es',
-        flag: "ES",
+        flag: "flag-icon-es",
         locale: {
           "fr-fr": {
             label: 'Espagnol'

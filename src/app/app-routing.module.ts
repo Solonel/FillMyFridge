@@ -23,6 +23,8 @@ import { UserComponent } from './back/user/user.component';
 // import { BookComponent } from './back/book/book.component';
 // import { AuthorComponent } from './back/author/author.component';
 // import { AuthorsComponent } from './back/authors/authors.component';
+import { LanguageComponent } from './back/language/language.component';
+import { LanguagesComponent } from './back/languages/languages.component';
 
 const routes: Routes = [
     // Front
@@ -52,6 +54,9 @@ const routes: Routes = [
     { path: 'users', component: UsersComponent },
     { path: 'user/add', component: UserComponent },
     { path: 'user/:id', component: UserComponent },
+    { path: 'languages', component: LanguagesComponent },
+    { path: 'language/add', component: LanguageComponent },
+    { path: 'language/:id', component: LanguageComponent },
     // { path: 'authors', component: AuthorsComponent },
     // { path: 'author/add', component: AuthorComponent },
     // { path: 'author/:id', component: AuthorComponent }

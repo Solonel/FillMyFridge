@@ -1,35 +1,35 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { Language } from '../../classes/language';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { SelectionModel } from '@angular/cdk/collections';
-import { Ingredient } from '../../classes/Ingredient';
 import { Router } from "@angular/router";
-import { IngredientService } from '../../services/ingredient.service';
 import { LanguageService } from '../../services/language.service';
 
 @Component({
-  selector: 'lsc-ingredients',
-  templateUrl: './ingredients.component.html',
-  styleUrls: ['./ingredients.component.css']
+  selector: 'lsc-languages',
+  templateUrl: './languages.component.html',
+  styleUrls: ['./languages.component.css']
 })
-export class IngredientsComponent implements OnInit {
-  ingredients: Ingredient[];
-  displayedColumns = ['select', 'id', 'title', 'description'];
-  dataSource: MatTableDataSource<Ingredient>;
-  selection: SelectionModel<Ingredient>;
+export class LanguagesComponent implements OnInit {
+
+  languages: Language[];
+  displayedColumns = ['select', 'id', 'label', 'flag'];
+  dataSource: MatTableDataSource<Language>;
+  selection: SelectionModel<Language>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private router: Router, private ingredientService: IngredientService, private languageService: LanguageService) {
-    this.dataSource = new MatTableDataSource(this.ingredients);
-    this.selection = new SelectionModel<Ingredient>(true, []);
+  constructor(private router: Router, private languageService: LanguageService) {
+    this.dataSource = new MatTableDataSource(this.languages);
+    this.selection = new SelectionModel<Language>(true, []);
   }
 
   /**
-  * Lifecycle hook that is called after data-bound properties of a directive are initialized.
-  */
+   * Lifecycle hook that is called after data-bound properties of a directive are initialized.
+   */
   ngOnInit() {
-    this.getIngredients();
+    this.getLanguages();
   }
 
   /**
@@ -41,21 +41,21 @@ export class IngredientsComponent implements OnInit {
   }
 
   /**
-   * Récupère les ingrédients
+   * Récupère les langages
    */
-  getIngredients() {
-    this.ingredientService.getIngredients()
-      .subscribe(ingredients => {
-        this.ingredients = ingredients;
-        this.dataSource.data = ingredients;
+  getLanguages() {
+    this.languageService.getLanguages()
+      .subscribe(languages => {
+        this.languages = languages;
+        this.dataSource.data = languages;
       });
   }
 
   /**
-   * Redirige vers l'ajout d'un ingredient
+   * Redirige vers l'ajout d'un langage
    */
-  addIngredient() {
-    this.router.navigate([`ingredient/add`]);
+  addLanguage() {
+    this.router.navigate([`language/add`]);
   }
 
   /**
@@ -91,7 +91,7 @@ export class IngredientsComponent implements OnInit {
    * @param id Identifiant de l'enregistrement
    */
   redirectOnDetail(id) {
-    this.router.navigate([`ingredient/${id}`]);
+    this.router.navigate([`language/${id}`]);
   }
 
 }

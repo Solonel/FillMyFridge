@@ -1,0 +1,67 @@
+<lsc-back-menu></lsc-back-menu>
+
+<div class="clear gridHeader">
+    <!-- <mat-form-field class="left">
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+    </mat-form-field> -->
+    <mat-paginator class="right" [pageSizeOptions]="[25, 50, 100]"></mat-paginator>
+    <button type="button" (click)="addLanguage()" class="btn btn-dark addButtonGrid right">Ajouter</button>
+</div>
+
+<div class="clear">
+
+    <mat-table class="grid" #table [dataSource]="dataSource" matSort>
+        <!-- Checkbox Column -->
+        <ng-container matColumnDef="select">
+            <mat-header-cell *matHeaderCellDef>
+                <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()" [indeterminate]="selection.hasValue() && !isAllSelected()">
+                </mat-checkbox>
+            </mat-header-cell>
+            <mat-cell *matCellDef="let row">
+                <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null" [checked]="selection.isSelected(row)">
+                </mat-checkbox>
+            </mat-cell>
+        </ng-container>
+
+        <!-- id Column -->
+        <ng-container matColumnDef="id">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> # </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.id}} </mat-cell>
+        </ng-container>
+
+        <!-- label Column -->
+        <ng-container matColumnDef="label">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Libellé </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.locale[this.languageService.getDefaultLanguageId()].label}}</mat-cell>
+        </ng-container>
+
+        <!-- flag Column -->
+        <ng-container matColumnDef="flag">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Drapeau </mat-header-cell>
+            <mat-cell *matCellDef="let row"> <span class="flag-icon {{row.flag}}"></span> </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;" (dblclick)="redirectOnDetail(row.id)">
+        </mat-row>
+
+    </mat-table>
+</div>
+
+<hr>
+
+<mat-expansion-panel>
+    <mat-expansion-panel-header>
+        <mat-panel-title>
+            Amélioration continue
+        </mat-panel-title>
+    </mat-expansion-panel-header>
+    <ul>
+        <li>Ajouter un filtre</li>
+    </ul>
+</mat-expansion-panel>
+
+
+<!-- Copyright 2017 Google Inc. All Rights Reserved.
+      Use of this source code is governed by an MIT-style license that
+      can be found in the LICENSE file at http://angular.io/license -->
