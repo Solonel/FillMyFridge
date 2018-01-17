@@ -7,12 +7,13 @@
 
         <form [formGroup]="ingredientForm" novalidate>
 
-            <mat-form-field class="example-full-width">
-                <input formControlName="id" matInput type="number" placeholder="Id">
+            <mat-form-field *ngIf="ingredientForm.value.id">
+                <input readonly formControlName="id" matInput type="number" placeholder="Id">
             </mat-form-field>
 
-            <mat-form-field class="example-full-width">
-                <input formControlName="icon" matInput placeholder="Icon">
+            <mat-form-field>
+                <mat-label>Icône</mat-label>
+                <input formControlName="icon" matInput placeholder="Icône">
             </mat-form-field>
 
             <hr>
@@ -21,28 +22,75 @@
 
                 <mat-tab-group>
 
-                    <mat-tab *ngFor="let language of ingredientLanguage" formGroupName="{{language.id}}" label={{language.label}}>
+                    <mat-tab *ngFor="let language of implementedLanguage" formGroupName="{{language.id}}" label={{language.label}}>
 
-                        <mat-form-field class="example-full-width">
-                            <input type="text" class="text" matInput placeholder="description" formControlName='description'>
-                        </mat-form-field>
-                        <mat-form-field class="example-full-width">
-                            <input type="text" class="text" matInput placeholder="available" formControlName='available'>
-                        </mat-form-field>
+                        <mat-card>
+                            <mat-form-field>
+                                <mat-label>Description</mat-label>
+                                <input type="text" class="text" matInput placeholder="Description" formControlName='description'>
+                            </mat-form-field>
 
+                            <mat-slide-toggle placeholder="available" formControlName="available"> Disponible </mat-slide-toggle>
+                        </mat-card>
 
                         <div formGroupName="title">
-                            <mat-form-field class="example-full-width">
-                                <input type="text" class="text" matInput placeholder="plural" formControlName='plural'>
-                            </mat-form-field>
-                            <mat-form-field class="example-full-width">
-                                <input type="text" class="text" matInput placeholder="singular" formControlName='singular'>
-                            </mat-form-field>
+                            <mat-card>
+                                <mat-card-header>
+                                    <mat-card-title>Titre</mat-card-title>
+                                </mat-card-header>
+                                <mat-card-content>
+                                    <mat-form-field>
+                                        <mat-label>Singulier</mat-label>
+                                        <input type="text" matInput placeholder="Singulier" formControlName='singular'>
+                                    </mat-form-field>
+                                    <mat-form-field>
+                                        <mat-label>Pluriel</mat-label>
+                                        <input type="text" matInput placeholder="Pluriel" formControlName='plural'>
+                                    </mat-form-field>
+                                </mat-card-content>
+                            </mat-card>
                         </div>
 
                     </mat-tab>
                     <mat-tab label="Ajouter langue">
+                        <mat-card>
+                            <mat-form-field>
+                                <mat-select placeholder="Langue" [(value)]="newLanguageId" (change)="addNewLanguage(newLanguageId)">
+                                    <mat-option *ngFor="let language of notImplementedLanguage" [value]="language.id">
+                                        {{ language.label }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </mat-card>
 
+                        <div formGroupName="{{newLanguageId}}" *ngIf="isNewLanguageReady">
+                            <mat-card>
+                                <mat-form-field>
+                                    <mat-label>Description</mat-label>
+                                    <input type="text" class="text" matInput placeholder="Description" formControlName='description'>
+                                </mat-form-field>
+
+                                <mat-slide-toggle placeholder="available" formControlName="available"> Disponible </mat-slide-toggle>
+                            </mat-card>
+
+                            <div formGroupName="title">
+                                <mat-card>
+                                    <mat-card-header>
+                                        <mat-card-title>Titre</mat-card-title>
+                                    </mat-card-header>
+                                    <mat-card-content>
+                                        <mat-form-field>
+                                            <mat-label>Singulier</mat-label>
+                                            <input type="text" class="text" matInput placeholder="Singulier" formControlName='singular'>
+                                        </mat-form-field>
+                                        <mat-form-field>
+                                            <mat-label>Pluriel</mat-label>
+                                            <input type="text" class="text" matInput placeholder="Pluriel" formControlName='plural'>
+                                        </mat-form-field>
+                                    </mat-card-content>
+                                </mat-card>
+                            </div>
+                        </div>
                     </mat-tab>
                 </mat-tab-group>
             </div>
