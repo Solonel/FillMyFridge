@@ -64,8 +64,12 @@ export class CategoryComponent implements OnInit {
     }
 
     // Retourne une collection de languages implémentées
-    this.categoryImplementedLanguages = this.languageService.getImplementedLanguages(localeIds);
-    this.categoryNotImplementedLanguages = this.languageService.getNotImplementedLanguages(localeIds);
+    this.languageService.getImplementedLanguages(localeIds).subscribe(implementedLanguages => {
+      this.categoryImplementedLanguages = implementedLanguages;
+    });
+    this.languageService.getNotImplementedLanguages(localeIds).subscribe(notImplementedLanguages => {
+      this.categoryNotImplementedLanguages = notImplementedLanguages;
+    });
     let localeFormArray = this.fb.group(this.locales);
     this.categoryForm.setControl('locale', localeFormArray);
   }
@@ -99,9 +103,11 @@ export class CategoryComponent implements OnInit {
 
           // this.setRecipeArray(category.recipes)
         } else {
-          this.categoryNotImplementedLanguages = this.languageService.getNotImplementedLanguages([]);
+          this.languageService.getNotImplementedLanguages([]).subscribe(notImplementedLanguages => {
+            this.categoryNotImplementedLanguages = notImplementedLanguages;
+          });
         }
-      })
+      });
 
   }
 
