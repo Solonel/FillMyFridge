@@ -1,9 +1,9 @@
 <lsc-back-menu></lsc-back-menu>
 
 <div class="clear gridHeader">
-    <mat-form-field class="left">
+    <!-- <mat-form-field class="left">
         <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
-    </mat-form-field>
+    </mat-form-field> -->
     <mat-paginator class="right" [pageSizeOptions]="[25, 50, 100]"></mat-paginator>
     <button type="button" (click)="addIngredient()" class="btn btn-dark addButtonGrid right">Ajouter</button>
 </div>
@@ -47,6 +47,20 @@
 
     </mat-table>
 </div>
+
+<hr>
+
+<mat-expansion-panel>
+    <mat-expansion-panel-header>
+        <mat-panel-title>
+            Amélioration continue
+        </mat-panel-title>
+    </mat-expansion-panel-header>
+    <ul>
+        <li>Ajouter un filtre</li>
+        <li>Gérer le cas où la langue par défaut n'est pas présente</li>
+    </ul>
+</mat-expansion-panel>
 
 
 <!-- Copyright 2017 Google Inc. All Rights Reserved.
