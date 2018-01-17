@@ -4,6 +4,7 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { Ingredient } from '../../classes/Ingredient';
 import { Router } from "@angular/router";
 import { IngredientService } from '../../services/ingredient.service';
+import { LanguageService } from '../../services/language.service';
 
 @Component({
   selector: 'lsc-ingredients',
@@ -19,7 +20,7 @@ export class IngredientsComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private router: Router, private ingredientService: IngredientService) {
+  constructor(private router: Router, private ingredientService: IngredientService, private languageService: LanguageService) {
     this.dataSource = new MatTableDataSource(this.ingredients);
     this.selection = new SelectionModel<Ingredient>(true, []);
   }

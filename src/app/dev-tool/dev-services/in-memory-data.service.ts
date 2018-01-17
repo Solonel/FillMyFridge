@@ -77,78 +77,78 @@ export class InMemoryDataService implements InMemoryDbService {
     const ingredients: Ingredient[] = [
       {
         id: 1, locale: {
-          "fr-fr": { title: { singular: "chocolat pâtisser noir", plural: "" }, description: "", available: true }
+          "fr-fr": { title: { singular: "chocolat pâtisser noir", plural: "" }, description: "fr-fr description 1", available: true }
         }, image: ""
       },
       {
         id: 2, locale: {
-          "fr-fr": { title: { singular: "beurre", plural: "beurres" }, description: "1", available: true },
-          "en-en": { title: { singular: "butter", plural: "butters" }, description: "2", available: false }
+          "fr-fr": { title: { singular: "beurre", plural: "beurres" }, description: "fr-fr description 2", available: true },
+          "en-en": { title: { singular: "butter", plural: "butters" }, description: "en-en description 2", available: false }
         }, image: ""
       },
       {
         id: 3, locale: {
-          "fr-fr": { title: { singular: "oeuf", plural: "oeufs" }, description: "", available: true }
+          "fr-fr": { title: { singular: "oeuf", plural: "oeufs" }, description: "fr-fr description 3", available: true }
         }, image: ""
       },
       {
         id: 4, locale: {
-          "fr-fr": { title: { singular: "farine", plural: "farines" }, description: "", available: true }
+          "fr-fr": { title: { singular: "farine", plural: "farines" }, description: "fr-fr description 4", available: true }
         }, image: ""
       },
       {
         id: 5, locale: {
-          "fr-fr": { title: { singular: "sucre en poudre", plural: "sucres en poudre" }, description: "", available: true }
+          "fr-fr": { title: { singular: "sucre en poudre", plural: "sucres en poudre" }, description: "fr-fr description 5", available: true }
         }, image: ""
       },
       {
         id: 6, locale: {
-          "fr-fr": { title: { singular: "mayonnaise", plural: "mayonnaises" }, description: "", available: true }
+          "fr-fr": { title: { singular: "mayonnaise", plural: "mayonnaises" }, description: "fr-fr description 6", available: true }
         }, image: ""
       },
       {
         id: 7, locale: {
-          "fr-fr": { title: { singular: "tomate", plural: "tomates" }, description: "", available: true }
+          "fr-fr": { title: { singular: "tomate", plural: "tomates" }, description: "fr-fr description 7", available: true }
         }, image: ""
       },
       {
         id: 8, locale: {
-          "fr-fr": { title: { singular: "boule de mozzarella", plural: "boules de mozzarella" }, description: "", available: true }
+          "fr-fr": { title: { singular: "boule de mozzarella", plural: "boules de mozzarella" }, description: "fr-fr description 8", available: true }
         }, image: ""
       },
       {
         id: 9, locale: {
-          "fr-fr": { title: { singular: "thym", plural: "" }, description: "", available: true }
+          "fr-fr": { title: { singular: "thym", plural: "" }, description: "fr-fr description 9", available: true }
         }, image: ""
       },
       {
         id: 10, locale: {
-          "fr-fr": { title: { singular: "ciboulette", plural: "ciboulettes" }, description: "", available: true }
+          "fr-fr": { title: { singular: "ciboulette", plural: "ciboulettes" }, description: "fr-fr description 10", available: true }
         }, image: ""
       },
       {
         id: 11, locale: {
-          "fr-fr": { title: { singular: "estragon", plural: "estragons" }, description: "", available: true }
+          "fr-fr": { title: { singular: "estragon", plural: "estragons" }, description: "fr-fr description 11", available: true }
         }, image: ""
       },
       {
         id: 12, locale: {
-          "fr-fr": { title: { singular: "persil", plural: "persils" }, description: "", available: true }
+          "fr-fr": { title: { singular: "persil", plural: "persils" }, description: "fr-fr description 12", available: true }
         }, image: ""
       },
       {
         id: 13, locale: {
-          "fr-fr": { title: { singular: "salade composée (en sachet)", plural: "salades composées" }, description: "", available: true }
+          "fr-fr": { title: { singular: "salade composée (en sachet)", plural: "salades composées" }, description: "fr-fr description 13", available: true }
         }, image: ""
       },
       {
         id: 14, locale: {
-          "fr-fr": { title: { singular: "vinaigre balsamique", plural: "vinaigres balsamique" }, description: "", available: true }
+          "fr-fr": { title: { singular: "vinaigre balsamique", plural: "vinaigres balsamique" }, description: "fr-fr description 14", available: true }
         }, image: ""
       },
       {
         id: 15, locale: {
-          "fr-fr": { title: { singular: "basilic", plural: "basilics" }, description: "", available: true }
+          "fr-fr": { title: { singular: "basilic", plural: "basilics" }, description: "fr-fr description 15", available: true }
         }, image: ""
       },
     ]
