@@ -7,6 +7,7 @@ import { HomepageComponent } from './front/homepage/homepage.component';
 import { RegisterComponent } from './front/register/register.component';
 import { ProfileComponent } from './front/profile/profile.component';
 import { FrontRecipesComponent } from './front/front-recipes/front-recipes.component';
+import { ShoppingListComponent } from './front/shopping-list/shopping-list.component';
 /** BackOffice Module */
 import { DashBoardComponent } from './back/dash-board/dash-board.component';
 import { IngredientComponent } from './back/ingredient/ingredient.component'
@@ -26,6 +27,7 @@ import { UserComponent } from './back/user/user.component';
 import { LanguageComponent } from './back/language/language.component';
 import { LanguagesComponent } from './back/languages/languages.component';
 
+
 const routes: Routes = [
     // Front
     { path: 'login', component: AuthenticationComponent },
@@ -33,6 +35,7 @@ const routes: Routes = [
     { path: 'register', component: RegisterComponent },
     { path: 'profile', component: ProfileComponent },
     { path: 'ft-recipes', component: FrontRecipesComponent },
+    { path: 'shoppinglist', component: ShoppingListComponent },
 
     // Back
     { path: 'administration', component: DashBoardComponent },

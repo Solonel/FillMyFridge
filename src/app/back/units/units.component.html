@@ -32,13 +32,13 @@
     <!-- title Column -->
     <ng-container matColumnDef="title">
       <mat-header-cell *matHeaderCellDef mat-sort-header> Titre </mat-header-cell>
-      <mat-cell *matCellDef="let row"> {{row.title}} </mat-cell>
+      <mat-cell *matCellDef="let row"> {{row.locale[this.languageService.getDefaultLanguageId()].title}} </mat-cell>
     </ng-container>
 
     <!-- description Column -->
     <ng-container matColumnDef="description">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> Description </mat-header-cell>
-      <mat-cell *matCellDef="let row"> {{row.description}} </mat-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Raccourcis </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.locale[this.languageService.getDefaultLanguageId()].shorted}} </mat-cell>
     </ng-container>
 
 

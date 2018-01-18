@@ -4,6 +4,7 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { Unit } from '../../classes/Unit';
 import { Router } from "@angular/router";
 import { UnitService } from '../../services/unit.service';
+import { LanguageService } from '../../services/language.service';
 
 @Component({
   selector: 'lsc-units',
@@ -19,7 +20,7 @@ export class UnitsComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private router: Router, private unitService: UnitService) {
+  constructor(private router: Router, private unitService: UnitService, private languageService: LanguageService) {
     this.dataSource = new MatTableDataSource(this.units);
     this.selection = new SelectionModel<Unit>(true, []);
   }
