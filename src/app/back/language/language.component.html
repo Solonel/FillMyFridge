@@ -1,5 +1,99 @@
 <lsc-back-menu></lsc-back-menu>
 
-<p>
-  language works!
-</p>
+<!-- export class Language {
+  id: string;
+  flag: string;
+  locale: {
+      [key: string]: LanguageLocale
+  };
+}
+
+export class LanguageLocale {
+  label: string;
+} -->
+
+<div class="form">
+
+  <h1>Langage</h1>
+  <div *ngIf="!isLoading">
+
+    <form [formGroup]="languageForm" novalidate>
+
+      <mat-form-field>
+        <input formControlName="id" matInput type="text" placeholder="Id">
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Drapeau</mat-label>
+        <input formControlName="flag" matInput placeholder="Drapeau">
+      </mat-form-field>
+
+      <span class="flag-icon {{languageForm.value.flag}}"></span> 
+
+      <hr>
+
+      <div formGroupName="locale">
+
+        <mat-tab-group>
+
+          <mat-tab *ngFor="let language of implementedLanguages" formGroupName="{{language.id}}" label={{language.label}}>
+
+            <mat-card>
+              <mat-form-field>
+                <mat-label>Libellé</mat-label>
+                <input type="text" class="text" matInput placeholder="Description" formControlName='label'>
+              </mat-form-field>
+            </mat-card>
+
+          </mat-tab>
+          <mat-tab label="Ajouter une langue">
+            <mat-card>
+              <mat-form-field>
+                <mat-select placeholder="Langue" [(value)]="newLanguageId" (change)="addNewLanguage(newLanguageId)">
+                  <mat-option *ngFor="let language of notImplementedLanguages" [value]="language.id">
+                    {{ language.label }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </mat-card>
+
+            <div formGroupName="{{newLanguageId}}" *ngIf="isNewLanguageReady">
+              <mat-card>
+                <mat-form-field>
+                  <mat-label>Libellé</mat-label>
+                  <input type="text" matInput placeholder="Libellé" formControlName='label'>
+                </mat-form-field>
+              </mat-card>
+            </div>
+          </mat-tab>
+        </mat-tab-group>
+      </div>
+
+      <hr>
+
+      <div *ngIf="!languageExist">
+        <button (click)="add()" type="button" class="btn btn-primary"> Enregistrer </button>
+      </div>
+
+      <div *ngIf="languageExist">
+        <button type="button" (click)="update()" class="btn btn-success"> Modifier </button>
+        <button type="button" (click)="delete()" class="btn btn-danger"> Supprimer </button>
+      </div>
+
+      <hr>
+    </form>
+
+  </div>
+
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Amélioration continue
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <ul>
+    <li></li>
+    </ul>
+  </mat-expansion-panel>
+
+</div>
