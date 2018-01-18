@@ -19,6 +19,7 @@ import { HomepageComponent } from './front/homepage/homepage.component';
 import { RegisterComponent } from './front/register/register.component';
 import { ProfileComponent } from './front/profile/profile.component';
 import { FrontRecipesComponent } from './front/front-recipes/front-recipes.component';
+import { ShoppingListComponent } from './front/shopping-list/shopping-list.component';
 
 /**
  * Back Component
@@ -49,6 +50,9 @@ import { UnitService } from './services/unit.service';
 import { IngredientService } from './services/ingredient.service';
 import { RecipeService } from './services/recipe.service';
 import { CategoryService } from './services/category.service';
+import { UserService } from './services/user.service';
+import { LanguageService } from './services/language.service';
+import { ShoppingListService } from './services/shopping-list.service';
 //import { BookService } from './services/book.service';
 //import { AuthorService } from './services/author.service';
 
@@ -56,8 +60,6 @@ import { CategoryService } from './services/category.service';
  * Dev Component
  */
 import { DevMenuComponent } from './dev-tool/dev-menu/dev-menu.component';
-import { UserService } from './services/user.service';
-import { LanguageService } from './services/language.service';
 
 /**
  * Pipe
@@ -74,6 +76,7 @@ import { LanguageService } from './services/language.service';
     ProfileComponent,
     FrontMenuComponent,
     FrontRecipesComponent,
+    ShoppingListComponent,
     //BooksComponent,
     //BookComponent,
     DashBoardComponent,
@@ -112,6 +115,7 @@ import { LanguageService } from './services/language.service';
     UnitService,
     IngredientService,
     LanguageService,
+    ShoppingListService,
     RecipeService],
   bootstrap: [AppComponent]
 })

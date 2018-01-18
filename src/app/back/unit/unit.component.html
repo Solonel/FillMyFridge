@@ -1,44 +1,90 @@
 <lsc-back-menu></lsc-back-menu>
 
-<div class="form">
+<div class="form  justify-content-start">
 
     <h1>Unité</h1>
-    <div *ngIf="!fetchingData">
+    <div *ngIf="!isLoading">
 
-        <div *ngIf="unit ">
-            <div>
-                <mat-form-field class="example-full-width">
-                    <input [(ngModel)]="unit.title" matInput placeholder="Titre">
-                </mat-form-field>
+        <form [formGroup]="unitForm">
 
-                <mat-form-field class="example-full-width">
-                    <input [(ngModel)]="unit.description" matInput placeholder="Description">
-                </mat-form-field>
+            <mat-form-field>
+                <input disabled value="{{unitForm.value.id}}" matInput type="number" placeholder="Identifiant ">
+            </mat-form-field>
+            
+            <div formGroupName="locale">
+                <mat-tab-group>
+                    <mat-tab *ngFor="let language of unitImplementedLanguages" formGroupName="{{ language.id }}">
+                        <ng-template mat-tab-label>
+                            <div class="flag-icon {{ language.flag }}"></div>
+                            <div>{{ language.label }}</div>
+                        </ng-template>
+                        <mat-card>
+                            <div class="row justify-content-start">
+                                <div class="col">
+                                    <mat-form-field class="example-full-width">
+                                        <input type="text" class="text" matInput placeholder="Nom" formControlName='title'>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col">
+                                    <mat-form-field class="example-full-width">
+                                        <input type="text" class="text" matInput placeholder="Raccourcis" formControlName='shorted'>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row justify-content-start">
+                                <div class="col">
+                                    <mat-slide-toggle formControlName="available"> Disponible </mat-slide-toggle>
+                                </div>
+                            </div>
+                        </mat-card>
+
+                    </mat-tab>
+                    <mat-tab label="Ajouter langue" *ngIf="unitNotImplementedLanguages.length > 0">
+                        <mat-card>
+                            <mat-card>
+                                <mat-form-field class="example-full-width">
+                                    <mat-select placeholder="Langue" [(value)]="newLanguageId" (change)="addNewLanguage(newLanguageId)">
+                                        <mat-option *ngFor="let language of unitNotImplementedLanguages" [value]="language.id">
+                                            {{ language.label }}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </mat-card>
+
+                            <div formGroupName="{{newLanguageId}}" *ngIf="isNewLanguageReady">
+                                <mat-card>
+                                    <div class="row justify-content-start">
+                                        <div class="col">
+                                            <mat-form-field class="example-full-width">
+                                                <input type="text" class="text" matInput placeholder="Nom" formControlName='title'>
+                                            </mat-form-field>
+                                        </div>
+                                        <div class="col">
+                                            <mat-form-field class="example-full-width">
+                                                <input type="text" class="text" matInput placeholder="Raccourcis" formControlName='shorted'>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                    <div class="row justify-content-start">
+                                        <div class="col">
+                                            <mat-slide-toggle formControlName="available"> Disponible </mat-slide-toggle>
+                                        </div>
+                                    </div>
+                                </mat-card>
+                            </div>
+                        </mat-card>
+                    </mat-tab>
+                </mat-tab-group>
             </div>
-            <div>
+            <div *ngIf="unitForm.value.id">
                 <button type="button" (click)="save()" class="btn btn-success"> Modifier </button>
                 <button type="button" (click)="delete()" class="btn btn-danger"> Supprimer </button>
             </div>
-        </div>
-
-        <div *ngIf="!unit">
-
-            <div>
-                <form #registerForm="ngForm" (ngSubmit)="addUnit(registerForm.value)">
-                    <mat-form-field class="example-full-width">
-                        <input required ngModel name="title" matInput placeholder="Titre">
-                    </mat-form-field>
-
-                    <mat-form-field class="example-full-width">
-                        <input required ngModel name="description" matInput placeholder="Description">
-                    </mat-form-field>
-                    <button type="submit" class="btn btn-primary" [disabled]="registerForm.invalid"> Enregistrer </button>
-                </form>
-
+            <div *ngIf="!unitForm.value.id">
+                <button (click)="addCategory()" type="button" class="btn btn-primary"> Enregistrer </button>
             </div>
 
-        </div>
-
+        </form>
     </div>
 
 </div>

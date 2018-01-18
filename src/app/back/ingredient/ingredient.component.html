@@ -7,8 +7,8 @@
 
         <form [formGroup]="ingredientForm" novalidate>
 
-            <mat-form-field >
-                <input disabled  value="{{ingredientForm.value.id}}" matInput type="number" placeholder="Id">
+            <mat-form-field>
+                <input disabled value="{{ingredientForm.value.id}}" matInput type="number" placeholder="Id">
             </mat-form-field>
 
             <mat-form-field>
@@ -22,8 +22,11 @@
 
                 <mat-tab-group>
 
-                    <mat-tab *ngFor="let language of implementedLanguages" formGroupName="{{language.id}}" label={{language.label}}>
-
+                    <mat-tab *ngFor="let language of implementedLanguages" formGroupName="{{language.id}}">
+                        <ng-template mat-tab-label>
+                            <div class="flag-icon {{ language.flag }}"></div>
+                            <div>{{ language.label }}</div>
+                        </ng-template>
                         <mat-card>
                             <mat-form-field>
                                 <mat-label>Description</mat-label>
@@ -52,7 +55,7 @@
                         </div>
 
                     </mat-tab>
-                    <mat-tab label="Ajouter une langue">
+                    <mat-tab label="Ajouter une langue" *ngIf="notImplementedLanguages.length > 0">
                         <mat-card>
                             <mat-form-field>
                                 <mat-select placeholder="Langue" [(value)]="newLanguageId" (change)="addNewLanguage(newLanguageId)">

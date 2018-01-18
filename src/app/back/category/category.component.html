@@ -1,16 +1,21 @@
 <lsc-back-menu></lsc-back-menu>
 
-<div class="form justify-content-around">
+<div class="form justify-content-start">
+    <h1>Catégorie</h1>
     <div *ngIf="!isLoading">
-<span class="flag-icon flag-icon-gr"></span>    
         <form [formGroup]="categoryForm">
-            <div class="container">
-                <div class="row justify-content-around">
+            <div class="container justify-content-start">
+                <div class="row justify-content-start">
+                    <div class="col-12">
 
-                    <div class="col-6">
-                        <mat-slide-toggle formControlName="published"> Publié </mat-slide-toggle>
+                        <mat-form-field>
+                            <input disabled value="{{categoryForm.value.id}}" matInput type="number" placeholder="Id">
+                        </mat-form-field>
+
+                        <mat-slide-toggle formControlName="published">Catégorie publiée </mat-slide-toggle>
                     </div>
-                    <div class="col-6">
+
+                    <!-- <div class="col-6">
                         <div formArrayName="recipes">
                             <mat-selection-list #recipesList>
                                 <mat-list-option checkboxPosition="before" [value]="recipe.value" *ngFor="let recipe of recipeFormArray.controls; let idx = index"
@@ -28,57 +33,87 @@
                             </mat-selection-list>
                             <button type="button" *ngIf="recipeFormArray.controls.length > 0" (click)="removeRecipes(recipesList)" class="btn btn-dark">
                                 Retirer recettes</button>
-                            <!-- <button type="button" *ngIf="recipeFormArray.controls.length === 0" (click)="addRecipe()" class="btn btn-dark"> Ajouter recettes </button> -->
+                        <button type="button" *ngIf="recipeFormArray.controls.length === 0" (click)="addRecipe()" class="btn btn-dark"> Ajouter recettes </button> 
                         </div>
-                    </div>
-                    <div class="col-12">
-                        <div *ngIf="categoryForm.value.id">
-                            <button type="button" (click)="save()" class="btn btn-success"> Modifier </button>
-                            <button type="button" (click)="delete()" class="btn btn-danger"> Supprimer </button>
-                        </div>
-                        <div *ngIf="!categoryForm.value.id">
-                            <button (click)="addCategory()" type="button" class="btn btn-primary"> Enregistrer </button>
-                        </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
+            <hr>
             <div formGroupName="locale">
                 <mat-tab-group>
-                    <mat-tab *ngFor="let language of categoryImplementedLanguages" formGroupName="{{language.id}}" label={{language.label}}>
-
-                        <mat-form-field class="example-full-width">
-                            <input type="text" class="text" matInput placeholder="title" formControlName='title'>
-                        </mat-form-field>
-                        <mat-form-field class="example-full-width">
-                            <input type="text" class="text" matInput placeholder="description" formControlName='description'>
-                        </mat-form-field>
-                        <mat-form-field class="example-full-width">
-                            <input type="text" class="text" matInput placeholder="available" formControlName='available'>
-                        </mat-form-field>
+                    <mat-tab *ngFor="let language of categoryImplementedLanguages" formGroupName="{{ language.id }}">
+                        <ng-template mat-tab-label>
+                            <div class="flag-icon {{ language.flag }}"></div>
+                            <div>{{ language.label }}</div>
+                        </ng-template>
+                        <mat-card>
+                            <div class="row justify-content-start">
+                                <div class="col">
+                                    <mat-form-field class="example-full-width">
+                                        <input type="text" class="text" matInput placeholder="name" formControlName='title'>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col">
+                                    <mat-form-field class="example-full-width">
+                                        <input type="text" class="text" matInput placeholder="Description" formControlName='description'>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row justify-content-start">
+                                <div class="col">
+                                    <mat-slide-toggle formControlName="available"> Disponible </mat-slide-toggle>
+                                </div>
+                            </div>
+                        </mat-card>
 
                     </mat-tab>
-                    <mat-tab label="Ajouter langue">
-                        <mat-form-field class="example-full-width">
-                            <mat-select placeholder="Langue" [(value)]="newLanguageId" (change)="newLanguageSelected(newLanguageId)">
-                                <mat-option *ngFor="let language of categoryNotImplementedLanguages" [value]="language.id">
-                                    {{ language.label }}
-                                </mat-option>
-                            </mat-select>
-                        </mat-form-field>
+                    <mat-tab label="Ajouter langue" *ngIf="categoryNotImplementedLanguages.length > 0">
+                        <mat-card>
+                            <mat-card>
+                                <mat-form-field class="example-full-width">
 
-                        <div formGroupName="{{newLanguageId}}" *ngIf="isFormReady">
-                            <mat-form-field class="example-full-width">
-                                <input type="text" class="text" matInput placeholder="title" formControlName='title'>
-                            </mat-form-field>
-                            <mat-form-field class="example-full-width">
-                                <input type="text" class="text" matInput placeholder="description" formControlName='description'>
-                            </mat-form-field>
-                            <mat-form-field class="example-full-width">
-                                <input type="text" class="text" matInput placeholder="available" formControlName='available'>
-                            </mat-form-field>
-                        </div>
+                                    <mat-select placeholder="Langue" [(value)]="newLanguageId" (change)="addNewLanguage(newLanguageId)">
+                                        <mat-option *ngFor="let language of categoryNotImplementedLanguages" [value]="language.id">
+                                            {{ language.label }}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </mat-card>
+
+                            <div formGroupName="{{newLanguageId}}" *ngIf="isNewLanguageReady">
+                                <mat-card>
+                                    <div class="row justify-content-start">
+                                        <div class="col">
+                                            <mat-form-field class="example-full-width">
+                                                <input type="text" class="text" matInput placeholder="Titre" formControlName='title'>
+                                            </mat-form-field>
+                                        </div>
+                                        <div class="col">
+                                            <mat-form-field class="example-full-width">
+                                                <input type="text" class="text" matInput placeholder="Description" formControlName='description'>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                    <div class="row justify-content-start">
+                                        <div class="col">
+                                            <mat-slide-toggle formControlName="available"> Disponible </mat-slide-toggle>
+                                        </div>
+                                    </div>
+                                </mat-card>
+                            </div>
+                        </mat-card>
                     </mat-tab>
                 </mat-tab-group>
+                <hr>
+                <div class="col-12">
+                    <div *ngIf="categoryForm.value.id">
+                        <button type="button" (click)="save()" class="btn btn-success"> Modifier </button>
+                        <button type="button" (click)="delete()" class="btn btn-danger"> Supprimer </button>
+                    </div>
+                    <div *ngIf="!categoryForm.value.id">
+                        <button (click)="addCategory()" type="button" class="btn btn-primary"> Enregistrer </button>
+                    </div>
+                </div>
             </div>
         </form>
     </div>
