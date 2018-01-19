@@ -28,7 +28,7 @@ export class LanguageLocale {
         <input formControlName="flag" matInput placeholder="Drapeau">
       </mat-form-field>
 
-      <span class="flag-icon {{languageForm.value.flag}}"></span> 
+      <span class="flag-icon {{languageForm.value.flag}}"></span>
 
       <hr>
 
@@ -36,17 +36,20 @@ export class LanguageLocale {
 
         <mat-tab-group>
 
-          <mat-tab *ngFor="let language of implementedLanguages" formGroupName="{{language.id}}" label={{language.label}}>
-
+          <mat-tab *ngFor="let language of implementedLanguages" formGroupName="{{language.id}}">
+            <ng-template mat-tab-label>
+              <div class="flag-icon {{ language.flag }}"></div>
+              <div>{{ language.label }}</div>
+          </ng-template>
             <mat-card>
-              <mat-form-field>
+              <mat-form-field> 
                 <mat-label>Libellé</mat-label>
                 <input type="text" class="text" matInput placeholder="Description" formControlName='label'>
               </mat-form-field>
             </mat-card>
 
           </mat-tab>
-          <mat-tab label="Ajouter une langue">
+          <mat-tab label="Ajouter une langue" *ngIf="notImplementedLanguages.length > 0">
             <mat-card>
               <mat-form-field>
                 <mat-select placeholder="Langue" [(value)]="newLanguageId" (change)="addNewLanguage(newLanguageId)">
@@ -92,7 +95,7 @@ export class LanguageLocale {
       </mat-panel-title>
     </mat-expansion-panel-header>
     <ul>
-    <li></li>
+      <li>Rendre obligatoire l'ajout de la langue par défaut en ajout</li>
     </ul>
   </mat-expansion-panel>
 

@@ -197,7 +197,7 @@ export class IngredientComponent implements OnInit {
    */
   update() {
     this.ingredientService.updateIngredient(this.ingredientForm.value)
-      .subscribe(() => { });
+      .subscribe(() => { this.getIngredient(); });
   }
 
   /**

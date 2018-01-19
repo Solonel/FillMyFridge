@@ -191,7 +191,7 @@ export class LanguageComponent implements OnInit {
    */
   update() {
     this.languageService.updateLanguage(this.languageForm.value)
-      .subscribe(() => { });
+      .subscribe(() => { this.getLanguage() });
   }
 
   /**
