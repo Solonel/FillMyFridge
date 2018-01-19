@@ -15,25 +15,32 @@ import { User } from '../../classes/user';
 export class UserComponent implements OnInit {
 
   @Input() user: User;
-  createUserForm: FormGroup;
+  userForm: FormGroup;
 
-  fetchingData = true;
+  isLoading = true;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private userService: UserService,
-    private formBuilder: FormBuilder) { }
+    private formBuilder: FormBuilder) {
+    this.createForm();
+  }
 
   ngOnInit() {
     this.getUser();
-    this.createUserForm = this.formBuilder.group({
-      gender: "",
-      firstName: "",
-      lastName: "",
-      birthDate: "",
-      email: "",
-      password: "",
+  }
+
+  createForm() {
+    this.userForm = this.formBuilder.group({
+      id: null,
+      gender: null,
+      firstName: null,
+      lastName: null,
+      birthDate: null,
+      email: null,
+      password: null,
+
     });
 
   }
@@ -41,7 +48,24 @@ export class UserComponent implements OnInit {
   getUser(): void {
     const id = +this.route.snapshot.paramMap.get('id');
     this.userService.getUserNo404(id)
-      .subscribe(user => { this.user = user; this.fetchingData = false; });
+      ._finally(() => {
+        this.isLoading = false;
+      })
+      .subscribe(user => {
+        this.user = user;
+        if (user) {
+
+          this.userForm.patchValue({
+            id: user.id,
+            gender: user.gender,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            birthDate: user.birthDate,
+            email: user.email,
+            password: user.password
+          });
+        }
+      });
   }
 
   goToList(): void {

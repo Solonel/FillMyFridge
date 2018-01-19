@@ -143,7 +143,7 @@ export class UnitComponent implements OnInit {
    * Redirige sur l'unité passée en paramètre
    * @param id Id de l'unité sur laquelle être redirigée
    */
-  goToCategory(id): void {
+  goToUnit(id): void {
     this.router.navigate([`unit/${id}`]);
   }
   save(): void {
@@ -162,7 +162,7 @@ export class UnitComponent implements OnInit {
 
   addUnit(formData) {
     this.unitService.addUnit(formData).subscribe(unit => {
-      this.goToCategory(unit.id)
+      this.goToUnit(unit.id)
     });;
   }
 

@@ -81,7 +81,7 @@
                 <button type="button" (click)="delete()" class="btn btn-danger"> Supprimer </button>
             </div>
             <div *ngIf="!unitForm.value.id">
-                <button (click)="addCategory()" type="button" class="btn btn-primary"> Enregistrer </button>
+                <button (click)="addUnit(unitForm.value)" type="button" class="btn btn-primary"> Enregistrer </button>
             </div>
 
         </form>

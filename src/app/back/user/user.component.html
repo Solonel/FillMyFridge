@@ -3,30 +3,20 @@
 <div class="form">
 
   <h1>Utilisateurs</h1>
-  <div *ngIf="!fetchingData">
+  <div *ngIf="!isLoading">
 
-    <div *ngIf="user ">
-      <div>
-        <mat-form-field class="example-full-width">
-          <input [(ngModel)]="user.firstName" matInput placeholder="Prénom">
-        </mat-form-field>
+    <div>
+      <form [formGroup]="userForm">
+        <div class="row">
+          <div class="col-4">
+            <mat-form-field>
+              <input disabled value="{{userForm.value.id}}" matInput type="number" placeholder="Identifiant ">
+            </mat-form-field>
+          </div>
+        </div>
+        <!-- <div class="row justify-content-around">-->
 
-        <mat-form-field class="example-full-width">
-          <input [(ngModel)]="user.lastName" matInput placeholder="Nom">
-        </mat-form-field>
-      </div>
-      <div>
-        <button type="button" (click)="save()" class="btn btn-success"> Modifier </button>
-        <button type="button" (click)="delete()" class="btn btn-danger"> Supprimer </button>
-      </div>
-    </div>
-
-    <div *ngIf="!user">
-
-      <div>
-        <form [formGroup]="createUserForm" (ngSubmit)="addUser(createUserForm.value)">
-
-          <!-- <div class="row justify-content-around">-->
+        <div class="row">
           <div class="col-4">
             <mat-form-field class="example-full-width">
               <mat-select [(value)]="gender" placeholder="Civilité" formControlName="gender" id="gender">
@@ -37,6 +27,8 @@
               </mat-select>
             </mat-form-field>
           </div>
+        </div>
+        <div class="row">
           <div class="col-4">
             <mat-form-field class="example-full-width">
               <input matInput placeholder="Nom" class="user lastName" formControlName="lastName" id="lastName">
@@ -47,7 +39,9 @@
               <input matInput placeholder="Prénom" class="user firstName" formControlName="firstName" id="firstName">
             </mat-form-field>
           </div>
-          <!-- <div class="row justify-content-around">-->
+        </div>
+        <!-- <div class="row justify-content-around">-->
+        <div class="row">
           <div class="col-4">
             <mat-form-field class="example-full-width">
               <input matInput [matDatepicker]="birthDate" placeholder="Date de naissance" formControlName="birthDate" id="birthDate">
@@ -55,7 +49,9 @@
               <mat-datepicker #birthDate></mat-datepicker>
             </mat-form-field>
           </div>
-          <!--<div class="row justify-content-around">-->
+        </div>
+        <!--<div class="row justify-content-around">-->
+        <div class="row">
           <div class="col-4">
             <mat-form-field class="example-full-width">
               <input matInput placeholder="Email" class="user email" formControlName="email" id="email" type="email">
@@ -67,9 +63,16 @@
               <input matInput placeholder="Mot de passe" class="user password" formControlName="password" id="password" type="password">
             </mat-form-field>
           </div>
-          <button type="submit" class="btn btn-primary" > Enregistrer </button> <!-- [disabled]="createUser.invalid" -->
-        </form>
-      </div>
+        </div>
+        <div *ngIf="userForm.value.id">
+          <button type="button" (click)="save()" class="btn btn-success"> Modifier </button>
+          <button type="button" (click)="delete()" class="btn btn-danger"> Supprimer </button>
+        </div>
+        <div *ngIf="!userForm.value.id">
+          <button (click)="addUser(userForm.value)" type="button" class="btn btn-primary"> Enregistrer </button>
+        </div>
+      </form>
     </div>
   </div>
+
 </div>
