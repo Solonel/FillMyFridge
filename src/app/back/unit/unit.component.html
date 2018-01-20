@@ -10,7 +10,7 @@
             <mat-form-field>
                 <input disabled value="{{unitForm.value.id}}" matInput type="number" placeholder="Identifiant ">
             </mat-form-field>
-            
+
             <div formGroupName="locale">
                 <mat-tab-group>
                     <mat-tab *ngFor="let language of unitImplementedLanguages" formGroupName="{{ language.id }}">
@@ -27,7 +27,7 @@
                                 </div>
                                 <div class="col">
                                     <mat-form-field class="example-full-width">
-                                        <input type="text" class="text" matInput placeholder="Raccourcis" formControlName='shorted'>
+                                        <input type="text" class="text" matInput placeholder="Symbole" formControlName='shorted'>
                                     </mat-form-field>
                                 </div>
                             </div>
@@ -86,5 +86,18 @@
 
         </form>
     </div>
+
+    <hr>
+
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                Amélioration continue
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        <ul>
+            <li>Ajouter les label sur les champs de saisie</li>
+        </ul>
+    </mat-expansion-panel>
 
 </div>

@@ -38,7 +38,9 @@
         <!-- flag Column -->
         <ng-container matColumnDef="flag">
             <mat-header-cell *matHeaderCellDef mat-sort-header> Drapeau </mat-header-cell>
-            <mat-cell *matCellDef="let row"> <span class="flag-icon {{row.flag}}"></span> </mat-cell>
+            <mat-cell *matCellDef="let row">
+                <span class="flag-icon {{row.flag}}"></span>
+            </mat-cell>
         </ng-container>
 
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

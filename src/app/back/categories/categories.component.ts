@@ -14,7 +14,7 @@ import { LanguageService } from '../../services/language.service';
 export class CategoriesComponent implements OnInit {
 
   categories: Category[];
-  displayedColumns = ['select', 'id', 'title', 'description','published'];
+  displayedColumns = ['select', 'id', 'title', 'description', 'published'];
   dataSource: MatTableDataSource<Category>;
   selection: SelectionModel<Category>;
   defaultLanguageCategory = {};
@@ -22,7 +22,7 @@ export class CategoriesComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private router: Router, private categoryService: CategoryService, private languageService:LanguageService) {
+  constructor(private router: Router, private categoryService: CategoryService, private languageService: LanguageService) {
     this.dataSource = new MatTableDataSource(this.categories);
     this.selection = new SelectionModel<Category>(true, []);
   }
@@ -39,7 +39,7 @@ export class CategoriesComponent implements OnInit {
   getCategories() {
     this.categoryService.getCategories()
       .subscribe(categories => {
-      //  this.defaultLanguageCategory.id = categories.id;
+        //  this.defaultLanguageCategory.id = categories.id;
 
         this.categories = categories;
         this.dataSource.data = categories;

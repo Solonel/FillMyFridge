@@ -1,17 +1,5 @@
 <lsc-back-menu></lsc-back-menu>
 
-<!-- export class Language {
-  id: string;
-  flag: string;
-  locale: {
-      [key: string]: LanguageLocale
-  };
-}
-
-export class LanguageLocale {
-  label: string;
-} -->
-
 <div class="form">
 
   <h1>Langage</h1>
@@ -40,9 +28,9 @@ export class LanguageLocale {
             <ng-template mat-tab-label>
               <div class="flag-icon {{ language.flag }}"></div>
               <div>{{ language.label }}</div>
-          </ng-template>
+            </ng-template>
             <mat-card>
-              <mat-form-field> 
+              <mat-form-field>
                 <mat-label>Libellé</mat-label>
                 <input type="text" class="text" matInput placeholder="Description" formControlName='label'>
               </mat-form-field>

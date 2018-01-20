@@ -2,7 +2,7 @@
 
 <div class="clear gridHeader">
     <mat-form-field class="left">
-        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtre">
     </mat-form-field>
     <mat-paginator class="right" [pageSizeOptions]="[25, 50, 100]"></mat-paginator>
     <button type="button" (click)="addUser()" class="btn btn-dark addButtonGrid right">Ajouter</button>
@@ -59,15 +59,22 @@
             <mat-cell *matCellDef="let row"> {{row.email }} </mat-cell>
         </ng-container>
 
-        <!-- password Column -->
-        <ng-container matColumnDef="password">
-            <mat-header-cell *matHeaderCellDef mat-sort-header> Mot de passe </mat-header-cell>
-            <mat-cell *matCellDef="let row"> {{row.password}} </mat-cell>
-        </ng-container>
-
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
         <mat-row *matRowDef="let row; columns: displayedColumns;" (dblclick)="redirectOnDetail(row.id)">
         </mat-row>
 
     </mat-table>
 </div>
+
+<hr>
+
+<mat-expansion-panel>
+    <mat-expansion-panel-header>
+        <mat-panel-title>
+            Amélioration continue
+        </mat-panel-title>
+    </mat-expansion-panel-header>
+    <ul>
+        <li>Gérer le format date</li>
+    </ul>
+</mat-expansion-panel>

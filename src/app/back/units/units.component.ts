@@ -13,7 +13,7 @@ import { LanguageService } from '../../services/language.service';
 })
 export class UnitsComponent implements OnInit {
   units: Unit[];
-  displayedColumns = ['select', 'id', 'title', 'description'];
+  displayedColumns = ['select', 'id', 'title', 'shorted'];
   dataSource: MatTableDataSource<Unit>;
   selection: SelectionModel<Unit>;
 

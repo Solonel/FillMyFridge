@@ -12,7 +12,7 @@ import { UserService } from '../../services/user.service';
 })
 export class UsersComponent implements OnInit {
   users: User[];
-  displayedColumns = ['select', 'id', 'gender', 'lastName', 'firstName', 'birthDate', 'email', 'password'];
+  displayedColumns = ['select', 'id', 'gender', 'lastName', 'firstName', 'birthDate', 'email'];
 
   dataSource: MatTableDataSource<User>;
   selection: SelectionModel<User>;

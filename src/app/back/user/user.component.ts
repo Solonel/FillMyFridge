@@ -13,8 +13,6 @@ import { User } from '../../classes/user';
 })
 
 export class UserComponent implements OnInit {
-
-  @Input() user: User;
   userForm: FormGroup;
 
   isLoading = true;
@@ -40,7 +38,6 @@ export class UserComponent implements OnInit {
       birthDate: null,
       email: null,
       password: null,
-
     });
 
   }
@@ -52,9 +49,7 @@ export class UserComponent implements OnInit {
         this.isLoading = false;
       })
       .subscribe(user => {
-        this.user = user;
         if (user) {
-
           this.userForm.patchValue({
             id: user.id,
             gender: user.gender,
@@ -72,20 +67,22 @@ export class UserComponent implements OnInit {
     this.router.navigate([`users`]);
   }
 
+  goToUser(id) {
+    this.router.navigate([`user/${id}`]);
+  }
+
   save(): void {
-    console.log("save", this.user);
-    this.userService.updateUser(this.user)
-      .subscribe(() => this.goToList());
+    this.userService.updateUser(this.userForm.value)
+      .subscribe(() => this.getUser());
   }
 
   delete(): void {
-    console.log("delete", this.user);
-    this.userService.deleteUser(this.user)
+    this.userService.deleteUser(this.userForm.value)
       .subscribe(() => this.goToList());
   }
 
   addUser(formData) {
-    this.userService.addUser(formData).subscribe(() => this.goToList());;
+    this.userService.addUser(formData).subscribe((user) => this.goToUser(user.id));;
   }
 
 }

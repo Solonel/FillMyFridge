@@ -1,9 +1,9 @@
 <lsc-back-menu></lsc-back-menu>
 
 <div class="clear gridHeader">
-  <mat-form-field class="left">
+  <!-- <mat-form-field class="left">
     <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
-  </mat-form-field>
+  </mat-form-field> -->
   <mat-paginator class="right" [pageSizeOptions]="[25, 50, 100]"></mat-paginator>
   <button type="button" (click)="addUnit()" class="btn btn-dark addButtonGrid right">Ajouter</button>
 </div>
@@ -35,9 +35,9 @@
       <mat-cell *matCellDef="let row"> {{row.locale[this.languageService.getDefaultLanguageId()].title}} </mat-cell>
     </ng-container>
 
-    <!-- description Column -->
-    <ng-container matColumnDef="description">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> Raccourcis </mat-header-cell>
+    <!-- shorted Column -->
+    <ng-container matColumnDef="shorted">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Symboles </mat-header-cell>
       <mat-cell *matCellDef="let row"> {{row.locale[this.languageService.getDefaultLanguageId()].shorted}} </mat-cell>
     </ng-container>
 
@@ -48,3 +48,16 @@
 
   </mat-table>
 </div>
+
+<hr>
+
+<mat-expansion-panel>
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      Amélioration continue
+    </mat-panel-title>
+  </mat-expansion-panel-header>
+  <ul>
+    <li>Ajouter un filtre</li>
+  </ul>
+</mat-expansion-panel>
