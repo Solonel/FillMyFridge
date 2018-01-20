@@ -1,10 +1,32 @@
 <lsc-front-menu></lsc-front-menu>
 
-<div>
+<div class="alert alert-primary"> 
   - Créer une nouvelle liste
 </div>
+<form [formGroup]="newShoppingList">
+  <div class="row">
+    <div class="col">
+      <div class="form-group">
+        <label for="nbPeople">Nombre de personnes</label>
+        <input formControlName="nbPeople" type="number" class="form-control" id="nbPeople" aria-describedby="nbPeopleHelp" placeholder="Nombre de personnes">
+        <small id="nbPeopleHelp" class="form-text text-muted">Nombre de personne par repas</small>
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-group">
+        <label for="nbMeal">Nombre de repas</label>
+        <input formControlName="nbMeal" type="number" class="form-control" id="nbMeal" aria-describedby="nbMealHelp" placeholder="Nombre de repas">
+        <small id="nbMealHelp" class="form-text text-muted">Nombre de repas à prévoir</small>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <button type="button" (click)="generate(newShoppingList.value)" class="btn btn-success"> Générer ma liste de courses ! </button>
+    </div>
+  </div>
+</form>
 
-
-<div>
-    - Consulter les listes déjà créées
+<div class="alert alert-primary">
+  - Consulter les listes déjà créées
 </div>

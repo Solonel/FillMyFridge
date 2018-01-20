@@ -39,8 +39,7 @@ export class UsersComponent implements OnInit {
       .subscribe(users => {
         this.users = users;
         this.dataSource.data = users;
-      }
-      );
+      });
   }
 
   addUser() {

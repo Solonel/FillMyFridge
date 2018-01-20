@@ -10,24 +10,25 @@ import { FormControl, FormGroup, FormArray, FormBuilder } from '@angular/forms';
 })
 export class ShoppingListComponent implements OnInit {
 
+  newShoppingList: FormGroup;
+
   constructor(
     private shoppingListService: ShoppingListService,
-    private fb: FormControl) { }
+    private fb: FormBuilder) {
+    this.createNewShoppingList();
+  }
 
   ngOnInit() {
-    this.createForm();
-  }
-  createForm() {
-  }
-  //   id: number;
-  //   userId: User;
-  //   recipes: Recipe[];
-  //   items: ShoppingListItem[];
-  // }
-  // export class ShoppingListItem {
-  //   id: number;
-  //   quantity: number
-  //   unit: string;
-  //   item: string;
+  };
 
+  createNewShoppingList() {
+    this.newShoppingList = this.fb.group({
+      nbPeople: null,
+      nbMeal: null,
+    });
+  };
+
+  generate(formValues) {
+    console.log(formValues);
+  }
 }
