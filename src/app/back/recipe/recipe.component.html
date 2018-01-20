@@ -1,32 +1,136 @@
 <lsc-back-menu></lsc-back-menu>
 
-<!-- <div *ngIf="!isLoading">
-    <form [formGroup]="categoryForm"> -->
+<div class="form">
 
-        <p>id</p>
-        <mat-form-field>
-            <input matInput placeholder="Title">
-        </mat-form-field>
-        <mat-form-field>
-            <input matInput placeholder="Description">
-        </mat-form-field>
-        <p>Directions</p>
-        <p>Proportions</p>
-        <mat-form-field>
-            <input matInput placeholder="Nombre de personne" type="number">
-        </mat-form-field>
-        <mat-form-field>
-            <input matInput placeholder="Temps de préparation" type="time">
-        </mat-form-field>
-        <mat-form-field>
-            <input matInput placeholder="Temps de cuisson" type="time">
-        </mat-form-field>
-        <mat-form-field>
-            <input matInput placeholder="Temps de total" type="time">
-        </mat-form-field>
-        <mat-slide-toggle> Publié </mat-slide-toggle>
-        <mat-form-field>
-            <input matInput placeholder="Note" type="number">
-        </mat-form-field>
-<!--     </form>
-</div> -->
+    <h1>Recette</h1>
+    <div *ngIf="!isLoading">
+
+        <form [formGroup]="recipeForm" novalidate>
+
+            <mat-form-field>
+                <input disabled value="{{recipeForm.value.id}}" matInput type="number" placeholder="Id">
+            </mat-form-field>
+
+            <p>author</p>
+
+            <mat-form-field>
+                <mat-label>Note</mat-label>
+                <input matInput placeholder="Note" formControlName="rating" type="number">
+            </mat-form-field>
+
+            <p>proportions</p>
+
+            <mat-form-field>
+                <mat-label>Nombre de personnes</mat-label>
+                <input matInput placeholder="Nombre de personnes" formControlName="servings" type="number">
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Temps de préparation</mat-label>
+                <input matInput formControlName="preparation" placeholder="Temps de préparation" type="time">
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Temps de cuisson</mat-label>
+                <input matInput formControlName="cook" placeholder="Temps de cuisson" type="time">
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Temps total</mat-label>
+                <input matInput formControlName="readyin" placeholder="Temps total" type="time">
+            </mat-form-field>
+
+            <mat-slide-toggle placeholder="Publié" formControlName="published">Publié</mat-slide-toggle>
+
+            <hr>
+
+            <div formGroupName="locale">
+
+                <mat-tab-group>
+
+                    <mat-tab *ngFor="let language of implementedLanguages" formGroupName="{{language.id}}">
+                        <ng-template mat-tab-label>
+                            <div class="flag-icon {{ language.flag }}"></div>
+                            <div>{{ language.label }}</div>
+                        </ng-template>
+                        <mat-card>
+                            <mat-form-field>
+                                <mat-label>Description</mat-label>
+                                <input type="text" matInput placeholder="Description" formControlName='description'>
+                            </mat-form-field>
+
+                            <mat-form-field>
+                                <mat-label>Titre</mat-label>
+                                <input matInput placeholder="Titre">
+                            </mat-form-field>
+
+                            <mat-slide-toggle placeholder="available" formControlName="available">Disponible</mat-slide-toggle>
+
+                            <p>directions</p>
+
+                        </mat-card>
+
+                    </mat-tab>
+                    <mat-tab label="Ajouter une langue" *ngIf="notImplementedLanguages.length > 0">
+                        <mat-card>
+                            <mat-form-field>
+                                <mat-select placeholder="Langue" [(value)]="newLanguageId" (change)="addNewLanguage(newLanguageId)">
+                                    <mat-option *ngFor="let language of notImplementedLanguages" [value]="language.id">
+                                        {{ language.label }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </mat-card>
+
+                        <div formGroupName="{{newLanguageId}}" *ngIf="isNewLanguageReady">
+                            <mat-card>
+                                <mat-form-field>
+                                    <mat-label>Description</mat-label>
+                                    <input type="text" matInput placeholder="Description" formControlName='description'>
+                                </mat-form-field>
+
+                                <mat-form-field>
+                                    <mat-label>Titre</mat-label>
+                                    <input matInput placeholder="Titre">
+                                </mat-form-field>
+
+                                <mat-slide-toggle placeholder="available" formControlName="available">Disponible</mat-slide-toggle>
+
+                                <p>directions</p>
+
+                            </mat-card>
+                        </div>
+                    </mat-tab>
+                </mat-tab-group>
+            </div>
+
+            <hr>
+
+            <div *ngIf="!recipeForm.value.id">
+                <button (click)="add()" type="button" class="btn btn-primary"> Enregistrer </button>
+            </div>
+
+            <div *ngIf="recipeForm.value.id">
+                <button type="button" (click)="update()" class="btn btn-success"> Modifier </button>
+                <button type="button" (click)="delete()" class="btn btn-danger"> Supprimer </button>
+            </div>
+
+            <hr>
+        </form>
+
+    </div>
+
+    <hr>
+
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                Amélioration continue
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        <ul>
+            <li></li>
+        </ul>
+    </mat-expansion-panel>
+
+</div>

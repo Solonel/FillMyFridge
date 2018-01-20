@@ -4,9 +4,10 @@ import { Location } from '@angular/common';
 import { CategoryService } from '../../services/category.service'
 import { LanguageService } from '../../services/language.service';
 import { Category, CategoryLocale } from '../../classes/category';
-import { FormControl, FormGroup, FormArray, FormBuilder } from '@angular/forms';
-import 'rxjs/add/operator/finally';
+// import { FormControl, FormGroup, FormArray, FormBuilder } from '@angular/forms';
+import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
 import { Recipe } from '../../classes/Recipe';
+import 'rxjs/add/operator/finally';
 
 @Component({
   selector: 'lsc-category',
@@ -172,30 +173,28 @@ export class CategoryComponent implements OnInit {
     this.isNewLanguageReady = true;
   }
 
-  get recipeFormArray(): FormArray {
-    return this.categoryForm.get('recipes') as FormArray;
-  }
+  // get recipeFormArray(): FormArray {
+  //   return this.categoryForm.get('recipes') as FormArray;
+  // }
 
+  // setRecipeArray(recipes: Recipe[]) {
+  //   let recipeFormGroups = recipes.map(recipe => (
+  //     this.fb.group({
+  //       id: recipe.id,// Id
+  //       title: recipe.title,// Titre
+  //       description: recipe.description, // Petite description
+  //       servings: recipe.servings, // Nombre de personnes
+  //       preparation: recipe.preparation, // Temps de préparation
+  //       cook: recipe.cook,// Temps de cuisson
+  //       readyin: recipe.readyin, // Prêt en combien de temps
+  //       published: recipe.published, // Publié sur le site
+  //       rating: recipe.rating,// Notation
+  //     })
+  //   ));
 
-
-  setRecipeArray(recipes: Recipe[]) {
-    let recipeFormGroups = recipes.map(recipe => (
-      this.fb.group({
-        id: recipe.id,// Id
-        title: recipe.title,// Titre
-        description: recipe.description, // Petite description
-        servings: recipe.servings, // Nombre de personnes
-        preparation: recipe.preparation, // Temps de préparation
-        cook: recipe.cook,// Temps de cuisson
-        readyin: recipe.readyin, // Prêt en combien de temps
-        published: recipe.published, // Publié sur le site
-        rating: recipe.rating,// Notation
-      })
-    ));
-
-    let recipeFormArray = this.fb.array(recipeFormGroups);
-    this.categoryForm.setControl('recipes', recipeFormArray);
-  }
+  //   let recipeFormArray = this.fb.array(recipeFormGroups);
+  //   this.categoryForm.setControl('recipes', recipeFormArray);
+  // }
 
   goToList(): void {
     this.router.navigate([`categories`]);
@@ -226,11 +225,11 @@ export class CategoryComponent implements OnInit {
       .subscribe(category => { this.goToCategory(category.id) });;
   }
 
-  removeRecipes(recipes) {
-    recipes.selectedOptions.selected.map(item => {
-      this.recipeFormArray.removeAt(this.recipeFormArray.value.findIndex(recipe => recipe.id === item.id))
-    });
-    recipes.deselectAll();
-  }
+  // removeRecipes(recipes) {
+  //   recipes.selectedOptions.selected.map(item => {
+  //     this.recipeFormArray.removeAt(this.recipeFormArray.value.findIndex(recipe => recipe.id === item.id))
+  //   });
+  //   recipes.deselectAll();
+  // }
 
 }

@@ -1,9 +1,9 @@
 <lsc-back-menu></lsc-back-menu>
 
 <div class="clear gridHeader">
-    <mat-form-field class="left">
+    <!-- <mat-form-field class="left">
         <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
-    </mat-form-field>
+    </mat-form-field> -->
     <mat-paginator class="right" [pageSizeOptions]="[25, 50, 100]"></mat-paginator>
     <button type="button" (click)="addRecipe()" class="btn btn-dark right addButtonGrid">Ajouter</button>
 </div>
@@ -32,13 +32,31 @@
         <!-- title Column -->
         <ng-container matColumnDef="title">
             <mat-header-cell *matHeaderCellDef mat-sort-header> Titre </mat-header-cell>
-            <mat-cell *matCellDef="let row"> {{row.title}} </mat-cell>
+            <mat-cell *matCellDef="let row"> {{row.locale[this.languageService.getDefaultLanguageId()].title}} </mat-cell>
         </ng-container>
 
         <!-- description Column -->
         <ng-container matColumnDef="description">
             <mat-header-cell *matHeaderCellDef mat-sort-header> Description </mat-header-cell>
-            <mat-cell *matCellDef="let row"> {{row.description}} </mat-cell>
+            <mat-cell *matCellDef="let row"> {{row.locale[this.languageService.getDefaultLanguageId()].description}} </mat-cell>
+        </ng-container>
+
+        <!-- preparation Column -->
+        <ng-container matColumnDef="preparation">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Temps de préparation </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.preparation}} </mat-cell>
+        </ng-container>
+
+        <!-- cook Column -->
+        <ng-container matColumnDef="cook">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Temps de cuisson </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.cook}} </mat-cell>
+        </ng-container>
+
+        <!-- readyin Column -->
+        <ng-container matColumnDef="readyin">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Temps total </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.readyin}} </mat-cell>
         </ng-container>
 
         <!-- published  Column -->
@@ -57,7 +75,18 @@
     </mat-table>
 </div>
 
+<hr>
 
+<mat-expansion-panel>
+    <mat-expansion-panel-header>
+        <mat-panel-title>
+            Amélioration continue
+        </mat-panel-title>
+    </mat-expansion-panel-header>
+    <ul>
+        <li>Ajouter un filtre</li>
+    </ul>
+</mat-expansion-panel>
 <!-- Copyright 2017 Google Inc. All Rights Reserved.
       Use of this source code is governed by an MIT-style license that
       can be found in the LICENSE file at http://angular.io/license -->

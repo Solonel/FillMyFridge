@@ -200,18 +200,7 @@ export class InMemoryDataService implements InMemoryDbService {
     const recipes: Recipe[] = [
       {
         id: 1,
-        title: "Gâteau au chocolat fondant rapide",
-        description: "",
-        directions: [
-          "Préchauffez votre four à 180°C (thermostat 6).",
-          "Dans une casserole, faites fondre le chocolat et le beurre coupé en morceaux à feu très doux.",
-          "Dans un saladier, ajoutez le sucre, les oeufs, la farine. Mélangez.",
-          "Ajoutez le mélange chocolat/beurre. Mélangez bien.",
-          "Beurrez et farinez votre moule puis y versez la pâte à gâteau.",
-          "Faites cuire au four environ 20 minutes.",
-          "A la sortie du four le gâteau ne paraît pas assez cuit. C'est normal, laissez-le refroidir puis démoulez- le."],
         proportions: [
-          { quantity: 200, unit: units[0], ingredient: ingredients[0] }, // 1
           proportions[1],
           proportions[2],
           proportions[3],
@@ -223,21 +212,25 @@ export class InMemoryDataService implements InMemoryDbService {
         readyin: new Date(),
         published: true,
         rating: 4.5,
-        author: authors[0]
+        author: authors[0],
+        locale: {
+          "fr-fr": {
+            title: "Gâteau au chocolat fondant rapide",
+            description: "",
+            directions: [
+              { order: 1, description: "Préchauffez votre four à 180°C (thermostat 6)." },
+              { order: 2, description: "Dans une casserole, faites fondre le chocolat et le beurre coupé en morceaux à feu très doux." },
+              { order: 3, description: "Dans un saladier, ajoutez le sucre, les oeufs, la farine. Mélangez." },
+              { order: 4, description: "Ajoutez le mélange chocolat/beurre. Mélangez bien." },
+              { order: 5, description: "Beurrez et farinez votre moule puis y versez la pâte à gâteau." },
+              { order: 6, description: "Faites cuire au four environ 20 minutes." },
+              { order: 7, description: "A la sortie du four le gâteau ne paraît pas assez cuit. C'est normal, laissez-le refroidir puis démoulez- le." }],
+            available: true
+          }
+        }
       },
       {
         id: 2,
-        title: "Oeufs mimosa",
-        description: "",
-        directions: [
-          "Faire durcir les oeufs 10 mn, puis les mettre dans l'eau froide.",
-          "utiliser une mayonnaise prête vendue dans le commerce.",
-          "Les oeufs écalés, les couper dans le sens de la longueur, séparer les blancs des jaunes.",
-          "Dans une assiette creuse, émietter les jaunes à la fourchette, mélanger la moitié de ces jaunes émiettés avec la mayonnaise et réserver le reste.",
-          "Remplir les demi-blancs de cette préparation, puis saupoudrer chaque demi-oeuf du reste de jaunes émiettés (ce qui fait le mimosa !!).",
-          "Disposer les oeufs dans une assiette",
-          "Servir frais."
-        ],
         proportions: [
           proportions[5],
           proportions[6]
@@ -248,18 +241,26 @@ export class InMemoryDataService implements InMemoryDbService {
         readyin: new Date(),
         published: true,
         rating: 5,
-        author: authors[1]
+        author: authors[1],
+        locale: {
+          "fr-fr": {
+            title: "Oeufs mimosa",
+            description: "",
+            directions: [
+              { order: 1, description: "Faire durcir les oeufs 10 mn, puis les mettre dans l'eau froide." },
+              { order: 2, description: "utiliser une mayonnaise prête vendue dans le commerce." },
+              { order: 3, description: "Les oeufs écalés, les couper dans le sens de la longueur, séparer les blancs des jaunes." },
+              { order: 4, description: "Dans une assiette creuse, émietter les jaunes à la fourchette, mélanger la moitié de ces jaunes émiettés avec la mayonnaise et réserver le reste." },
+              { order: 5, description: "Remplir les demi-blancs de cette préparation, puis saupoudrer chaque demi-oeuf du reste de jaunes émiettés (ce qui fait le mimosa !!)." },
+              { order: 6, description: "Disposer les oeufs dans une assiette" },
+              { order: 7, description: "Servir frais." }
+            ],
+            available: true
+          }
+        }
       },
       {
         id: 3,
-        title: "Tomates-mozza aux herbes",
-        description: "Des tranches de tomate et de mozzarella parsemées d'herbes de provence",
-        directions: [
-          "Coupez des fines tranches de tomates et de mozzarella puis rangez-les dans cet ordre : une tranche de tomate puis une tranche de mozzarella et ainsi de suite.",
-          "Saupoudrez-les de persil, ail, estragon, persillade lyophilisée, la ciboulette, du basilic et du thym.",
-          "Mettez de la sauce de façon à ce que les tomates et les herbes en soit recouverts au 3/4.",
-          "Prenez des belle feuilles de salade bien ondulées et bien vertes pour les mettre autour des tomates et de la mozzarella pour un beau petit décor raffiné.",
-        ],
         proportions: [
           proportions[8],
           proportions[9]
@@ -270,7 +271,20 @@ export class InMemoryDataService implements InMemoryDbService {
         readyin: new Date(),
         published: true,
         rating: 5,
-        author: authors[1]
+        author: authors[1],
+        locale: {
+          "fr-fr": {
+            title: "Tomates-mozza aux herbes",
+            description: "Des tranches de tomate et de mozzarella parsemées d'herbes de provence",
+            directions: [
+              { order: 1, description: "Coupez des fines tranches de tomates et de mozzarella puis rangez-les dans cet ordre : une tranche de tomate puis une tranche de mozzarella et ainsi de suite." },
+              { order: 2, description: "Saupoudrez-les de persil, ail, estragon, persillade lyophilisée, la ciboulette, du basilic et du thym." },
+              { order: 3, description: "Mettez de la sauce de façon à ce que les tomates et les herbes en soit recouverts au 3/4." },
+              { order: 4, description: "Prenez des belle feuilles de salade bien ondulées et bien vertes pour les mettre autour des tomates et de la mozzarella pour un beau petit décor raffiné." },
+            ],
+            available: true
+          }
+        }
       }
     ];
 

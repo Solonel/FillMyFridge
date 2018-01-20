@@ -29,12 +29,12 @@ export class IngredientComponent implements OnInit {
   ingredientForm: FormGroup;
 
   /**
-   * Les langues de l'ingredient implémenté
+   * Les langues de l'ingredient implémentées
    */
   implementedLanguages = [];
 
   /**
- * Les langues de l'ingredient non implémenté
+ * Les langues de l'ingredient non implémentées
  */
   notImplementedLanguages = [];
 
@@ -111,7 +111,7 @@ export class IngredientComponent implements OnInit {
 
   /**
    * Créé les FormGroup par langue
-   * @param locale Liste langue sur les ingredients
+   * @param locale Liste id langue sur l'ingredient'
    */
   setLocaleGroup(locale) {
     // On créé un tableau temporaire pour avoir les id des langues de l ingredient
