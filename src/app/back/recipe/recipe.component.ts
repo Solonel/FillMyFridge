@@ -5,6 +5,8 @@ import { FormControl, FormGroup, FormBuilder, FormArray } from '@angular/forms';
 import { Recipe, RecipeLocale } from '../../classes/recipe';
 import { LanguageService } from '../../services/language.service';
 import { Observable } from 'rxjs/Observable';
+import { MatTableDataSource } from '@angular/material';
+import { Proportion } from '../../classes/proportion';
 
 @Component({
   selector: 'lsc-recipe',
@@ -12,6 +14,12 @@ import { Observable } from 'rxjs/Observable';
   styleUrls: ['./recipe.component.css']
 })
 export class RecipeComponent implements OnInit {
+
+  //displayedColumns = ['quantity', 'unit', 'ingredient', 'actionsColumn'];
+  displayedColumns = ['quantity', 'unit', 'ingredient'];
+  
+  dataSource: MatTableDataSource<Proportion>;
+
   /**
   * Permet de temporiser le html tant que le chargement de la recette n'est pas terminé
   */
@@ -41,6 +49,7 @@ export class RecipeComponent implements OnInit {
    *  Dictionnaire de langue de la recette
    */
   locales: { [key: string]: FormGroup };
+
 
 
   /**
@@ -109,6 +118,7 @@ export class RecipeComponent implements OnInit {
           readyin: recipe.readyin,
           published: recipe.published,
         });
+
         this.setProportions(recipe.proportions)
         this.setLocaleGroup(recipe.locale);
       });
@@ -124,7 +134,7 @@ export class RecipeComponent implements OnInit {
   }
 
   setProportions(proportions) {
-
+    this.dataSource = new MatTableDataSource(proportions);
   }
 
   /**
