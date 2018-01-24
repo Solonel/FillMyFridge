@@ -30,3 +30,28 @@
 <div class="alert alert-primary">
   - Consulter les listes déjà créées
 </div>
+<!-- 
+Une liste de course contient 
+
+ShoppingListe
+{
+  user : User
+  config : ConfigurationShoppingListe[];
+  shoppingItems : {
+    closed: boolean; // course fait
+    ShoppingItems[{quantité / unit / nom ingredient / check /}]       
+  }
+  cooking : Cooking [] {
+              recipe : Recipe
+              nbPers : number
+              RecipeDone : boolean
+            }
+  closed : boolean;   // recette fait  + course fait     
+}
+
+ConfigurationShoppingListe {
+  nb pers
+  category
+  nb repas
+  recipe[]
+} -->
