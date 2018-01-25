@@ -1,24 +1,40 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, Injectable, EventEmitter } from '@angular/core';
 import { RecipeService } from '../../services/recipe.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormControl, FormGroup, FormBuilder, FormArray } from '@angular/forms';
+import { FormControl, FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
 import { Recipe, RecipeLocale } from '../../classes/recipe';
 import { LanguageService } from '../../services/language.service';
 import { Observable } from 'rxjs/Observable';
-import { MatTableDataSource } from '@angular/material';
 import { Proportion } from '../../classes/proportion';
+
+
+import { TableDataSource, ValidatorService } from 'angular4-material-table';
+
+@Injectable()
+export class ProportionValidatorService implements ValidatorService {
+  getRowValidator(): FormGroup {
+    return new FormGroup({
+      'unit': new FormControl(),
+      'ingredient': new FormControl(),
+      'quantity': new FormControl(),
+    });
+  }
+}
+
 
 @Component({
   selector: 'lsc-recipe',
   templateUrl: './recipe.component.html',
-  styleUrls: ['./recipe.component.css']
+  styleUrls: ['./recipe.component.css'],
+  providers: [
+    { provide: ValidatorService, useClass: ProportionValidatorService }
+  ],
 })
 export class RecipeComponent implements OnInit {
 
-  //displayedColumns = ['quantity', 'unit', 'ingredient', 'actionsColumn'];
-  displayedColumns = ['quantity', 'unit', 'ingredient'];
-  
-  dataSource: MatTableDataSource<Proportion>;
+  displayedColumns = ['quantity', 'unit', 'ingredient', 'actionsColumn'];
+
+  dataSource: TableDataSource<Proportion>;
 
   /**
   * Permet de temporiser le html tant que le chargement de la recette n'est pas terminé
@@ -65,7 +81,7 @@ export class RecipeComponent implements OnInit {
     private router: Router,
     private recipeService: RecipeService,
     private fb: FormBuilder,
-    private languageService: LanguageService) {
+    private languageService: LanguageService, private proportionValidatorService: ValidatorService) {
     this.createForm();
     // On initialise l objet 
     this.locales = {}
@@ -79,7 +95,7 @@ export class RecipeComponent implements OnInit {
       id: null,
       author: null,
       rating: null,
-      proportions: this.fb.array([]),
+      proportions: null,
       servings: null,
       preparation: null,
       cook: null,
@@ -108,21 +124,24 @@ export class RecipeComponent implements OnInit {
         // On n'est plus en loading
         this.isLoading = false;
       }).subscribe(recipe => {
-        this.recipeForm.patchValue({
-          id: recipe.id,
-          author: recipe.author,
-          rating: recipe.rating,
-          servings: recipe.servings,
-          preparation: recipe.preparation,
-          cook: recipe.cook,
-          readyin: recipe.readyin,
-          published: recipe.published,
-        });
+        if (recipe) {
+          this.recipeForm.patchValue({
+            id: recipe.id,
+            author: recipe.author,
+            rating: recipe.rating,
+            servings: recipe.servings,
+            preparation: recipe.preparation,
+            cook: recipe.cook,
+            readyin: recipe.readyin,
+            published: recipe.published
+          });
 
-        this.setProportions(recipe.proportions)
-        this.setLocaleGroup(recipe.locale);
+          this.setProportions(recipe.proportions ? recipe.proportions : [])
+          this.setLocaleGroup(recipe.locale);
+        }
       });
     } else {
+      this.setProportions([]);
       this.languageService.getNotImplementedLanguages([]).finally(() => {
         this.isLoading = false;
       }).subscribe(notImplementedLanguages => {
@@ -134,7 +153,12 @@ export class RecipeComponent implements OnInit {
   }
 
   setProportions(proportions) {
-    this.dataSource = new MatTableDataSource(proportions);
+    this.dataSource = new TableDataSource<any>(proportions, Proportion, this.proportionValidatorService);
+    this.dataSource.datasourceSubject.subscribe(proportions => {
+      this.recipeForm.patchValue({
+        proportions: proportions
+      });
+    });
   }
 
   /**

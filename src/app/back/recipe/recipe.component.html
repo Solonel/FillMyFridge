@@ -41,54 +41,59 @@
 
             <mat-slide-toggle placeholder="Publié" formControlName="published">Publié</mat-slide-toggle>
 
-            <mat-table #table class="grid" [dataSource]="dataSource" matSort>
+            <hr>
 
-                    <!-- quantity Column -->
-                    <ng-container matColumnDef="quantity">
-                        <mat-header-cell *matHeaderCellDef mat-sort-header> Quantité </mat-header-cell>
-                        <mat-cell *matCellDef="let row"> {{row.quantity}} </mat-cell>
-                    </ng-container>
+            <mat-table class="table-margin-bottom" #table [dataSource]="dataSource">
+                <ng-container matColumnDef="quantity">
+                    <mat-header-cell *matHeaderCellDef> quantity </mat-header-cell>
+                    <mat-cell *matCellDef="let row">
+                        <div *ngIf="!row.editing">
+                            {{row.currentData.quantity}}
+                        </div>
+                         <div *ngIf="row.editing"> 
+                            <mat-form-field>
+                                <input matInput [formControl]="row.validator.controls['quantity']"  type="number" placeholder="quantity" [(ngModel)]="row.currentData.quantity">
+                            </mat-form-field>
+                         </div> 
+                    </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="unit">
+                    <mat-header-cell *matHeaderCellDef> unit </mat-header-cell>
+                    <mat-cell *matCellDef="let row">
+                        {{row.currentData.unit}}
+                        <!-- <input matInput [formControl]="row.validator.controls['unit']" type="number" placeholder="unit" [(ngModel)]="row.currentData.unit"> -->
 
-                    <!-- description Column -->
-                    <ng-container matColumnDef="unit">
-                        <mat-header-cell *matHeaderCellDef mat-sort-header> Unité </mat-header-cell>
-                        <mat-cell *matCellDef="let row">
-                            {{row.unit ? row.unit.locale[this.languageService.getDefaultLanguageId()].shorted : ''}}
-                        </mat-cell>
-                    </ng-container>
+                    </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="ingredient">
+                    <mat-header-cell *matHeaderCellDef> ingredient </mat-header-cell>
+                    <mat-cell *matCellDef="let row">
+                        {{row.currentData.ingredient}}
+                        <!-- <input matInput [formControl]="row.validator.controls['ingredient']" placeholder="ingredient" [(ngModel)]="row.currentData.ingredient"> -->
+                    </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="actionsColumn">
+                    <mat-header-cell *matHeaderCellDef>
+                        <button mat-icon-button color="accent" (click)="dataSource.createNew()">
+                            <i class="fa fa-plus mat-icon"></i>
+                        </button>
+                    </mat-header-cell>
+                    <mat-cell *matCellDef="let row">
+                        <button *ngIf="!row.editing" mat-icon-button color="primary" focusable="false" (click)="row.startEdit()">
+                            <i class="fa fa-pencil mat-icon"></i>
+                        </button>
+                        <button *ngIf="row.editing" mat-icon-button color="primary" focusable="false" (click)="row.confirmEditCreate()">
+                            <i class="fa fa-check mat-icon"></i>
+                        </button>
+                        <button mat-icon-button color="primary" focusable="false" (click)="row.cancelOrDelete()">
+                            <i class="fa fa-times mat-icon"></i>
+                        </button>
+                    </mat-cell>
+                </ng-container>
 
-                    <!-- title Column -->
-                    <ng-container matColumnDef="ingredient">
-                        <mat-header-cell *matHeaderCellDef mat-sort-header> Ingredient </mat-header-cell>
-                        <mat-cell *matCellDef="let row"> {{row.quantity > 1 ? row.ingredient.locale[this.languageService.getDefaultLanguageId()].title.plural
-                            : row.ingredient.locale[this.languageService.getDefaultLanguageId()].title.singular}}
-                        </mat-cell>
-                    </ng-container>
-
-                   <!-- <ng-container matColumnDef="actionsColumn">
-                        <mat-header-cell *matHeaderCellDef>
-                            <button mat-icon-button color="accent" (click)="dataSource.createNew()">
-                                <i class="fa fa-plus mat-icon"></i>
-                            </button>
-                        </mat-header-cell>
-                         <mat-cell *matCellDef="let row">
-                            <button *ngIf="!row.editing" mat-icon-button color="primary" focusable="false" (click)="row.startEdit()">
-                                <i class="fa fa-pencil mat-icon"></i>
-                            </button>
-                            <button *ngIf="row.editing" mat-icon-button color="primary" focusable="false" (click)="row.confirmEditCreate()">
-                                <i class="fa fa-check mat-icon"></i>
-                            </button>
-                            <button mat-icon-button color="primary" focusable="false" (click)="row.cancelOrDelete()">
-                                <i class="fa fa-times mat-icon"></i>
-                            </button>
-                        </mat-cell> 
-                    </ng-container>-->
-
-                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-                    <mat-row *matRowDef="let row; columns: displayedColumns;">
-                    </mat-row>
-
-                </mat-table>
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+            </mat-table>
 
             <hr>
 
