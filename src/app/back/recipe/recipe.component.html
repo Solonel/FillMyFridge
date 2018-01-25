@@ -12,7 +12,7 @@
             </mat-form-field>
 
             <p>author</p>
-
+            <p>Catégorie ?</p>
             <mat-form-field>
                 <mat-label>Note</mat-label>
                 <input matInput placeholder="Note" formControlName="rating" type="number">
@@ -50,11 +50,11 @@
                         <div *ngIf="!row.editing">
                             {{row.currentData.quantity}}
                         </div>
-                         <div *ngIf="row.editing"> 
+                        <div *ngIf="row.editing">
                             <mat-form-field>
-                                <input matInput [formControl]="row.validator.controls['quantity']"  type="number" placeholder="quantity" [(ngModel)]="row.currentData.quantity">
+                                <input matInput [formControl]="row.validator.controls['quantity']" type="number" placeholder="quantity" [(ngModel)]="row.currentData.quantity">
                             </mat-form-field>
-                         </div> 
+                        </div>
                     </mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="unit">
@@ -68,7 +68,21 @@
                 <ng-container matColumnDef="ingredient">
                     <mat-header-cell *matHeaderCellDef> ingredient </mat-header-cell>
                     <mat-cell *matCellDef="let row">
-                        {{row.currentData.ingredient}}
+                        <div *ngIf="!row.editing">
+                            {{row.currentData.ingredient.id}}
+                        </div>
+                        <div *ngIf="row.editing">
+                            <mat-form-field>
+                                <mat-select [formControl]="row.validator.controls['ingredient']" [(ngModel)]="row.currentData.ingredient" placeholder="Ingredient">
+
+                                    <mat-option *ngFor="let ingredient of ingredients" [value]="ingredient">
+                                        {{ ingredient.id }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+
                         <!-- <input matInput [formControl]="row.validator.controls['ingredient']" placeholder="ingredient" [(ngModel)]="row.currentData.ingredient"> -->
                     </mat-cell>
                 </ng-container>

@@ -9,6 +9,9 @@ import { Proportion } from '../../classes/proportion';
 
 
 import { TableDataSource, ValidatorService } from 'angular4-material-table';
+import { UnitService } from '../../services/unit.service';
+import { IngredientService } from '../../services/ingredient.service';
+import { Ingredient } from '../../classes/ingredient';
 
 @Injectable()
 export class ProportionValidatorService implements ValidatorService {
@@ -66,7 +69,9 @@ export class RecipeComponent implements OnInit {
    */
   locales: { [key: string]: FormGroup };
 
+  ingredients = [];
 
+  units = []
 
   /**
    * Constructeur 
@@ -75,13 +80,19 @@ export class RecipeComponent implements OnInit {
    * @param recipeService Le service recipe pour les traitements liés aux formulaires
    * @param fb Le formbuilder pour construire le formulaire react
    * @param languageService Le service language pour récupérer les informations de traduction
+   * @param proportionValidatorService Le service de validation des proportions
+   * @param unitService Le service unit pour récupérer les unités
+   * @param ingredientService Le service ingredient pour récupérer les ingredients
    */
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private recipeService: RecipeService,
     private fb: FormBuilder,
-    private languageService: LanguageService, private proportionValidatorService: ValidatorService) {
+    private languageService: LanguageService,
+    private proportionValidatorService: ValidatorService,
+    private unitService: UnitService,
+    private ingredientService: IngredientService) {
     this.createForm();
     // On initialise l objet 
     this.locales = {}
@@ -109,6 +120,8 @@ export class RecipeComponent implements OnInit {
    * Initialisation de la recette
    */
   ngOnInit() {
+    this.getIngredients();
+    this.getUnits();
     this.getRecipe();
   }
 
@@ -133,7 +146,8 @@ export class RecipeComponent implements OnInit {
             preparation: recipe.preparation,
             cook: recipe.cook,
             readyin: recipe.readyin,
-            published: recipe.published
+            published: recipe.published,
+            proportions: recipe.proportions
           });
 
           this.setProportions(recipe.proportions ? recipe.proportions : [])
@@ -158,6 +172,19 @@ export class RecipeComponent implements OnInit {
       this.recipeForm.patchValue({
         proportions: proportions
       });
+    });
+  }
+
+
+  getIngredients() {
+    this.ingredientService.getIngredients().subscribe(ingredients => {
+      this.ingredients = ingredients;
+    });
+  }
+
+  getUnits() {
+    this.unitService.getUnits().subscribe(units => {
+      this.units = units;
     });
   }
 
@@ -248,6 +275,7 @@ export class RecipeComponent implements OnInit {
    * Met à jour la recette
    */
   update() {
+    console.log(this.recipeForm.value)
     this.recipeService.updateRecipe(this.recipeForm.value)
       .subscribe(() => { this.getRecipe(); });
   }
