@@ -19,7 +19,8 @@ import { HomepageComponent } from './front/homepage/homepage.component';
 import { RegisterComponent } from './front/register/register.component';
 import { ProfileComponent } from './front/profile/profile.component';
 import { FrontRecipesComponent } from './front/front-recipes/front-recipes.component';
-import { ShoppingListComponent } from './front/shopping-list/shopping-list.component';
+import { MyShoppingListsComponent } from './front/my-shopping-lists/my-shopping-lists.component';
+import { ShoppingListGeneratorComponent } from './front/shopping-list-generator/shopping-list-generator.component';
 
 /**
  * Back Component
@@ -76,7 +77,8 @@ import { DevMenuComponent } from './dev-tool/dev-menu/dev-menu.component';
     ProfileComponent,
     FrontMenuComponent,
     FrontRecipesComponent,
-    ShoppingListComponent,
+    MyShoppingListsComponent,
+    ShoppingListGeneratorComponent,
     //BooksComponent,
     //BookComponent,
     DashBoardComponent,

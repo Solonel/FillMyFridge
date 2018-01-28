@@ -14,7 +14,12 @@
     </ul>
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a class="nav-link" href="#" routerLink="/shoppinglist">Générateur de liste de course</a>
+        <a class="nav-link" href="#" routerLink="/newshoppinglist">Nouvelle liste</a>
+      </li>
+    </ul>
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="#" routerLink="/myshoppinglists">Mes Listes</a>
       </li>
     </ul>
     <ul *ngIf="!auth.userIsLoggedIn()" class="navbar-nav navbar-right">

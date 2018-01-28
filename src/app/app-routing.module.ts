@@ -7,7 +7,8 @@ import { HomepageComponent } from './front/homepage/homepage.component';
 import { RegisterComponent } from './front/register/register.component';
 import { ProfileComponent } from './front/profile/profile.component';
 import { FrontRecipesComponent } from './front/front-recipes/front-recipes.component';
-import { ShoppingListComponent } from './front/shopping-list/shopping-list.component';
+import { MyShoppingListsComponent } from './front/my-shopping-lists/my-shopping-lists.component';
+import { ShoppingListGeneratorComponent } from './front/shopping-list-generator/shopping-list-generator.component';
 /** BackOffice Module */
 import { DashBoardComponent } from './back/dash-board/dash-board.component';
 import { IngredientComponent } from './back/ingredient/ingredient.component'
@@ -35,7 +36,8 @@ const routes: Routes = [
     { path: 'register', component: RegisterComponent },
     { path: 'profile', component: ProfileComponent },
     { path: 'ft-recipes', component: FrontRecipesComponent },
-    { path: 'shoppinglist', component: ShoppingListComponent },
+    { path: 'myshoppinglists', component: MyShoppingListsComponent },
+    { path: 'newshoppinglist', component: ShoppingListGeneratorComponent },
 
     // Back
     { path: 'administration', component: DashBoardComponent },

@@ -1,0 +1,94 @@
+<lsc-front-menu></lsc-front-menu>
+
+<form [formGroup]="shoppingListForm">
+  <mat-table class="table-margin-bottom" #table [dataSource]="dataSource">
+    <ng-container matColumnDef="nbPers">
+      <mat-header-cell *matHeaderCellDef> Nombre de personne </mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <div *ngIf="!row.editing">
+          {{row.currentData.nbPers}}
+        </div>
+        <div *ngIf="row.editing">
+          <mat-form-field>
+            <input matInput [formControl]="row.validator.controls['nbPers']" type="number" placeholder="Nombre de personne" [(ngModel)]="row.currentData.nbPers">
+          </mat-form-field>
+        </div>
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="category">
+      <mat-header-cell *matHeaderCellDef> Catégorie </mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <div *ngIf="!row.editing">
+          {{row.currentData.category}}
+        </div>
+        <div *ngIf="row.editing">
+          CHAMPS D'EDITION CATEGORIE
+        </div>
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="nbMeal">
+      <mat-header-cell *matHeaderCellDef> Nombre de repas </mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <div *ngIf="!row.editing">
+          {{row.currentData.nbMeal}}
+        </div>
+        <div *ngIf="row.editing">
+          <mat-form-field>
+            <input matInput [formControl]="row.validator.controls['nbMeal']" type="number" placeholder="Nombre de repâs" [(ngModel)]="row.currentData.nbMeal">
+          </mat-form-field>
+        </div>
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="actionsColumn">
+      <mat-header-cell *matHeaderCellDef>
+        <button mat-icon-button color="accent" (click)="dataSource.createNew()">
+          <i class="fa fa-plus mat-icon"></i>
+        </button>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <button *ngIf="!row.editing" mat-icon-button color="primary" focusable="false" (click)="row.startEdit()">
+          <i class="fa fa-pencil mat-icon"></i>
+        </button>
+        <button *ngIf="row.editing" mat-icon-button color="primary" focusable="false" (click)="row.confirmEditCreate()">
+          <i class="fa fa-check mat-icon"></i>
+        </button>
+        <button mat-icon-button color="primary" focusable="false" (click)="row.cancelOrDelete()">
+          <i class="fa fa-times mat-icon"></i>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+
+
+  <button class="btn btn-primary" type="button" (click)="generateList(shoppingListForm.value)">Prépare ma liste</button>
+
+</form>
+
+
+
+
+<!-- 
+
+<div>
+  <div>
+    <label for="nbPers">Nombre de personnes</label>
+    <input type="number" id="nbPers" class="form-control" placeholder="Nombre de personnes">
+  </div>
+  <div class="form-group">
+    <label for="cat">Example select</label>
+    <select class="form-control" id="cat">
+      <option>1</option>
+      <option>2</option>
+      <option>3</option>
+      <option>4</option>
+      <option>5</option>
+    </select>
+  </div>
+  <div>
+    <label for="nbMeal">Nombre de repas</label>
+    <input type="number" id="nbMeal" class="form-control" placeholder="Nombre de repas">
+  </div>
+</div> -->
