@@ -11,13 +11,11 @@
                 <input disabled value="{{recipeForm.value.id}}" matInput type="number" placeholder="Id">
             </mat-form-field>
 
-            <p>author</p>
             <p>Catégorie ?</p>
             <mat-form-field>
                 <mat-label>Note</mat-label>
                 <input matInput placeholder="Note" formControlName="rating" type="number">
             </mat-form-field>
-
 
             <mat-form-field>
                 <mat-label>Nombre de personnes</mat-label>
@@ -124,15 +122,14 @@
             <hr>
 
             <div formGroupName="locale">
-
                 <mat-tab-group>
-
                     <mat-tab *ngFor="let language of implementedLanguages" formGroupName="{{language.id}}">
                         <ng-template mat-tab-label>
                             <div class="flag-icon {{ language.flag }}"></div>
                             <div>{{ language.label }}</div>
                         </ng-template>
                         <mat-card>
+
                             <mat-form-field>
                                 <mat-label>Description</mat-label>
                                 <input type="text" matInput placeholder="Description" formControlName='description'>
@@ -148,6 +145,7 @@
                         </mat-card>
                         <mat-card>
                             <mat-table class="table-margin-bottom" #table [dataSource]="directions[language.id]">
+                                
                                 <ng-container matColumnDef="order">
                                     <mat-header-cell *matHeaderCellDef> Ordre </mat-header-cell>
                                     <mat-cell *matCellDef="let row">
@@ -161,6 +159,7 @@
                                         </div>
                                     </mat-cell>
                                 </ng-container>
+
                                 <ng-container matColumnDef="description">
                                     <mat-header-cell *matHeaderCellDef> Instructions </mat-header-cell>
                                     <mat-cell *matCellDef="let row">
@@ -212,6 +211,7 @@
 
                         <div formGroupName="{{newLanguageId}}" *ngIf="isNewLanguageReady">
                             <mat-card>
+
                                 <mat-form-field>
                                     <mat-label>Description</mat-label>
                                     <input type="text" matInput placeholder="Description" formControlName='description'>
@@ -227,6 +227,7 @@
                             </mat-card>
                             <mat-card>
                                 <mat-table class="table-margin-bottom" #table [dataSource]="directions[newLanguageId]">
+                                    
                                     <ng-container matColumnDef="order">
                                         <mat-header-cell *matHeaderCellDef> Ordre </mat-header-cell>
                                         <mat-cell *matCellDef="let row">
@@ -240,6 +241,7 @@
                                             </div>
                                         </mat-cell>
                                     </ng-container>
+
                                     <ng-container matColumnDef="description">
                                         <mat-header-cell *matHeaderCellDef> Instructions </mat-header-cell>
                                         <mat-cell *matCellDef="let row">
@@ -277,7 +279,6 @@
                                     <mat-row *matRowDef="let row; columns: recipeDirectionColumns;"></mat-row>
                                 </mat-table>
                             </mat-card>
-
                         </div>
                     </mat-tab>
                 </mat-tab-group>
@@ -315,6 +316,7 @@
             <li>Gérer correctement la langue</li>
             <li>Note en etoile</li>
             <li>Personne en bonhomme</li>
+            <li>Ordre des directions</li>
         </ul>
     </mat-expansion-panel>
 
