@@ -2,11 +2,10 @@ import { Component, OnInit, Input, Output, Injectable, EventEmitter } from '@ang
 import { RecipeService } from '../../services/recipe.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
-import { Recipe, RecipeLocale } from '../../classes/recipe';
+import { Recipe, RecipeLocale, RecipeDirection } from '../../classes/recipe';
 import { LanguageService } from '../../services/language.service';
 import { Observable } from 'rxjs/Observable';
 import { Proportion } from '../../classes/proportion';
-
 
 import { TableDataSource, ValidatorService } from 'angular4-material-table';
 import { UnitService } from '../../services/unit.service';
@@ -24,20 +23,32 @@ export class ProportionValidatorService implements ValidatorService {
   }
 }
 
+@Injectable()
+export class RecipeDirectionValidatorService implements ValidatorService {
+  getRowValidator(): FormGroup {
+    return new FormGroup({
+      'order': new FormControl(),
+      'description': new FormControl(),
+    });
+  }
+}
 
 @Component({
   selector: 'lsc-recipe',
   templateUrl: './recipe.component.html',
   styleUrls: ['./recipe.component.css'],
   providers: [
-    { provide: ValidatorService, useClass: ProportionValidatorService }
+    RecipeDirectionValidatorService,
+    ProportionValidatorService
   ],
 })
 export class RecipeComponent implements OnInit {
 
-  displayedColumns = ['quantity', 'unit', 'ingredient', 'actionsColumn'];
+  proportionsColumns = ['quantity', 'unit', 'ingredient', 'actionsColumn'];
 
-  dataSource: TableDataSource<Proportion>;
+  recipeDirectionColumns = ['order', 'description', 'actionsColumn'];
+
+  dataSourceProportions: TableDataSource<Proportion>;
 
   /**
   * Permet de temporiser le html tant que le chargement de la recette n'est pas terminé
@@ -69,6 +80,9 @@ export class RecipeComponent implements OnInit {
    */
   locales: { [key: string]: FormGroup };
 
+
+  directions: { [key: string]: TableDataSource<RecipeDirection> };
+
   ingredients = [];
 
   units = []
@@ -81,6 +95,7 @@ export class RecipeComponent implements OnInit {
    * @param fb Le formbuilder pour construire le formulaire react
    * @param languageService Le service language pour récupérer les informations de traduction
    * @param proportionValidatorService Le service de validation des proportions
+   * @param RecipeDirectionValidatorService Le service de validation des directions
    * @param unitService Le service unit pour récupérer les unités
    * @param ingredientService Le service ingredient pour récupérer les ingredients
    */
@@ -90,12 +105,14 @@ export class RecipeComponent implements OnInit {
     private recipeService: RecipeService,
     private fb: FormBuilder,
     private languageService: LanguageService,
-    private proportionValidatorService: ValidatorService,
+    private proportionValidatorService: ProportionValidatorService,
+    private RecipeDirectionValidatorService: RecipeDirectionValidatorService,
     private unitService: UnitService,
     private ingredientService: IngredientService) {
     this.createForm();
     // On initialise l objet 
     this.locales = {}
+    this.directions = {}
   }
 
   /**
@@ -149,13 +166,16 @@ export class RecipeComponent implements OnInit {
             published: recipe.published,
             proportions: recipe.proportions
           });
-
-          this.setProportions(recipe.proportions ? recipe.proportions : [])
+          // Gère les proportions
+          this.setProportions(recipe.proportions ? recipe.proportions : []);
+          // gère la langue
           this.setLocaleGroup(recipe.locale);
         }
       });
     } else {
+      // Gère les proportions 
       this.setProportions([]);
+      // Récupère les langues non implémentées 
       this.languageService.getNotImplementedLanguages([]).finally(() => {
         this.isLoading = false;
       }).subscribe(notImplementedLanguages => {
@@ -166,22 +186,31 @@ export class RecipeComponent implements OnInit {
     }
   }
 
+  /**
+   * Configure la source pour la table
+   * @param proportions 
+   */
   setProportions(proportions) {
-    this.dataSource = new TableDataSource<any>(proportions, Proportion, this.proportionValidatorService);
-    this.dataSource.datasourceSubject.subscribe(proportions => {
+    this.dataSourceProportions = new TableDataSource<any>(proportions, Proportion, this.proportionValidatorService);
+    this.dataSourceProportions.datasourceSubject.subscribe(proportions => {
       this.recipeForm.patchValue({
         proportions: proportions
       });
     });
   }
 
-
+  /**
+   * Récupère les ingredients pour les proportions
+   */
   getIngredients() {
     this.ingredientService.getIngredients().subscribe(ingredients => {
       this.ingredients = ingredients;
     });
   }
 
+  /**
+   * Récupère les unités pour les proportions
+   */
   getUnits() {
     this.unitService.getUnits().subscribe(units => {
       this.units = units;
@@ -198,15 +227,19 @@ export class RecipeComponent implements OnInit {
 
     // On parcours chaque objet de langue de la recette
     for (let i in locale) {
+      // Un tableau vide si il n'y a pas de direction
+      let directionsArray = locale[i].directions ? locale[i].directions : [];
+
       // On créé un objet temporaire pour créé le formgroup
       let obj = {
         description: locale[i].description,
         available: locale[i].available,
         title: locale[i].title,
-        directions: this.setDirections(locale[i].directions)
+        directions: directionsArray
       }
-      this.locales[i] = this.fb.group(obj);
 
+      this.setDirections(i, directionsArray);
+      this.locales[i] = this.fb.group(obj);
       localeIds.push(i);
     }
 
@@ -217,8 +250,19 @@ export class RecipeComponent implements OnInit {
     this.recipeForm.setControl('locale', this.fb.group(this.locales));
   }
 
-  setDirections(directions) {
-
+  /**
+   * Configure le tableau de direction par langue
+   * @param languageId 
+   * @param directions 
+   */
+  setDirections(languageId, directions) {
+    let dataSourceRecipeDirection = new TableDataSource<any>(directions, RecipeDirection, this.RecipeDirectionValidatorService);
+    dataSourceRecipeDirection.datasourceSubject.subscribe(directions => {
+      this.recipeForm.get('locale').get(languageId).patchValue({
+        directions: directions
+      });
+    });
+    this.directions[languageId] = dataSourceRecipeDirection
   }
 
   /**
@@ -232,7 +276,6 @@ export class RecipeComponent implements OnInit {
     }, err => {
       console.log(err);
     });
-
     this.languageService.getNotImplementedLanguages(localeIds).subscribe(notImplementedLanguages => {
       this.notImplementedLanguages = notImplementedLanguages
     }, err => {
@@ -249,8 +292,11 @@ export class RecipeComponent implements OnInit {
       description: null,
       available: null,
       title: null,
-      directions: this.fb.array([])
+      directions: null
     }
+    // On créé le tableau de directions
+    this.setDirections(newLanguageId, []);
+    // On paramètre le formulaire de langue
     this.locales[newLanguageId] = this.fb.group(obj);
     this.recipeForm.setControl('locale', this.fb.group(this.locales));
     this.isNewLanguageReady = true;

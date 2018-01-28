@@ -43,58 +43,70 @@
 
             <hr>
 
-            <mat-table class="table-margin-bottom" #table [dataSource]="dataSource">
+            <h2>Proportions</h2>
+
+            <mat-table class="table-margin-bottom" #table [dataSource]="dataSourceProportions">
                 <ng-container matColumnDef="quantity">
-                    <mat-header-cell *matHeaderCellDef> quantity </mat-header-cell>
+                    <mat-header-cell *matHeaderCellDef> Quantités </mat-header-cell>
                     <mat-cell *matCellDef="let row">
                         <div *ngIf="!row.editing">
                             {{row.currentData.quantity}}
                         </div>
                         <div *ngIf="row.editing">
                             <mat-form-field>
-                                <input matInput [formControl]="row.validator.controls['quantity']" type="number" placeholder="quantity" [(ngModel)]="row.currentData.quantity">
+                                <input matInput [formControl]="row.validator.controls['quantity']" type="number" placeholder="Quantité" [(ngModel)]="row.currentData.quantity">
                             </mat-form-field>
                         </div>
                     </mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="unit">
-                    <mat-header-cell *matHeaderCellDef> unit </mat-header-cell>
-                    <mat-cell *matCellDef="let row">
-                        {{row.currentData.unit}}
-                        <!-- <input matInput [formControl]="row.validator.controls['unit']" type="number" placeholder="unit" [(ngModel)]="row.currentData.unit"> -->
-
-                    </mat-cell>
-                </ng-container>
-                <ng-container matColumnDef="ingredient">
-                    <mat-header-cell *matHeaderCellDef> ingredient </mat-header-cell>
+                    <mat-header-cell *matHeaderCellDef> Unités </mat-header-cell>
                     <mat-cell *matCellDef="let row">
                         <div *ngIf="!row.editing">
-                            {{row.currentData.ingredient.id}}
+                            {{row.currentData.unit ? row.currentData.unit.locale[this.languageService.getDefaultLanguageId()].shorted : undefined }}
                         </div>
                         <div *ngIf="row.editing">
                             <mat-form-field>
-                                <mat-select [formControl]="row.validator.controls['ingredient']" [(ngModel)]="row.currentData.ingredient" placeholder="Ingredient">
-
-                                    <mat-option *ngFor="let ingredient of ingredients" [value]="ingredient">
-                                        {{ ingredient.id }}
+                                <mat-select [(value)]="row.currentData.unit" [formControl]="row.validator.controls['unit']" [(ngModel)]="row.currentData.unit"
+                                    placeholder="Unité">
+                                    <mat-option [value]="undefined">
+                                    </mat-option>
+                                    <mat-option *ngFor="let unit of units" [value]="unit">
+                                        {{ unit.locale[this.languageService.getDefaultLanguageId()].shorted }}
                                     </mat-option>
                                 </mat-select>
                             </mat-form-field>
                         </div>
-
-
-                        <!-- <input matInput [formControl]="row.validator.controls['ingredient']" placeholder="ingredient" [(ngModel)]="row.currentData.ingredient"> -->
+                    </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="ingredient">
+                    <mat-header-cell *matHeaderCellDef> Ingrédients </mat-header-cell>
+                    <mat-cell *matCellDef="let row">
+                        <div *ngIf="!row.editing">
+                            {{row.currentData.ingredient ? row.currentData.ingredient.locale[this.languageService.getDefaultLanguageId()].title.singular
+                            : undefined}}
+                        </div>
+                        <div *ngIf="row.editing">
+                            <mat-form-field>
+                                <mat-select [(value)]="row.currentData.ingredient" [formControl]="row.validator.controls['ingredient']" [(ngModel)]="row.currentData.ingredient"
+                                    placeholder="Ingredient">
+                                    <mat-option *ngFor="let ingredient of ingredients" [value]="ingredient">
+                                        {{ ingredient.locale[this.languageService.getDefaultLanguageId()].title.singular }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
                     </mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="actionsColumn">
                     <mat-header-cell *matHeaderCellDef>
-                        <button mat-icon-button color="accent" (click)="dataSource.createNew()">
+                        <button mat-icon-button color="accent" (click)="dataSourceProportions.createNew()">
                             <i class="fa fa-plus mat-icon"></i>
                         </button>
                     </mat-header-cell>
                     <mat-cell *matCellDef="let row">
                         <button *ngIf="!row.editing" mat-icon-button color="primary" focusable="false" (click)="row.startEdit()">
-                            <i class="fa fa-pencil mat-icon"></i>
+                            <i class="fa fa-pencil-alt mat-icon"></i>
                         </button>
                         <button *ngIf="row.editing" mat-icon-button color="primary" focusable="false" (click)="row.confirmEditCreate()">
                             <i class="fa fa-check mat-icon"></i>
@@ -105,8 +117,8 @@
                     </mat-cell>
                 </ng-container>
 
-                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                <mat-header-row *matHeaderRowDef="proportionsColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: proportionsColumns;"></mat-row>
             </mat-table>
 
             <hr>
@@ -134,7 +146,58 @@
                             <mat-slide-toggle placeholder="available" formControlName="available">Disponible</mat-slide-toggle>
 
                         </mat-card>
+                        <mat-card>
+                            <mat-table class="table-margin-bottom" #table [dataSource]="directions[language.id]">
+                                <ng-container matColumnDef="order">
+                                    <mat-header-cell *matHeaderCellDef> Ordre </mat-header-cell>
+                                    <mat-cell *matCellDef="let row">
+                                        <div *ngIf="!row.editing">
+                                            {{row.currentData.order}}
+                                        </div>
+                                        <div *ngIf="row.editing">
+                                            <mat-form-field>
+                                                <input matInput [formControl]="row.validator.controls['order']" type="number" placeholder="Order" [(ngModel)]="row.currentData.order">
+                                            </mat-form-field>
+                                        </div>
+                                    </mat-cell>
+                                </ng-container>
+                                <ng-container matColumnDef="description">
+                                    <mat-header-cell *matHeaderCellDef> Instructions </mat-header-cell>
+                                    <mat-cell *matCellDef="let row">
+                                        <div *ngIf="!row.editing">
+                                            {{row.currentData.description}}
+                                        </div>
+                                        <div *ngIf="row.editing">
+                                            <mat-form-field>
+                                                <input matInput [formControl]="row.validator.controls['description']" type="text" placeholder="Instruction" [(ngModel)]="row.currentData.description">
+                                            </mat-form-field>
+                                        </div>
+                                    </mat-cell>
+                                </ng-container>
 
+                                <ng-container matColumnDef="actionsColumn">
+                                    <mat-header-cell *matHeaderCellDef>
+                                        <button mat-icon-button color="accent" (click)="directions[language.id].createNew()">
+                                            <i class="fa fa-plus mat-icon"></i>
+                                        </button>
+                                    </mat-header-cell>
+                                    <mat-cell *matCellDef="let row">
+                                        <button *ngIf="!row.editing" mat-icon-button color="primary" focusable="false" (click)="row.startEdit()">
+                                            <i class="fa fa-pencil-alt mat-icon"></i>
+                                        </button>
+                                        <button *ngIf="row.editing" mat-icon-button color="primary" focusable="false" (click)="row.confirmEditCreate()">
+                                            <i class="fa fa-check mat-icon"></i>
+                                        </button>
+                                        <button mat-icon-button color="primary" focusable="false" (click)="row.cancelOrDelete()">
+                                            <i class="fa fa-times mat-icon"></i>
+                                        </button>
+                                    </mat-cell>
+                                </ng-container>
+
+                                <mat-header-row *matHeaderRowDef="recipeDirectionColumns"></mat-header-row>
+                                <mat-row *matRowDef="let row; columns: recipeDirectionColumns;"></mat-row>
+                            </mat-table>
+                        </mat-card>
                     </mat-tab>
                     <mat-tab label="Ajouter une langue" *ngIf="notImplementedLanguages.length > 0">
                         <mat-card>
@@ -161,9 +224,60 @@
 
                                 <mat-slide-toggle placeholder="available" formControlName="available">Disponible</mat-slide-toggle>
 
-                                <p>directions</p>
-
                             </mat-card>
+                            <mat-card>
+                                <mat-table class="table-margin-bottom" #table [dataSource]="directions[newLanguageId]">
+                                    <ng-container matColumnDef="order">
+                                        <mat-header-cell *matHeaderCellDef> Ordre </mat-header-cell>
+                                        <mat-cell *matCellDef="let row">
+                                            <div *ngIf="!row.editing">
+                                                {{row.currentData.order}}
+                                            </div>
+                                            <div *ngIf="row.editing">
+                                                <mat-form-field>
+                                                    <input matInput [formControl]="row.validator.controls['order']" type="number" placeholder="Order" [(ngModel)]="row.currentData.order">
+                                                </mat-form-field>
+                                            </div>
+                                        </mat-cell>
+                                    </ng-container>
+                                    <ng-container matColumnDef="description">
+                                        <mat-header-cell *matHeaderCellDef> Instructions </mat-header-cell>
+                                        <mat-cell *matCellDef="let row">
+                                            <div *ngIf="!row.editing">
+                                                {{row.currentData.description}}
+                                            </div>
+                                            <div *ngIf="row.editing">
+                                                <mat-form-field>
+                                                    <input matInput [formControl]="row.validator.controls['description']" type="text" placeholder="Instruction" [(ngModel)]="row.currentData.description">
+                                                </mat-form-field>
+                                            </div>
+                                        </mat-cell>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="actionsColumn">
+                                        <mat-header-cell *matHeaderCellDef>
+                                            <button mat-icon-button color="accent" (click)="directions[newLanguageId].createNew()">
+                                                <i class="fa fa-plus mat-icon"></i>
+                                            </button>
+                                        </mat-header-cell>
+                                        <mat-cell *matCellDef="let row">
+                                            <button *ngIf="!row.editing" mat-icon-button color="primary" focusable="false" (click)="row.startEdit()">
+                                                <i class="fa fa-pencil-alt mat-icon"></i>
+                                            </button>
+                                            <button *ngIf="row.editing" mat-icon-button color="primary" focusable="false" (click)="row.confirmEditCreate()">
+                                                <i class="fa fa-check mat-icon"></i>
+                                            </button>
+                                            <button mat-icon-button color="primary" focusable="false" (click)="row.cancelOrDelete()">
+                                                <i class="fa fa-times mat-icon"></i>
+                                            </button>
+                                        </mat-cell>
+                                    </ng-container>
+
+                                    <mat-header-row *matHeaderRowDef="recipeDirectionColumns"></mat-header-row>
+                                    <mat-row *matRowDef="let row; columns: recipeDirectionColumns;"></mat-row>
+                                </mat-table>
+                            </mat-card>
+
                         </div>
                     </mat-tab>
                 </mat-tab-group>
@@ -194,7 +308,13 @@
             </mat-panel-title>
         </mat-expansion-panel-header>
         <ul>
-            <li></li>
+            <li>Selection de la valeur de l ingredient a l edition</li>
+            <li>Filtré la liste d ingredient par ceux existant</li>
+            <li>Pouvoir organisé l ordre des ingredients</li>
+            <li>Libellé multilingue</li>
+            <li>Gérer correctement la langue</li>
+            <li>Note en etoile</li>
+            <li>Personne en bonhomme</li>
         </ul>
     </mat-expansion-panel>
 
