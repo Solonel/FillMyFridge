@@ -7,38 +7,21 @@ import { ShoppingList, ShoppingListItem, ConfigurationShoppingList } from "../..
 import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
 import 'rxjs/add/operator/finally';
 
-import { TableDataSource, ValidatorService } from 'angular4-material-table';
-
-
-@Injectable()
-export class ConfigurationValidatorService implements ValidatorService {
-  getRowValidator(): FormGroup {
-    return new FormGroup({
-      'nbPers': new FormControl(),
-      'category': new FormControl(),
-      'nbMeal': new FormControl(),
-    });
-  }
-}
 
 @Component({
   selector: 'lsc-shopping-list-generator',
   templateUrl: './shopping-list-generator.component.html',
   styleUrls: ['./shopping-list-generator.component.css'],
-  providers: [
-    { provide: ValidatorService, useClass: ConfigurationValidatorService }
-  ],
 })
 
 export class ShoppingListGeneratorComponent implements OnInit {
 
-  displayedColumns = ['nbPers', 'category', 'nbMeal', 'actionsColumn'];
+  isNewConfigReady: boolean = false;
 
-  dataSource: TableDataSource<ConfigurationShoppingList>;
-
+  addedConfigs: FormGroup[] = [];
   /**
-    * Permet de temporiser le html tant que le chargement de la recette n'est pas terminé
-    */
+   * Permet de temporiser le html tant que le chargement de la recette n'est pas terminé
+   */
   isLoading = true;
   /**
    * Le formulaire Group, il est de la form du ce qu'on souhaite avoir en sortie vers la base de données
@@ -51,7 +34,6 @@ export class ShoppingListGeneratorComponent implements OnInit {
     private router: Router,
     private shoppingListService: ShoppingListService,
     private fb: FormBuilder,
-    private configurationValidatorService: ValidatorService,
     private languageService: LanguageService) {
     // Initialisation du formulaire
     this.createForm();
@@ -62,8 +44,8 @@ export class ShoppingListGeneratorComponent implements OnInit {
   }
 
   /**
- * Créé le formulaire React vide, nécessaire pour l'iniatilisation
- */
+   * Créé le formulaire React vide, nécessaire pour l'iniatilisation
+   */
   createForm() {
     this.shoppingListForm = this.fb.group({
       id: null,
@@ -75,24 +57,31 @@ export class ShoppingListGeneratorComponent implements OnInit {
   }
 
   initializeForm(): void {
+
     this.shoppingListForm.patchValue({
       id: null,
       userId: null,
     });
-
-    this.setConfigurations([]);
+    this.addNewConfiguration();
   }
 
-  setConfigurations(config) {
-    this.dataSource = new TableDataSource<any>(config, ConfigurationShoppingList, this.configurationValidatorService);
-    this.dataSource.datasourceSubject.subscribe(configs => {
-      this.shoppingListForm.patchValue({
-        configs: configs
-      });
-    });
-  };
 
-  generateList(values){
+
+  /**
+   * Création d'un formulaire d'ajout d'une configuration sur la liste
+   */
+  addNewConfiguration() {
+    let obj = {
+      nbPers: null,
+      category: null,
+      nbMeal: null,
+    }
+    this.addedConfigs.push(this.fb.group(obj));
+    this.shoppingListForm.setControl('configs', this.fb.group(this.addedConfigs));
+    this.isNewConfigReady = true;
+  }
+
+  generateList(values) {
     this.shoppingListService.generateList(values);
   }
 }
