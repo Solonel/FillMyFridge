@@ -1,5 +1,6 @@
 import { Proportion } from './proportion';
 import { Author } from './author';
+import { Category } from './category';
 
 export class Recipe {
     id: number; // Id
@@ -11,6 +12,7 @@ export class Recipe {
     cook: Date; // Temps de cuisson
     readyin: Date; // Prêt en combien de temps
     published: boolean; // Publié sur le site
+    categories : Category[];
     locale: {
         [key: string]: RecipeLocale
     };

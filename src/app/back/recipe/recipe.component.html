@@ -6,38 +6,61 @@
     <div *ngIf="!isLoading">
 
         <form [formGroup]="recipeForm" novalidate>
-
-            <mat-form-field>
-                <input disabled value="{{recipeForm.value.id}}" matInput type="number" placeholder="Id">
-            </mat-form-field>
-
-            <p>Catégorie ?</p>
-            <mat-form-field>
-                <mat-label>Note</mat-label>
-                <input matInput placeholder="Note" formControlName="rating" type="number">
-            </mat-form-field>
-
-            <mat-form-field>
-                <mat-label>Nombre de personnes</mat-label>
-                <input matInput placeholder="Nombre de personnes" formControlName="servings" type="number">
-            </mat-form-field>
-
-            <mat-form-field>
-                <mat-label>Temps de préparation</mat-label>
-                <input matInput formControlName="preparation" placeholder="Temps de préparation" type="time">
-            </mat-form-field>
-
-            <mat-form-field>
-                <mat-label>Temps de cuisson</mat-label>
-                <input matInput formControlName="cook" placeholder="Temps de cuisson" type="time">
-            </mat-form-field>
-
-            <mat-form-field>
-                <mat-label>Temps total</mat-label>
-                <input matInput formControlName="readyin" placeholder="Temps total" type="time">
-            </mat-form-field>
-
-            <mat-slide-toggle placeholder="Publié" formControlName="published">Publié</mat-slide-toggle>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3">Author </div>
+                    <div class="col-lg-3">
+                        <mat-slide-toggle placeholder="Publié" formControlName="published">Publié</mat-slide-toggle>
+                    </div>
+                    <div class="col-lg-3">
+                        <mat-form-field>
+                            <input disabled value="{{recipeForm.value.id}}" matInput type="number" placeholder="Id">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-lg-3">
+                        <mat-form-field>
+                            <mat-label>Note</mat-label>
+                            <input matInput placeholder="Note" formControlName="rating" type="number">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-lg-3">
+                        <mat-form-field>
+                            <mat-label>Nombre de personnes</mat-label>
+                            <input matInput placeholder="Nombre de personnes" formControlName="servings" type="number">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-lg-3">
+                        <mat-form-field>
+                            <mat-label>Temps de préparation</mat-label>
+                            <input matInput formControlName="preparation" placeholder="Temps de préparation" type="time">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-lg-3">
+                        <mat-form-field>
+                            <mat-label>Temps de cuisson</mat-label>
+                            <input matInput formControlName="cook" placeholder="Temps de cuisson" type="time">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-lg-3">
+                        <mat-form-field>
+                            <mat-label>Temps total</mat-label>
+                            <input matInput formControlName="readyin" placeholder="Temps total" type="time">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-xs-12">
+                        <mat-form-field>
+                            <mat-select placeholder="Catégorie">
+                                <mat-option *ngFor="let category of categories" [value]="category">
+                                    {{ category.locale[this.languageService.getDefaultLanguageId()].title }}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <button mat-icon-button color="accent" (click)="linkCategory()">
+                            <i class="fa fa-plus mat-icon"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
 
             <hr>
 
@@ -145,7 +168,7 @@
                         </mat-card>
                         <mat-card>
                             <mat-table class="table-margin-bottom" #table [dataSource]="directions[language.id]">
-                                
+
                                 <ng-container matColumnDef="order">
                                     <mat-header-cell *matHeaderCellDef> Ordre </mat-header-cell>
                                     <mat-cell *matCellDef="let row">
@@ -227,7 +250,7 @@
                             </mat-card>
                             <mat-card>
                                 <mat-table class="table-margin-bottom" #table [dataSource]="directions[newLanguageId]">
-                                    
+
                                     <ng-container matColumnDef="order">
                                         <mat-header-cell *matHeaderCellDef> Ordre </mat-header-cell>
                                         <mat-cell *matCellDef="let row">
@@ -295,7 +318,6 @@
                 <button type="button" (click)="delete()" class="btn btn-danger"> Supprimer </button>
             </div>
 
-            <hr>
         </form>
 
     </div>

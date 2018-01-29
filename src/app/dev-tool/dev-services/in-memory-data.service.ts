@@ -213,6 +213,7 @@ export class InMemoryDataService implements InMemoryDbService {
         published: true,
         rating: 4.5,
         author: authors[0],
+        categories : [],
         locale: {
           "fr-fr": {
             title: "Gâteau au chocolat fondant rapide",
@@ -242,6 +243,7 @@ export class InMemoryDataService implements InMemoryDbService {
         published: true,
         rating: 5,
         author: authors[1],
+        categories : [],
         locale: {
           "fr-fr": {
             title: "Oeufs mimosa",
@@ -272,6 +274,7 @@ export class InMemoryDataService implements InMemoryDbService {
         published: true,
         rating: 5,
         author: authors[1],
+        categories : [],
         locale: {
           "fr-fr": {
             title: "Tomates-mozza aux herbes",
@@ -300,7 +303,7 @@ export class InMemoryDataService implements InMemoryDbService {
           },
         },
         published: true,
-        //recipes: [recipes[0]],
+        recipes: [recipes[0]],
       }, {
         id: 2,
         locale: {
@@ -312,10 +315,10 @@ export class InMemoryDataService implements InMemoryDbService {
           },
         },
         published: false,
-        // recipes: [
-        //   recipes[1],
-        //   recipes[2]
-        // ]
+        recipes: [
+          recipes[1],
+          recipes[2]
+        ]
       }
     ];
 

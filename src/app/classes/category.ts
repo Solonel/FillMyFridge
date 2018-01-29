@@ -3,9 +3,9 @@ import { Recipe } from './Recipe';
 export class Category {
     id: number;
     locale: {
-       [key: string]: CategoryLocale;
+        [key: string]: CategoryLocale;
     };
-    //recipes: Recipe[];
+    recipes: Recipe[];
     published: boolean;
 }
 export class CategoryLocale {
@@ -19,5 +19,5 @@ export class CategoryLight {
     image: string;
     title: string;
     description: string;
-    available: boolean;    
+    available: boolean;
 }
