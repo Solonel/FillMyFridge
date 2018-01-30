@@ -1,45 +1,31 @@
 <lsc-front-menu></lsc-front-menu>
 
 <form [formGroup]="shoppingListForm">
-
-  <div formGroupName="configs">
+  <div formArrayName="configs">
     <ul class="list-group">
-      <li class="list-groupe-item" *ngFor="let config of addedConfigs">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-3">
-
-              <div class="input-group input-group-sm mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text" id="inputGroup-sizing-sm-1">Small</span>
-                </div>
-                <input type="text" class="form-control" aria-label="Small" formControlName="nbPers" aria-describedby="inputGroup-sizing-sm">
-              </div>
-
-            </div>
-            <div class="col-md-6">
-              <div class="input-group input-group-sm mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text" id="inputGroup-sizing-sm-2">Small</span>
-                </div>
-                <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
-              </div>
-            </div>
-            <div class="col-md-3">
-              <div class="input-group input-group-sm mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text" id="inputGroup-sizing-sm-3">Small</span>
-                </div>
-                <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
-              </div>
-            </div>
+      <li class="list-group-item" *ngFor="let config of configs.controls; let i=index" [formGroupName]="i">
+        <div class="input-group input-group-sm mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="{{i}}">Nombre de personne</span>
           </div>
+          <input type="text" class="form-control" aria-label="Nombre de personne" formControlName="nbPers" aria-describedby="i">
+        </div>
+        <div class="input-group input-group-sm mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="{{i}}">Catégorie</span>
+          </div>
+          <input type="text" class="form-control" aria-label="Catégorie" formControlName="category" aria-describedby="i">
+        </div>
+        <div class="input-group input-group-sm mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="{{i}}">Nombre de repas</span>
+          </div>
+          <input type="text" class="form-control" aria-label="Nombre de repas" formControlName="nbMeal" aria-describedby="i">
         </div>
       </li>
     </ul>
   </div>
   <button class="btn btn-primary" type="button" (click)="generateList(shoppingListForm.value)">Prépare ma liste</button>
-
 </form>
 
 

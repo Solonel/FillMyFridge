@@ -6,6 +6,7 @@ import { LanguageService } from '../../services/language.service';
 import { ShoppingList, ShoppingListItem, ConfigurationShoppingList } from "../../classes/shopping-list";
 import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
 import 'rxjs/add/operator/finally';
+import { FormArray } from '@angular/forms/src/model';
 
 
 @Component({
@@ -16,9 +17,11 @@ import 'rxjs/add/operator/finally';
 
 export class ShoppingListGeneratorComponent implements OnInit {
 
+  shoppingList: ShoppingList;
+
   isNewConfigReady: boolean = false;
 
-  addedConfigs: FormGroup[] = [];
+  addedConfigs: ConfigurationShoppingList[];
   /**
    * Permet de temporiser le html tant que le chargement de la recette n'est pas terminé
    */
@@ -28,7 +31,6 @@ export class ShoppingListGeneratorComponent implements OnInit {
    */
   shoppingListForm: FormGroup;
 
-
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -37,6 +39,7 @@ export class ShoppingListGeneratorComponent implements OnInit {
     private languageService: LanguageService) {
     // Initialisation du formulaire
     this.createForm();
+    this.shoppingList = new ShoppingList;
   }
 
   ngOnInit() {
@@ -50,35 +53,38 @@ export class ShoppingListGeneratorComponent implements OnInit {
     this.shoppingListForm = this.fb.group({
       id: null,
       userId: null,
-      configs: null,
+      configs: this.fb.array([]),
       shoppings: null,
       cookings: null,
     });
   }
 
   initializeForm(): void {
-
     this.shoppingListForm.patchValue({
       id: null,
       userId: null,
     });
-    this.addNewConfiguration();
+    this.addConfiguration();
   }
 
-
+  get configs(): FormArray {
+    return this.shoppingListForm.get('configs') as FormArray;
+  };
 
   /**
    * Création d'un formulaire d'ajout d'une configuration sur la liste
    */
-  addNewConfiguration() {
-    let obj = {
-      nbPers: null,
-      category: null,
-      nbMeal: null,
-    }
-    this.addedConfigs.push(this.fb.group(obj));
-    this.shoppingListForm.setControl('configs', this.fb.group(this.addedConfigs));
+  getConfigurations() {
+    const configsFG = this.shoppingList.configs.map(config => this.fb.group(config));
+    const configFormArray = this.fb.array(configsFG);
+    this.shoppingListForm.setControl('configs', configFormArray);
     this.isNewConfigReady = true;
+  }
+
+  addConfiguration() {
+    this.configs.push(this.fb.group({
+      nbPers: null, category: null, nbMeal: null
+    }));
   }
 
   generateList(values) {
