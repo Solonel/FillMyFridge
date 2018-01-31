@@ -31,6 +31,8 @@ export class ShoppingListGeneratorComponent implements OnInit {
    */
   shoppingListForm: FormGroup;
 
+  rowIsInEdit: Boolean[] = [];
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -56,6 +58,7 @@ export class ShoppingListGeneratorComponent implements OnInit {
       configs: this.fb.array([]),
       shoppings: null,
       cookings: null,
+      newConfig: this.fb.group([]),
     });
   }
 
@@ -64,7 +67,7 @@ export class ShoppingListGeneratorComponent implements OnInit {
       id: null,
       userId: null,
     });
-    this.addConfiguration();
+    this.newConfiguration();
   }
 
   get configs(): FormArray {
@@ -81,10 +84,34 @@ export class ShoppingListGeneratorComponent implements OnInit {
     this.isNewConfigReady = true;
   }
 
+
+  editMode(index) {
+    this.rowIsInEdit[index] = true;
+  }
+
+  editConfiguration(index) {
+
+
+
+
+    this.rowIsInEdit[index] = false;
+
+  }
+
+  newConfiguration() {
+    this.shoppingListForm.setControl(
+      'newConfig',
+      this.fb.group({
+        nbPers: null, category: null, nbMeal: null
+      })
+    );
+  }
+
   addConfiguration() {
-    this.configs.push(this.fb.group({
-      nbPers: null, category: null, nbMeal: null
-    }));
+    this.configs.push(this.fb.group(
+      this.shoppingListForm.get('newConfig').value)
+    );
+    this.rowIsInEdit[this.configs.length - 1] = false;
   }
 
   generateList(values) {
