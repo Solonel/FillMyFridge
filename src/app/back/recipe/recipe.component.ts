@@ -10,9 +10,8 @@ import { TableDataSource, ValidatorService } from 'angular4-material-table';
 import { UnitService } from '../../services/unit.service';
 import { IngredientService } from '../../services/ingredient.service';
 import { Ingredient } from '../../classes/ingredient';
-import { Category } from '../../classes/category';
 import { Unit } from '../../classes/unit';
-import { CategoryService } from '../../services/category.service';
+import { Category } from '../../classes/category';
 
 @Injectable()
 export class ProportionValidatorService implements ValidatorService {
@@ -106,11 +105,6 @@ export class RecipeComponent implements OnInit {
   units = Array<Unit>();
 
   /**
-   * Listes des catégories
-   */
-  categories = Array<Category>();
-
-  /**
    * Constructeur 
    * @param route La route utilisé pour accéder à l'enregistrement
    * @param router Le router pour faire une redirection
@@ -121,7 +115,6 @@ export class RecipeComponent implements OnInit {
    * @param RecipeDirectionValidatorService Le service de validation des directions
    * @param unitService Le service unit pour récupérer les unités
    * @param ingredientService Le service ingredient pour récupérer les ingredients
-   * @param categoryService Le service catégory pour récupérer les catégories
    */
   constructor(
     private route: ActivatedRoute,
@@ -132,8 +125,7 @@ export class RecipeComponent implements OnInit {
     private proportionValidatorService: ProportionValidatorService,
     private RecipeDirectionValidatorService: RecipeDirectionValidatorService,
     private unitService: UnitService,
-    private ingredientService: IngredientService,
-    private categoryService: CategoryService) {
+    private ingredientService: IngredientService) {
     this.createForm();
     // On initialise les objets 
     this.locales = {}
@@ -165,7 +157,6 @@ export class RecipeComponent implements OnInit {
   ngOnInit() {
     this.getIngredients();
     this.getUnits();
-    this.getCategories();
     this.getRecipe();
   }
 
@@ -241,15 +232,6 @@ export class RecipeComponent implements OnInit {
   getUnits() {
     this.unitService.getUnits().subscribe(units => {
       this.units = units;
-    });
-  }
-
-  /**
-   * Récupère les catégories pour les proportions
-   */
-  getCategories() {
-    this.categoryService.getCategories().subscribe(categories => {
-      this.categories = categories;
     });
   }
 
@@ -383,6 +365,14 @@ export class RecipeComponent implements OnInit {
       .subscribe(recipe => {
         this.goToRecipe(recipe.id);
       });
+  }
+
+  /**
+   * TEST D UN COMPOSANT FILS
+   * @param category 
+   */
+  onAddCategory(category: Category) {
+    console.log(category)
   }
 
 }

@@ -43,6 +43,7 @@ import { UsersComponent } from './back/users/users.component';
 import { UserComponent } from './back/user/user.component';
 import { LanguageComponent } from './back/language/language.component';
 import { LanguagesComponent } from './back/languages/languages.component';
+import { CategorySelectorComponent } from './back/category-selector/category-selector.component'
 /**
  * Service
  */
@@ -96,7 +97,8 @@ import { DevMenuComponent } from './dev-tool/dev-menu/dev-menu.component';
     CategoryComponent,
     CategoriesComponent,
     LanguageComponent,
-    LanguagesComponent
+    LanguagesComponent,
+    CategorySelectorComponent
   ],
   imports: [
     HttpClientModule, BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule,
