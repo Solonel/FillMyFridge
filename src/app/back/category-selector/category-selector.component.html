@@ -1,13 +1,18 @@
 <mat-form-field>
-  <mat-select [(value)]="category" placeholder="Catégorie">
-    <mat-option *ngFor="let category of categories" [value]="category">
+  <mat-select [disabled]="this.selectCategory.length == 0" [(value)]="category" placeholder="Catégorie">
+    <mat-option *ngFor="let category of selectCategory" [value]="category">
       {{ category.locale[this.languageService.getDefaultLanguageId()].title }}
     </mat-option>
   </mat-select>
 </mat-form-field>
-<button mat-icon-button color="accent" (click)="addCategory(category)">
+<button mat-icon-button [disabled]="!category" color="accent" (click)="addCategory(category)">
   <i class="fa fa-plus mat-icon"></i>
 </button>
-<div> 
-
+<div>
+  <mat-chip-list #chipList>
+    <mat-chip *ngFor="let category of categories" removable="true" (remove)="remove(category)">
+      {{ category.locale[this.languageService.getDefaultLanguageId()].title }}
+      <mat-icon matChipRemove>cancel</mat-icon>
+    </mat-chip>
+  </mat-chip-list>
 </div>

@@ -26,6 +26,8 @@ export class InMemoryDataService implements InMemoryDbService {
       { id: 2, name: "", firstname: "", username: "mapo9" }
     ]
 
+
+    
     const languages: Language[] = [
       {
         id: 'fr-fr',
@@ -197,6 +199,35 @@ export class InMemoryDataService implements InMemoryDbService {
       { quantity: 1, unit: units[3], ingredient: ingredients[8], }, // 9 - salade tomate mozza
     ]
 
+
+    const categoriesRecipe: Category[] = [
+      {
+        id: 1,
+        locale: {
+          "fr-fr": {
+            title: "Desserts", description: "Les desserts de l'application", available: true
+          },
+          "en-en": {
+            title: "Desserts", description: "Application's desserts", available: true
+          },
+        },
+        published: true,
+        recipes: [],
+      }, {
+        id: 2,
+        locale: {
+          "fr-fr": {
+            title: "Entrées", description: "Les entrées de l'application", available: true
+          },
+          "en-en": {
+            title: "Appetizers", description: "Application's appetizers.", available: true
+          },
+        },
+        published: false,
+        recipes: []
+      }
+    ];
+
     const recipes: Recipe[] = [
       {
         id: 1,
@@ -213,7 +244,7 @@ export class InMemoryDataService implements InMemoryDbService {
         published: true,
         rating: 4.5,
         author: authors[0],
-        categories : [],
+        categories : [categoriesRecipe[0]],
         locale: {
           "fr-fr": {
             title: "Gâteau au chocolat fondant rapide",
@@ -243,7 +274,7 @@ export class InMemoryDataService implements InMemoryDbService {
         published: true,
         rating: 5,
         author: authors[1],
-        categories : [],
+        categories : [categoriesRecipe[1]],
         locale: {
           "fr-fr": {
             title: "Oeufs mimosa",

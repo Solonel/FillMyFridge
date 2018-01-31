@@ -104,6 +104,8 @@ export class RecipeComponent implements OnInit {
    */
   units = Array<Unit>();
 
+  categories = Array<Category>();
+
   /**
    * Constructeur 
    * @param route La route utilisé pour accéder à l'enregistrement
@@ -146,7 +148,7 @@ export class RecipeComponent implements OnInit {
       cook: null,
       readyin: null,
       published: null,
-      categories : null,
+      categories: null,
       locale: null
     });
   }
@@ -184,6 +186,9 @@ export class RecipeComponent implements OnInit {
             published: recipe.published,
             proportions: recipe.proportions
           });
+
+          this.categories = recipe.categories;
+          
           // Gère les proportions
           this.setProportions(recipe.proportions ? recipe.proportions : []);
           // gère la langue
@@ -371,8 +376,10 @@ export class RecipeComponent implements OnInit {
    * TEST D UN COMPOSANT FILS
    * @param category 
    */
-  onAddCategory(category: Category) {
-    console.log(category)
+  addCategory(categories: Category) {
+    this.recipeForm.patchValue({
+      categories: categories
+    });
   }
 
 }
