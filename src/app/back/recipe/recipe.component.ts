@@ -104,6 +104,9 @@ export class RecipeComponent implements OnInit {
    */
   units = Array<Unit>();
 
+  /**
+   * Liste des catégories de la recette
+   */
   categories = Array<Category>();
 
   /**
@@ -148,7 +151,7 @@ export class RecipeComponent implements OnInit {
       cook: null,
       readyin: null,
       published: null,
-      categories: null,
+      categories: this.fb.array([]),
       locale: null
     });
   }
@@ -373,13 +376,15 @@ export class RecipeComponent implements OnInit {
   }
 
   /**
-   * TEST D UN COMPOSANT FILS
+   * A la récupération des catégories, du composant fils on ajoute nos catégories aux form
    * @param category 
    */
-  addCategory(categories: Category) {
-    this.recipeForm.patchValue({
-      categories: categories
-    });
+  addCategory(categories: Category[]) {
+
+    const categoryFGs = categories.map(category => this.fb.group(category));
+    const categoryFormArray = this.fb.array(categoryFGs);
+    this.recipeForm.setControl('categories', categoryFormArray);
+
   }
 
 }
