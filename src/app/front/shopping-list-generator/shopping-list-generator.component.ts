@@ -7,6 +7,7 @@ import { ShoppingList, ShoppingListItem, ConfigurationShoppingList } from "../..
 import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
 import 'rxjs/add/operator/finally';
 import { FormArray } from '@angular/forms/src/model';
+import { ElementRef } from '@angular/core/src/linker/element_ref';
 
 
 @Component({
@@ -86,6 +87,11 @@ export class ShoppingListGeneratorComponent implements OnInit {
 
 
   editMode(index) {
+    var nbPers = document.getElementById("nbPers" + index);
+    var category = document.getElementById("category" + index);
+    var nbMeal = document.getElementById("nbMeal" + index);
+
+    console.log(nbPers, nbMeal, category);
     this.rowIsInEdit[index] = true;
   }
 
@@ -95,7 +101,6 @@ export class ShoppingListGeneratorComponent implements OnInit {
 
 
     this.rowIsInEdit[index] = false;
-
   }
 
   newConfiguration() {

@@ -23,10 +23,35 @@ export class RecipeService {
   getRecipes(): Observable<Recipe[]> {
     return this.http.get<Recipe[]>(this.recipesUrl)
       .pipe(
-      tap(ingredients => this.log(`fetched Recipes`)),
+      tap(recipes => this.log(`fetched Recipes`)),
       catchError(this.handleError('getRecipes', []))
       );
   }
+
+  /** GET Recipes from the server */
+  getRecipesByCat(categoryId): Observable<Recipe[]> {
+    return this.http.get<Recipe[]>(this.recipesUrl)
+      .pipe(
+      tap(recipes => {
+        let keepedRecipe: Recipe[] = [];
+        recipes.forEach(recipe => {
+
+          let keepRecipe: boolean = false;
+          recipe.categories.forEach(recipeCategory => {
+            if (!keepRecipe) {
+              if (recipeCategory.id == categoryId) {
+                keepRecipe = true;
+                keepedRecipe.push(recipe);
+              }
+            }
+          });
+        })
+        recipes = keepedRecipe;
+      }),
+      catchError(this.handleError('getRecipes', []))
+      );
+  }
+
 
   /** GET Recipe by id. Return `undefined` when id not found */
   getRecipeNo404<Data>(id: number): Observable<Recipe> {

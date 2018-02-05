@@ -54,11 +54,12 @@ export class ShoppingListService {
         config.recipes = [];
 
         for (let i = 0; i < config.nbMeal; i++) {
-          let recipeId = Math.floor(Math.random() * recipes.length) + 1;
-          config.recipes.push(recipes[recipeId]);
-
+          let recipeId = Math.floor(Math.random() * this.recipes.length);
+          config.recipes.push(this.recipes[recipeId]);
+          this.recipes.splice(recipeId, 1);
         }
-        console.log(config);
+        console.log("config", config);
+        console.log("recipes ", recipes);
 
       });
     }, error => {
